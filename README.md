@@ -1,4 +1,4 @@
-# Aura 🌈
+# Aura
 
 Aura is an innovative extension framework for Discord bots. Leveraging the power of TypeScript, Aura aims to enhance the
 bot development experience by offering a suite of advanced tools, utilities, and abstractions that simplify the creation
