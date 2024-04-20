@@ -50,6 +50,12 @@ importers:
       '@aurajs/opcodes':
         specifier: workspace:*
         version: link:../../packages/opcodes
+      '@aurajs/permissions':
+        specifier: workspace:*
+        version: link:../../packages/permissions
+      '@aurajs/teams':
+        specifier: workspace:*
+        version: link:../../packages/teams
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
@@ -63,6 +69,21 @@ importers:
 
   packages/core:
     dependencies:
+      '@aurajs/gateway':
+        specifier: workspace:*
+        version: link:../gateway
+      '@aurajs/oauth2':
+        specifier: workspace:*
+        version: link:../oauth2
+      '@aurajs/opcodes':
+        specifier: workspace:*
+        version: link:../opcodes
+      '@aurajs/permissions':
+        specifier: workspace:*
+        version: link:../permissions
+      '@aurajs/teams':
+        specifier: workspace:*
+        version: link:../teams
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
