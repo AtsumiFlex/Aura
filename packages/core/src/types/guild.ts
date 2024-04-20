@@ -20,39 +20,106 @@ export type GuildStructure = {
 	discovery_splash: string | null;
 	emojis: EmojiStructure[];
 	explicit_content_filter: ExplicitContentFilterLevel;
-	splash: string | null;
-	verification_level: VerificationLevel;
-	widget_channel_id?: Snowflake | null;
-	widget_enabled?: boolean;
-	name: string;
-	max_presences?: Integer | null;
-	roles: RoleStructure[];
-	permissions?: string;
 	features: GuildFeatures[];
+	icon: string | null;
+	icon_hash?: string | null;
+	id: Snowflake;
+	max_members?: Integer;
+	max_presences?: Integer | null;
+	max_stage_video_channel_users?: Integer;
+	max_video_channel_users?: Integer;
 	mfa_level: MFALevel;
+	name: string;
 	nsfw_level: GuildNSFWLevel;
 	owner?: boolean;
-	icon: string | null;
-	rules_channel_id: Snowflake | null;
-	preferred_locale: Locales;
-	max_members?: Integer;
-	vanity_url_code: string | null;
-	system_channel_id: Snowflake | null;
-	id: Snowflake;
-	premium_tier: PremiumTier;
-	premium_subscription_count?: Integer;
-	region?: VoiceRegionStructure["id"];
-	public_updates_channel_id: Snowflake | null;
-	max_video_channel_users?: Integer;
-	max_stage_video_channel_users?: Integer;
-	system_channel_flags: SystemChannelFlags;
-	icon_hash?: string | null;
-	welcome_screen?: WelcomeScreenStructure;
 	owner_id: Snowflake;
-	stickers?: object[];
+	permissions?: string;
+	preferred_locale: Locales;
 	// TODO: Sticker Object
 	premium_progress_bar_enabled?: boolean;
+	premium_subscription_count?: Integer;
+	premium_tier: PremiumTier;
+	public_updates_channel_id: Snowflake | null;
+	region?: VoiceRegionStructure["id"];
+	roles: RoleStructure[];
+	rules_channel_id: Snowflake | null;
 	safety_alerts_channel_id: Snowflake | null;
+	splash: string | null;
+	stickers?: object[];
+	system_channel_flags: SystemChannelFlags;
+	system_channel_id: Snowflake | null;
+	vanity_url_code: string | null;
+	verification_level: VerificationLevel;
+	welcome_screen?: WelcomeScreenStructure;
+	widget_channel_id?: Snowflake | null;
+	widget_enabled?: boolean;
+};
+
+// https://discord.com/developers/docs/resources/guild-template#guild-template-object-guild-template-structure
+export type GuildTemplateStructure = {
+	code: string;
+	created_at: string;
+	creator: UserStructure;
+	creator_id: Snowflake;
+	description: string | null;
+	is_dirty: boolean | null;
+	name: string;
+	serialized_source_guild: GuildStructure;
+	source_guild_id: Snowflake;
+	updated_at: string;
+	usage_count: Integer;
+};
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-structure
+export type GuildScheduledEventStructure = {
+	channel_id: Snowflake | null;
+	creator?: UserStructure;
+	creator_id?: Snowflake | null;
+	description?: string | null;
+	entity_id: Snowflake | null;
+	entity_metadata: GuildScheduledEventEntityMetadata | null;
+	entity_type: GuildScheduledEventEntityTypes;
+	guild_id: Snowflake;
+	id: Snowflake;
+	image?: string | null;
+	scheduled_start_time: string;
+	status: GuildScheduledEventStatus;
+	name: string;
+	privacy_level: GuildScheduledEventPrivacyLevel;
+	user_count: Integer;
+	scheduled_end_time: string | null;
+};
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level
+export enum GuildScheduledEventPrivacyLevel {
+	GuildOnly = 2,
+}
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types
+export enum GuildScheduledEventEntityTypes {
+	StageInstance = 1,
+	Voice = 2,
+	External = 3,
+}
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status
+export enum GuildScheduledEventStatus {
+	Scheduled = 1,
+	Active = 2,
+	Completed = 3,
+	Canceled = 4,
+}
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata
+export type GuildScheduledEventEntityMetadata = {
+	location?: string;
+};
+
+// https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure
+export type GuildScheduledEventUserStructure = {
+	guild_schedule_event_id: Snowflake;
+	member?: GuildMemberStructure;
+	user: UserStructure;
 };
 
 // https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level
