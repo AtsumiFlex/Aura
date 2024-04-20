@@ -5,4 +5,5 @@ export * from "./reference/formats";
 export * from "./reference/locales";
 
 // ./types
-export * from "./types";
+export * from "./types/global";
+export * from "./types/user";

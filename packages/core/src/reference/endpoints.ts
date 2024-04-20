@@ -1,4 +1,4 @@
-import type { Snowflake } from "../types";
+import type { Snowflake } from "../types/global";
 import type { ImageFormats } from "./formats";
 
 type IgnoreLottie = Exclude<ImageFormats, ImageFormats.Lottie>;

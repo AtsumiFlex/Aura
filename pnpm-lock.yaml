@@ -158,6 +158,56 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
+  packages/permissions:
+    dependencies:
+      '@aurajs/core':
+        specifier: workspace:*
+        version: link:../core
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+    devDependencies:
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.12.7
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      eslint-config-neon:
+        specifier: ^0.1.62
+        version: 0.1.62(eslint@8.57.0)(svelte@3.59.2)(typescript@5.4.5)
+      eslint-formatter-pretty:
+        specifier: ^6.0.1
+        version: 6.0.1
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
+  packages/teams:
+    dependencies:
+      '@aurajs/core':
+        specifier: workspace:*
+        version: link:../core
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+    devDependencies:
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.12.7
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      eslint-config-neon:
+        specifier: ^0.1.62
+        version: 0.1.62(eslint@8.57.0)(svelte@3.59.2)(typescript@5.4.5)
+      eslint-formatter-pretty:
+        specifier: ^6.0.1
+        version: 6.0.1
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':
