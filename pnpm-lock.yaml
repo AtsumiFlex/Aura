@@ -41,6 +41,15 @@ importers:
       '@aurajs/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@aurajs/gateway':
+        specifier: workspace:*
+        version: link:../../packages/gateway
+      '@aurajs/oauth2':
+        specifier: workspace:*
+        version: link:../../packages/oauth2
+      '@aurajs/opcodes':
+        specifier: workspace:*
+        version: link:../../packages/opcodes
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
@@ -76,6 +85,9 @@ importers:
 
   packages/gateway:
     dependencies:
+      '@aurajs/core':
+        specifier: workspace:*
+        version: link:../core
       tslib:
         specifier: ^2.6.2
         version: 2.6.2

@@ -28,7 +28,7 @@ ws.on("open", () => {
 	const identifyPayload = {
 		op: 2,
 		d: {
-			token: "",
+			token: "YOUR_BOT_TOKEN",
 			intents: 513,
 			properties: {
 				$os: "linux",

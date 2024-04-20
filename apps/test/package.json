@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
+    "@aurajs/gateway": "workspace:*",
+    "@aurajs/oauth2": "workspace:*",
+    "@aurajs/opcodes": "workspace:*",
     "tslib": "^2.6.2",
     "ws": "^8.16.0"
   },
