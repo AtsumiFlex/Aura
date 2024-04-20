@@ -1,12 +1,12 @@
 /**
  * @fileoverview This file defines the JSON error codes used in the application.
- * @see {https://discord.com/developers/docs/topics/opcodes-and-status-codes#json}
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json}
  */
 
 /**
  * @enum {number}
  * @description Enum for JSON error codes.
- * @see {https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
  */
 export enum JSONErrorCodes {
 	GeneralError = 0,

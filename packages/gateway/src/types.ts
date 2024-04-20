@@ -63,14 +63,21 @@ export type StatusTypes = "dnd" | "idle" | "invisible" | "offline" | "online";
 // https://discord.com/developers/docs/topics/gateway-events#receive-events
 export type GatewayReceiveEvents = {
 	ApplicationCommandPermissionsUpdate: any;
-	AutoModerationActionExecution: any;
+	AutoModerationActionExecution: AutoModerationActionExecutionEventFields;
 	AutoModerationRuleCreate: any;
+	// TODO: Auto Moderation Rule Structure
 	AutoModerationRuleDelete: any;
+	// TODO: Auto Moderation Rule Structure
 	AutoModerationRuleUpdate: any;
+	// TODO: Auto Moderation Rule Structure
 	ChannelCreate: any;
+	// TODO: Channel Structure
 	ChannelDelete: any;
+	// TODO: Channel Structure
 	ChannelPinsUpdate: any;
+	// TODO: Channel Structure
 	ChannelUpdate: any;
+	// TODO: Channel Structure
 	EntitlementCreate: any;
 	EntitlementDelete: any;
 	EntitlementUpdate: any;
@@ -100,7 +107,7 @@ export type GatewayReceiveEvents = {
 	IntegrationDelete: any;
 	IntegrationUpdate: any;
 	InteractionCreate: any;
-	InvalidSession: any;
+	InvalidSession: false;
 	InviteCreate: any;
 	InviteDelete: any;
 	MessageCreate: any;
@@ -114,18 +121,21 @@ export type GatewayReceiveEvents = {
 	MessageReactionRemoveEmoji: any;
 	MessageUpdate: any;
 	PresenceUpdate: any;
-	Ready: any;
-	Reconnect: any;
-	Resumed: any;
+	Ready: ReadyEventFields;
+	Reconnect: null;
+	Resumed: ResumeStructure;
 	StageInstanceCreate: any;
 	StageInstanceDelete: any;
 	StageInstanceUpdate: any;
 	ThreadCreate: any;
+	// TODO: Channel Structure
 	ThreadDelete: any;
-	ThreadListSync: any;
+	// TODO: Channel Structure
+	ThreadListSync: ThreadListSyncEventFields;
 	ThreadMemberUpdate: any;
 	ThreadMembersUpdate: any;
 	ThreadUpdate: any;
+	// TODO: Channel Structure
 	TypingStart: any;
 	UserUpdate: any;
 	VoiceServerUpdate: any;
@@ -136,6 +146,47 @@ export type GatewayReceiveEvents = {
 // https://discord.com/developers/docs/topics/gateway-events#hello-hello-structure
 export type HelloStructure = {
 	heartbeat_interval: Integer;
+};
+
+// https://discord.com/developers/docs/topics/gateway-events#ready-ready-event-fields
+export type ReadyEventFields = {
+	application: object;
+	// TODO: Application Structure
+	guilds: object;
+	// TODO: UnavailableGuild Structure
+	resume_gateway_url: string;
+	session_id: string;
+	shard?: [Integer, Integer];
+	user: object;
+	// TODO: User Structure
+	v: Integer;
+};
+
+// https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution-auto-moderation-action-execution-event-fields
+export type AutoModerationActionExecutionEventFields = {
+	action: object;
+	// TODO: Auto Moderation Action Object
+	alert_system_message_id?: Snowflake;
+	channel_id?: Snowflake;
+	content: string;
+	guild_id: Snowflake;
+	matched_content: string | null;
+	matched_keyword: string | null;
+	message_id?: Snowflake;
+	rule_id: Snowflake;
+	rule_trigger_type: any;
+	// TODO: Trigger Types
+	user_id: Snowflake;
+};
+
+// https://discord.com/developers/docs/topics/gateway-events#thread-list-sync-thread-list-sync-event-fields
+export type ThreadListSyncEventFields = {
+	channel_ids?: Snowflake[];
+	guild_id: Snowflake;
+	members: object[];
+	// TODO: Thread Member Structure
+	threads: object[];
+	// TODO: Channel Structure
 };
 
 export type ActivityStructure = {

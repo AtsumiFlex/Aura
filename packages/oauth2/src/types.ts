@@ -1,5 +1,6 @@
 /**
  * @fileoverview This file defines the types used in the OAuth2 package.
+ * @see {@link https://discord.com/developers/docs/topics/oauth2#oauth2}
  */
 
 import type { OAuth2Scopes } from "./enum";
@@ -7,12 +8,8 @@ import type { OAuth2Scopes } from "./enum";
 /**
  * @typedef {object} AccessTokenResponse
  * @description This type represents the response from an authorization code grant access token request.
- * @see {https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-access-token-response}
- * @property {string} access_token - The access token for the user.
- * @property {number} expires_in - The number of seconds before the access token expires.
- * @property {string} refresh_token - The refresh token for the user.
- * @property {string} scope - The scopes that the access token has access to.
- * @property {string} token_type - The type of the token.
+ * @see {@link https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-access-token-response}
+ * @property
  */
 export type AccessTokenResponse = {
 	access_token: string;
@@ -25,11 +22,8 @@ export type AccessTokenResponse = {
 /**
  * @typedef {object} ClientCredentialsAccessTokenResponse
  * @description This type represents the response from a client credentials grant access token request.
- * @see {https://discord.com/developers/docs/topics/oauth2#client-credentials-grant-client-credentials-access-token-response}
- * @property {string} access_token - The access token for the client.
- * @property {number} expires_in - The number of seconds before the access token expires.
- * @property {string} scope - The scopes that the access token has access to.
- * @property {string} token_type - The type of the token.
+ * @see {@link https://discord.com/developers/docs/topics/oauth2#client-credentials-grant-client-credentials-access-token-response}
+ * @property
  */
 export type ClientCredentialsAccessTokenResponse = {
 	access_token: string;
@@ -41,12 +35,8 @@ export type ClientCredentialsAccessTokenResponse = {
 /**
  * @typedef {object} BotAuthParameters
  * @description This type represents the parameters for bot authorization.
- * @see {https://discord.com/developers/docs/topics/oauth2#bot-authorization-flow-bot-auth-parameters}
- * @property {string} client_id - The client ID of the bot.
- * @property {boolean} disable_guild_select - Whether to disable guild selection on the authorization page.
- * @property {string} guild_id - The ID of the guild to preselect on the authorization page.
- * @property {string} permissions - The permissions to request.
- * @property {string} scope - The scopes to request.
+ * @see {@link https://discord.com/developers/docs/topics/oauth2#bot-authorization-flow-bot-auth-parameters}
+ * @property
  */
 export type BotAuthParameters = {
 	client_id: string;
@@ -60,11 +50,8 @@ export type BotAuthParameters = {
 /**
  * @typedef {object} GetCurrentAuthorizationInformationResponse
  * @description This type represents the response from a get current authorization information request.
- * @see {https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information-response-structure}
- * @property {object} application - The application object.
- * @property {number} expires - The number of seconds before the authorization information expires.
- * @property {OAuth2Scopes[]} scopes - The scopes that the authorization has access to.
- * @property {object} user - The user object.
+ * @see {@link https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information-response-structure}
+ * @property
  */
 export type GetCurrentAuthorizationInformationResponse = {
 	application: object;

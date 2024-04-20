@@ -1,23 +1,12 @@
 /**
  * @fileoverview This file defines the gateway opcodes and close event codes used in the application.
- * @see {https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway}
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway}
  */
 
 /**
  * @enum {number}
  * @description Enum for gateway opcodes.
- * @see {https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
- * @property {number} Dispatch - Opcode for dispatch.
- * @property {number} Heartbeat - Opcode for heartbeat.
- * @property {number} Identify - Opcode for identify.
- * @property {number} PresenceUpdate - Opcode for presence update.
- * @property {number} VoiceStateUpdate - Opcode for voice state update.
- * @property {number} Resume - Opcode for resume.
- * @property {number} Reconnect - Opcode for reconnect.
- * @property {number} RequestGuildMembers - Opcode for request guild members.
- * @property {number} InvalidSession - Opcode for invalid session.
- * @property {number} Hello - Opcode for hello.
- * @property {number} HeartbeatAck - Opcode for heartbeat acknowledgement.
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
  */
 export enum GatewayOpcodes {
 	Dispatch = 0,
@@ -36,21 +25,7 @@ export enum GatewayOpcodes {
 /**
  * @enum {number}
  * @description Enum for gateway close event codes.
- * @see {https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
- * @property {number} UnknownError - Close event code for unknown error.
- * @property {number} UnknownOpcode - Close event code for unknown opcode.
- * @property {number} DecodeError - Close event code for decode error.
- * @property {number} NotAuthenticated - Close event code for not authenticated.
- * @property {number} AuthenticationFailed - Close event code for authentication failed.
- * @property {number} AlreadyAuthenticated - Close event code for already authenticated.
- * @property {number} InvalidSeq - Close event code for invalid sequence.
- * @property {number} RateLimited - Close event code for rate limited.
- * @property {number} SessionTimeout - Close event code for session timeout.
- * @property {number} InvalidShard - Close event code for invalid shard.
- * @property {number} ShardingRequired - Close event code for sharding required.
- * @property {number} InvalidApiVersion - Close event code for invalid API version.
- * @property {number} InvalidIntents - Close event code for invalid intents.
- * @property {number} DisallowedIntents - Close event code for disallowed intents.
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
  */
 export enum GatewayCloseEventCodes {
 	UnknownError = 4_000,
