@@ -1,4 +1,47 @@
 import type { Integer, Snowflake } from "@aurajs/core";
+import type { AutoModerationActionExecutionEventFields } from "./events/auto";
+import type {
+	ChannelPinsUpdateEventFields,
+	ThreadListSyncEventFields,
+	ThreadMembersUpdateEventFields,
+} from "./events/channel";
+import type {
+	GuildBanAddEventFields,
+	GuildBanRemoveEventFields,
+	GuildCreateExtraFields,
+	GuildEmojisUpdateEventFields,
+	GuildIntegrationsUpdateEventFields,
+	GuildMemberAddExtraFields,
+	GuildMemberRemoveEventFields,
+	GuildMembersChunkEventFields,
+	GuildMemberUpdateEventFields,
+	GuildRoleCreateEventFields,
+	GuildRoleDeleteEventFields,
+	GuildRoleUpdateEventFields,
+	GuildScheduledEventUserAddEventFields,
+	GuildScheduledEventUserRemoveEventFields,
+	GuildStickersUpdateEventFields,
+} from "./events/guilds";
+import type {
+	IntegrationCreateEventAdditionalFields,
+	IntegrationDeleteEventFields,
+	IntegrationUpdateEventAdditionalFields,
+} from "./events/integrations";
+import type { InviteCreateEventFields, InviteDeleteEventFields } from "./events/invites";
+import type {
+	MessageCreateExtraFields,
+	MessageDeleteBulkEventFields,
+	MessageDeleteEventFields,
+	MessageReactionAddEventFields,
+	MessageReactionRemoveAllEventFields,
+	MessageReactionRemoveEmojiEventFields,
+	MessageReactionRemoveEventFields,
+} from "./events/message";
+import type { MessagePollVoteAddFields, MessagePollVoteRemoveFields } from "./events/polls";
+import type { ActivityStructure, PresenceUpdateEventFields, TypingStartEventFields } from "./events/presences";
+import type { HelloStructure, ReadyEventFields } from "./events/ready";
+import type { VoiceServerUpdateEventFields } from "./events/voice";
+import type { WebhooksUpdateEventFields } from "./events/webhooks";
 
 // https://discord.com/developers/docs/topics/gateway-events#payload-structure
 export type PayloadStructure = {
@@ -74,53 +117,56 @@ export type GatewayReceiveEvents = {
 	// TODO: Channel Structure
 	ChannelDelete: any;
 	// TODO: Channel Structure
-	ChannelPinsUpdate: any;
-	// TODO: Channel Structure
+	ChannelPinsUpdate: ChannelPinsUpdateEventFields;
 	ChannelUpdate: any;
 	// TODO: Channel Structure
 	EntitlementCreate: any;
 	EntitlementDelete: any;
 	EntitlementUpdate: any;
 	GuildAuditLogEntryCreate: any;
-	GuildBanAdd: any;
-	GuildBanRemove: any;
-	GuildCreate: any;
+	GuildBanAdd: GuildBanAddEventFields;
+	GuildBanRemove: GuildBanRemoveEventFields;
+	GuildCreate: GuildCreateExtraFields;
 	GuildDelete: any;
-	GuildEmojisUpdate: any;
-	GuildIntegrationsUpdate: any;
-	GuildMemberAdd: any;
-	GuildMemberRemove: any;
-	GuildMemberUpdate: any;
-	GuildMembersChunk: any;
-	GuildRoleCreate: any;
-	GuildRoleDelete: any;
-	GuildRoleUpdate: any;
+	GuildEmojisUpdate: GuildEmojisUpdateEventFields;
+	GuildIntegrationsUpdate: GuildIntegrationsUpdateEventFields;
+	GuildMemberAdd: GuildMemberAddExtraFields;
+	// TODO: And Guild Member Object
+	GuildMemberRemove: GuildMemberRemoveEventFields;
+	GuildMemberUpdate: GuildMemberUpdateEventFields;
+	GuildMembersChunk: GuildMembersChunkEventFields;
+	GuildRoleCreate: GuildRoleCreateEventFields;
+	GuildRoleDelete: GuildRoleDeleteEventFields;
+	GuildRoleUpdate: GuildRoleUpdateEventFields;
 	GuildScheduledEventCreate: any;
 	GuildScheduledEventDelete: any;
 	GuildScheduledEventUpdate: any;
-	GuildScheduledEventUserAdd: any;
-	GuildScheduledEventUserRemove: any;
-	GuildStickersUpdate: any;
+	GuildScheduledEventUserAdd: GuildScheduledEventUserAddEventFields;
+	GuildScheduledEventUserRemove: GuildScheduledEventUserRemoveEventFields;
+	GuildStickersUpdate: GuildStickersUpdateEventFields;
 	GuildUpdate: any;
 	Hello: HelloStructure;
-	IntegrationCreate: any;
-	IntegrationDelete: any;
-	IntegrationUpdate: any;
+	IntegrationCreate: IntegrationCreateEventAdditionalFields;
+	// TODO: And Integration Structure
+	IntegrationDelete: IntegrationDeleteEventFields;
+	IntegrationUpdate: IntegrationUpdateEventAdditionalFields;
+	// TODO: And Integration Structure
 	InteractionCreate: any;
 	InvalidSession: false;
-	InviteCreate: any;
-	InviteDelete: any;
-	MessageCreate: any;
-	MessageDelete: any;
-	MessageDeleteBulk: any;
-	MessagePollVoteAdd: any;
-	MessagePollVoteRemove: any;
-	MessageReactionAdd: any;
-	MessageReactionRemove: any;
-	MessageReactionRemoveAll: any;
-	MessageReactionRemoveEmoji: any;
+	InviteCreate: InviteCreateEventFields;
+	InviteDelete: InviteDeleteEventFields;
+	MessageCreate: MessageCreateExtraFields;
+	// TODO: And Message Structure
+	MessageDelete: MessageDeleteEventFields;
+	MessageDeleteBulk: MessageDeleteBulkEventFields;
+	MessagePollVoteAdd: MessagePollVoteAddFields;
+	MessagePollVoteRemove: MessagePollVoteRemoveFields;
+	MessageReactionAdd: MessageReactionAddEventFields;
+	MessageReactionRemove: MessageReactionRemoveEventFields;
+	MessageReactionRemoveAll: MessageReactionRemoveAllEventFields;
+	MessageReactionRemoveEmoji: MessageReactionRemoveEmojiEventFields;
 	MessageUpdate: any;
-	PresenceUpdate: any;
+	PresenceUpdate: PresenceUpdateEventFields;
 	Ready: ReadyEventFields;
 	Reconnect: null;
 	Resumed: ResumeStructure;
@@ -132,63 +178,14 @@ export type GatewayReceiveEvents = {
 	ThreadDelete: any;
 	// TODO: Channel Structure
 	ThreadListSync: ThreadListSyncEventFields;
-	ThreadMemberUpdate: any;
+	ThreadMemberUpdate: ThreadMembersUpdateEventFields;
 	ThreadMembersUpdate: any;
 	ThreadUpdate: any;
 	// TODO: Channel Structure
-	TypingStart: any;
+	TypingStart: TypingStartEventFields;
 	UserUpdate: any;
-	VoiceServerUpdate: any;
+	VoiceServerUpdate: VoiceServerUpdateEventFields;
 	VoiceStateUpdate: any;
-	WebhooksUpdate: any;
+	WebhooksUpdate: WebhooksUpdateEventFields;
 };
 
-// https://discord.com/developers/docs/topics/gateway-events#hello-hello-structure
-export type HelloStructure = {
-	heartbeat_interval: Integer;
-};
-
-// https://discord.com/developers/docs/topics/gateway-events#ready-ready-event-fields
-export type ReadyEventFields = {
-	application: object;
-	// TODO: Application Structure
-	guilds: object;
-	// TODO: UnavailableGuild Structure
-	resume_gateway_url: string;
-	session_id: string;
-	shard?: [Integer, Integer];
-	user: object;
-	// TODO: User Structure
-	v: Integer;
-};
-
-// https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution-auto-moderation-action-execution-event-fields
-export type AutoModerationActionExecutionEventFields = {
-	action: object;
-	// TODO: Auto Moderation Action Object
-	alert_system_message_id?: Snowflake;
-	channel_id?: Snowflake;
-	content: string;
-	guild_id: Snowflake;
-	matched_content: string | null;
-	matched_keyword: string | null;
-	message_id?: Snowflake;
-	rule_id: Snowflake;
-	rule_trigger_type: any;
-	// TODO: Trigger Types
-	user_id: Snowflake;
-};
-
-// https://discord.com/developers/docs/topics/gateway-events#thread-list-sync-thread-list-sync-event-fields
-export type ThreadListSyncEventFields = {
-	channel_ids?: Snowflake[];
-	guild_id: Snowflake;
-	members: object[];
-	// TODO: Thread Member Structure
-	threads: object[];
-	// TODO: Channel Structure
-};
-
-export type ActivityStructure = {
-	// TODO: Implement this
-};
