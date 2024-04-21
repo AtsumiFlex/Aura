@@ -6,9 +6,10 @@
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
-    "@aurajs/types": "workspace:*",
     "@aurajs/gateway": "workspace:*",
     "@aurajs/rest": "workspace:*",
+    "@aurajs/types": "workspace:*",
+    "eventemitter3": "^5.0.1",
     "tslib": "^2.6.2",
     "ws": "^8.16.0"
   },

@@ -36,6 +36,7 @@ export * from "./resources/webhook";
 
 // ./
 export * from "./global";
+export * from "./intents";
 export * from "./locales";
 export * from "./permission";
 export * from "./role";

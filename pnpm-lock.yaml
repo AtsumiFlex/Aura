@@ -53,6 +53,9 @@ importers:
       '@aurajs/types':
         specifier: workspace:*
         version: link:../../packages/types
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
