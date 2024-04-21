@@ -1,9 +1,9 @@
 // https://discord.com/developers/docs/resources/guild#guild-resource
 import type { OAuth2Scopes } from "@aurajs/oauth2";
 import type { RoleStructure } from "@aurajs/permissions";
-import type { Locales } from "../reference/locales";
+import type { Integer, Snowflake } from "../global";
+import type { Locales } from "../locales";
 import type { EmojiStructure } from "./emoji";
-import type { Integer, Snowflake } from "./global";
 import type { UserStructure } from "./user";
 import type { VoiceRegionStructure } from "./voice";
 
@@ -82,12 +82,12 @@ export type GuildScheduledEventStructure = {
 	guild_id: Snowflake;
 	id: Snowflake;
 	image?: string | null;
-	scheduled_start_time: string;
-	status: GuildScheduledEventStatus;
 	name: string;
 	privacy_level: GuildScheduledEventPrivacyLevel;
-	user_count: Integer;
 	scheduled_end_time: string | null;
+	scheduled_start_time: string;
+	status: GuildScheduledEventStatus;
+	user_count: Integer;
 };
 
 // https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level
@@ -357,9 +357,8 @@ export type OnboardingPromptStructure = {
 export type PromptOptionStructure = {
 	channel_ids: Snowflake[];
 	description: string;
-	emoji?: object;
+	emoji?: EmojiStructure;
 	emoji_animated?: boolean;
-	// TODO: Emoji Object
 	emoji_id?: Snowflake;
 	emoji_name?: string;
 	id: Snowflake;

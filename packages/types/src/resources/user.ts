@@ -1,6 +1,7 @@
 // https://discord.com/developers/docs/resources/user#users-resource
-import type { Locales } from "../reference/locales";
-import type { Snowflake } from "./global";
+import type { Snowflake } from "../global";
+import type { Locales } from "../locales";
+import type { IntegrationStructure } from "./guild";
 
 // https://discord.com/developers/docs/resources/user#user-object-user-structure
 export type UserStructure = {
@@ -38,7 +39,7 @@ export enum UserFlags {
 	VerifiedBot = 65_536,
 	VerifiedDeveloper = 131_072,
 	CertifiedModerator = 262_144,
-	BotHttpInteractions = 4_194_304,
+	BotHttpInteractions = 524_288,
 	ActiveDeveloper = 4_194_304,
 }
 
@@ -54,8 +55,7 @@ export enum PremiumTypes {
 export type ConnectionStructure = {
 	friend_sync: boolean;
 	id: string;
-	integrations?: object[];
-	// TODO: an array of partial server integrations
+	integrations?: IntegrationStructure[];
 	name: string;
 	revoked?: boolean;
 	show_activity: boolean;

@@ -1,13 +1,13 @@
 // https://discord.com/developers/docs/resources/voice#voice-resource
-import type { Snowflake } from "./global";
+import type { Snowflake } from "../global";
+import type { GuildMemberStructure } from "./guild";
 
 // https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure
 export type VoiceStateStructure = {
 	channel_id: Snowflake | null;
 	deaf: boolean;
 	guild_id?: Snowflake;
-	member?: object;
-	// TODO: Guild Member Object
+	member?: GuildMemberStructure;
 	mute: boolean;
 	request_to_speak_timestamp: string | null;
 	self_deaf: boolean;

@@ -1,5 +1,5 @@
 // https://discord.com/developers/docs/resources/poll#poll-resource
-import type { Integer } from "./global";
+import type { Integer } from "../global";
 
 // https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure
 export type PollStructure = {

@@ -1,5 +1,5 @@
 // https://discord.com/developers/docs/resources/invite#invite-resource
-import type { Integer } from "./global";
+import type { Integer } from "../global";
 import type { GuildStructure } from "./guild";
 import type { UserStructure } from "./user";
 

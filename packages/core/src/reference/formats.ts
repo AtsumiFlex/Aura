@@ -1,4 +1,4 @@
-import type { GuildNavigationTypes, Snowflake } from "../types/global";
+import type { GuildNavigationTypes, Snowflake } from "../../../types/src/global";
 
 export function formatUser<User extends Snowflake>(user: Snowflake): `<@${User}>`;
 export function formatUser(user: Snowflake) {

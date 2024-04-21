@@ -1,5 +1,5 @@
 // https://discord.com/developers/docs/resources/sticker#sticker-resource
-import type { Integer, Snowflake } from "./global";
+import type { Integer, Snowflake } from "../global";
 import type { UserStructure } from "./user";
 
 // https://discord.com/developers/docs/resources/sticker#sticker-object-sticker-structure

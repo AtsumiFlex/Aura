@@ -1,6 +1,6 @@
 // https://discord.com/developers/docs/resources/emoji#emoji-resource
-import type { RoleStructure } from "@aurajs/permissions";
-import type { Snowflake } from "./global";
+import type { RoleStructure } from "packages/permissions";
+import type { Snowflake } from "../global";
 import type { UserStructure } from "./user";
 
 // https://discord.com/developers/docs/resources/emoji#emoji-object-emoji-structure

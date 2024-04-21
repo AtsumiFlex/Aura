@@ -1,5 +1,5 @@
 // https://discord.com/developers/docs/resources/webhook#webhook-resource
-import type { Snowflake } from "./global";
+import type { Snowflake } from "../global";
 import type { GuildStructure } from "./guild";
 import type { UserStructure } from "./user";
 

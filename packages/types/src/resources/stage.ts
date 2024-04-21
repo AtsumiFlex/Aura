@@ -1,5 +1,5 @@
 // https://discord.com/developers/docs/resources/stage-instance#stage-instance-resource
-import type { Snowflake } from "./global";
+import type { Snowflake } from "../global";
 
 // https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure
 export type StageInstanceStructure = {

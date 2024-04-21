@@ -1,8 +1,7 @@
 // https://discord.com/developers/docs/topics/teams#teams
-
-// https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types
 import type { Snowflake, UserStructure } from "@aurajs/core";
 
+// https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types
 export enum TeamMemberRoleTypes {
 	Developer = "developer",
 	Member = "admin",
