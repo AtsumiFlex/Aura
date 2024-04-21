@@ -1,5 +1,6 @@
 // https://discord.com/developers/docs/resources/poll#poll-resource
 import type { Integer } from "../global";
+import type { EmojiStructure } from "./emoji";
 
 // https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure
 export type PollStructure = {
@@ -27,9 +28,8 @@ export enum LayoutType {
 
 // https://discord.com/developers/docs/resources/poll#poll-media-object-poll-media-object-structure
 export type PollMediaStructure = {
-	emoji?: object;
+	emoji?: EmojiStructure;
 	text?: string;
-	// TODO: Emoji Object
 };
 
 // https://discord.com/developers/docs/resources/poll#poll-answer-object-poll-answer-object-structure

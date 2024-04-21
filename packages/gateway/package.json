@@ -12,21 +12,20 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "build:delete": "npm run delete:dist:windows && npm run build",
     "build:watch": "tsc -p tsconfig.json --watch",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "delete:dist:windows": "rmdir /S /Q dist"
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
+    "@aurajs/types": "workspace:*",
+    "eventemitter3": "^5.0.1",
     "tslib": "^2.6.2",
     "ws": "^8.16.0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "@types/ws": "^8.5.10",
-    "eslint": "^8.57.0",
-    "eslint-config-neon": "^0.1.62",
-    "eslint-formatter-pretty": "^6.0.1",
-    "typescript": "^5.4.5"
+    "@types/ws": "^8.5.10"
   }
 }

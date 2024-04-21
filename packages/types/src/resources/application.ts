@@ -1,9 +1,9 @@
 // https://discord.com/developers/docs/resources/application#application-resource
-import type { OAuth2Scopes } from "@aurajs/oauth2";
-import type { BitwisePermissionFlags } from "@aurajs/permissions";
-import type { TeamObject } from "@aurajs/teams";
 import type { Snowflake } from "../global";
 import type { Locales } from "../locales";
+import type { OAuth2Scopes } from "../oauth2/enum";
+import type { BitwisePermissionFlags } from "../permission";
+import type { TeamObject } from "../teams";
 import type { GuildStructure } from "./guild";
 import type { UserStructure } from "./user";
 
@@ -23,8 +23,7 @@ export type ApplicationStructure = {
 	id: Snowflake;
 	install_params?: InstallParamsStructure;
 	integration_types_config?: ApplicationIntegrationTypes;
-	interactions_endpoint_url?: string[];
-	// TODO: Interactions endpoint URL for the app
+	interactions_endpoint_url?: string;
 	name: string;
 	owner?: UserStructure;
 	primary_sku_id?: Snowflake;

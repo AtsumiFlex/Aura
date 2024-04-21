@@ -1,3 +1,4 @@
+import type { Snowflake } from "@aurajs/types";
 import type { ImageFormats } from "./formats";
 
 type IgnoreLottie = Exclude<ImageFormats, ImageFormats.Lottie>;

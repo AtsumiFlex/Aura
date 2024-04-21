@@ -1,6 +1,7 @@
 // https://discord.com/developers/docs/resources/channel#channels-resource
-import type { RoleStructure } from "@aurajs/permissions";
 import type { Float, Integer, Snowflake } from "../global";
+import type { InteractionTypes, MessageInteractionStructure, ResolvedDataStructure } from "../interactions/responding";
+import type { RoleStructure } from "../role";
 import type { ApplicationIntegrationTypes } from "./application";
 import type { EmojiStructure } from "./emoji";
 import type { GuildMemberStructure } from "./guild";
@@ -97,7 +98,6 @@ export type MessageStructure = {
 	attachments: AttachmentStructure[];
 	author: UserStructure;
 	channel_id: Snowflake;
-	// TODO: Channel Object
 	components: any[];
 	// TODO: Message Components
 	content: string;
@@ -105,8 +105,7 @@ export type MessageStructure = {
 	embeds: EmbedStructure[];
 	flags?: MessageFlags;
 	id: Snowflake;
-	interaction?: any;
-	// TODO: Message Interaction Object
+	interaction?: MessageInteractionStructure;
 	interaction_metadata?: MessageInteractionMetadataStructure;
 	mention_channels?: ChannelMentionStructure[];
 	mention_everyone: boolean;
@@ -119,12 +118,11 @@ export type MessageStructure = {
 	position?: Integer;
 	reactions?: ReactionStructure[];
 	referenced_message?: MessageStructure;
-	resolved?: any;
-	// TODO: Interaction resolved data
+	resolved?: ResolvedDataStructure;
 	role_subscription_data?: RoleSubscriptionDataStructure;
 	sticker_items?: StickerItemStructure[];
 	stickers?: StickerStructure[];
-	thread?: any;
+	thread?: ChannelStructure;
 	timestamp: string;
 	tts: boolean;
 	type: MessageTypes;
@@ -168,8 +166,7 @@ export enum MessageTypes {
 
 // https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
 export type MessageActivityStructure = {
-	party_id?: any;
-	// TODO: Rich Presence Party ID
+	party_id?: string;
 	type: MessageActivityTypes;
 };
 
@@ -203,8 +200,7 @@ export type MessageInteractionMetadataStructure = {
 	interacted_message_id?: Snowflake;
 	original_response_message_id?: Snowflake;
 	triggering_interaction_metadata?: MessageInteractionMetadataStructure;
-	type: any;
-	// TODO: Interaction Type
+	type: InteractionTypes;
 	user_id: Snowflake;
 };
 
@@ -391,8 +387,7 @@ export type ChannelMentionStructure = {
 	guild_id: Snowflake;
 	id: Snowflake;
 	name: string;
-	type: number;
-	// TODO: Channel Type
+	type: ChannelTypes;
 };
 
 // https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types

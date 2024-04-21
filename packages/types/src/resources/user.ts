@@ -1,6 +1,7 @@
 // https://discord.com/developers/docs/resources/user#users-resource
 import type { Snowflake } from "../global";
 import type { Locales } from "../locales";
+import type { ApplicationRoleConnectionMetadataStructure } from "./application";
 import type { IntegrationStructure } from "./guild";
 
 // https://discord.com/developers/docs/resources/user#user-object-user-structure
@@ -96,8 +97,7 @@ export enum VisibilityTypes {
 
 // https://discord.com/developers/docs/resources/user#application-role-connection-object-application-role-connection-structure
 export type ApplicationRoleConnectionStructure = {
-	metadata: object;
-	// TODO: object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected
+	metadata: ApplicationRoleConnectionMetadataStructure;
 	platform_name: string | null;
 	platform_username: string | null;
 };

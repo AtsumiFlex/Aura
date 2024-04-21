@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@aurajs/types",
+  "name": "@aurajs/rest",
   "type": "commonjs",
   "main": "./dist/index.js",
   "types": "./dist/types-docs/index.d.ts",
@@ -19,6 +19,8 @@
     "delete:dist:windows": "rmdir /S /Q dist"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "@aurajs/types": "workspace:*",
+    "tslib": "^2.6.2",
+    "undici": "^6.13.0"
   }
 }

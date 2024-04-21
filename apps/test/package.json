@@ -2,17 +2,13 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/test",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "build:watch": "tsc -p tsconfig.json --watch",
     "dev": "nodemon --exec ts-node-dev --respawn --transpile-only ./src/index.ts"
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
+    "@aurajs/types": "workspace:*",
     "@aurajs/gateway": "workspace:*",
-    "@aurajs/oauth2": "workspace:*",
-    "@aurajs/opcodes": "workspace:*",
-    "@aurajs/permissions": "workspace:*",
-    "@aurajs/teams": "workspace:*",
+    "@aurajs/rest": "workspace:*",
     "tslib": "^2.6.2",
     "ws": "^8.16.0"
   },

@@ -1,9 +1,11 @@
 // https://discord.com/developers/docs/resources/guild#guild-resource
-import type { OAuth2Scopes } from "@aurajs/oauth2";
-import type { RoleStructure } from "@aurajs/permissions";
 import type { Integer, Snowflake } from "../global";
 import type { Locales } from "../locales";
+import type { OAuth2Scopes } from "../oauth2/enum";
+import type { RoleStructure } from "../role";
+import type { ChannelStructure } from "./channel";
 import type { EmojiStructure } from "./emoji";
+import type { StickerStructure } from "./sticker";
 import type { UserStructure } from "./user";
 import type { VoiceRegionStructure } from "./voice";
 
@@ -35,7 +37,6 @@ export type GuildStructure = {
 	owner_id: Snowflake;
 	permissions?: string;
 	preferred_locale: Locales;
-	// TODO: Sticker Object
 	premium_progress_bar_enabled?: boolean;
 	premium_subscription_count?: Integer;
 	premium_tier: PremiumTier;
@@ -45,7 +46,7 @@ export type GuildStructure = {
 	rules_channel_id: Snowflake | null;
 	safety_alerts_channel_id: Snowflake | null;
 	splash: string | null;
-	stickers?: object[];
+	stickers?: StickerStructure[];
 	system_channel_flags: SystemChannelFlags;
 	system_channel_id: Snowflake | null;
 	vanity_url_code: string | null;
@@ -227,8 +228,7 @@ export type GuildPreviewStructure = {
 	id: Snowflake;
 	name: string;
 	splash: string | null;
-	stickers: object[];
-	// TODO: Sticker Object
+	stickers: StickerStructure[];
 };
 
 // https://discord.com/developers/docs/resources/guild#guild-widget-settings-object-guild-widget-settings-structure
@@ -239,10 +239,9 @@ export type GuildWidgetSettingsStructure = {
 
 // https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure
 export type GuildWidgetStructure = {
-	channels: object[];
+	channels: ChannelStructure[];
 	id: Snowflake;
 	instant_invite: string | null;
-	// TODO: Channel Object
 	members: UserStructure[];
 	name: string;
 	presence_count: Integer;

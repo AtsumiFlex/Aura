@@ -1,4 +1,4 @@
-import type { GuildNavigationTypes, Snowflake } from "../../../types/src/global";
+import type { GuildNavigationTypes, Snowflake } from "@aurajs/types";
 
 export function formatUser<User extends Snowflake>(user: Snowflake): `<@${User}>`;
 export function formatUser(user: Snowflake) {
