@@ -20,3 +20,4 @@ export type AuthenticationType = "Bearer" | "Bot";
 export type SetString<T extends bigint | boolean | number | string | null | undefined> = `${T}`;
 export type Snowflake = `${bigint}`;
 export type Integer = number;
+export type ISO8601Timestamp = string;

@@ -1,15 +1,15 @@
 import type Buffer from "node:buffer";
 import { clearInterval, clearTimeout, setInterval, setTimeout } from "node:timers";
+import { GatewayOpcodes } from "@aurajs/core";
 import EventEmitter from "eventemitter3";
 import WebSocket from "ws";
-import { GatewayOpcodes } from "../opcodes/gateway";
 
 export class GatewayWebSocket extends EventEmitter {
+	public ws: WebSocket | null = null;
+
 	private heartbeatInterval: NodeJS.Timeout | null = null;
 
 	private reconnectInterval: NodeJS.Timeout | null = null;
-
-	private _ws: WebSocket | null = null;
 
 	private _url: string = "wss://gateway.discord.gg/?v=10&encoding=json";
 
@@ -19,21 +19,21 @@ export class GatewayWebSocket extends EventEmitter {
 	}
 
 	public send(data: any): void {
-		if (this._ws === null || this._ws.readyState !== WebSocket.OPEN) {
+		if (this.ws === null || this.ws.readyState !== WebSocket.OPEN) {
 			throw new Error("WebSocket is not connected");
 		}
 
-		this._ws.send(JSON.stringify(data));
+		this.ws.send(JSON.stringify(data));
 	}
 
 	public close(code?: number | undefined, data?: Buffer | string | undefined): void {
-		if (this._ws === null) {
+		if (this.ws === null) {
 			throw new Error("WebSocket is not connected");
 		}
 
 		this.stopHeartbeat();
-		this._ws.close(code, data);
-		this._ws = null;
+		this.ws.close(code, data);
+		this.ws = null;
 	}
 
 	public destroy(): void {
@@ -45,26 +45,26 @@ export class GatewayWebSocket extends EventEmitter {
 	}
 
 	private connect(): void {
-		if (this._ws !== null) {
+		if (this.ws !== null) {
 			return;
 		}
 
-		this._ws = new WebSocket(this._url);
-		this._ws.on("open", () => {
+		this.ws = new WebSocket(this._url);
+		this.ws.on("open", () => {
 			this.startHeartbeat();
 			this.emit("open");
 		});
 
-		this._ws.on("message", (data) => {
+		this.ws.on("message", (data) => {
 			// eslint-disable-next-line @typescript-eslint/no-base-to-string
 			this.emit("message", JSON.stringify(JSON.parse(data.toString())));
 		});
 
-		this._ws.on("error", (error) => {
+		this.ws.on("error", (error) => {
 			this.emit("error", error);
 		});
 
-		this._ws.on("close", (closEvent) => {
+		this.ws.on("close", (closEvent) => {
 			this.emit("close", closEvent);
 			this.stopHeartbeat();
 			this.reconnect();
