@@ -1,0 +1,8 @@
+{
+  "extends": "../../apps/foo/.eslintrc.json",
+  "rules": {
+    "line-comment-position": 0,
+    "no-inline-comments": 0,
+    "no-warning-comments": 0
+  }
+}
