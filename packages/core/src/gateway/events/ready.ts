@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#ready}
  */
 
-import type { APIVersions, Integer } from "@aurajs/core";
+import type { APIVersions, Integer } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#ready-ready-event-fields}

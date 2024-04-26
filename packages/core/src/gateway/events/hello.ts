@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#hello}
  */
 
-import type { Integer } from "@aurajs/core";
+import type { Integer } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#hello-hello-structure}

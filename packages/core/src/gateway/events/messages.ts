@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#messages}
  */
 
-import type { Snowflake } from "@aurajs/core";
+import type { Snowflake } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#message-create-message-create-extra-fields}

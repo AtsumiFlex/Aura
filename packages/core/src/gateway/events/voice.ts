@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice}
  */
 
-import type { Snowflake } from "@aurajs/core";
+import type { Snowflake } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice-server-update-voice-server-update-event-fields}

@@ -58,25 +58,6 @@ importers:
         specifier: ^8.5.10
         version: 8.5.10
 
-  packages/gateway:
-    dependencies:
-      '@aurajs/core':
-        specifier: workspace:*
-        version: link:../core
-      eventemitter3:
-        specifier: ^5.0.1
-        version: 5.0.1
-      tslib:
-        specifier: ^2.6.2
-        version: 2.6.2
-      ws:
-        specifier: ^8.16.0
-        version: 8.16.0
-    devDependencies:
-      '@types/ws':
-        specifier: ^8.5.10
-        version: 8.5.10
-
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':

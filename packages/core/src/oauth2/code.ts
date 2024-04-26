@@ -3,8 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/oauth2#authorization-code-grant}
  */
 
-import type { AuthenticationType } from "../base/base";
-import type { SetString } from "../index";
+import type { AuthenticationType, SetString } from "index";
 import type { OAuth2Scopes } from "./resources";
 
 /**

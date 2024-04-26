@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#guilds}
  */
 
-import type { Integer, ISO8601Timestamp, Snowflake } from "@aurajs/core";
+import type { Integer, ISO8601Timestamp, Snowflake } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#guild-create-guild-create-extra-fields}

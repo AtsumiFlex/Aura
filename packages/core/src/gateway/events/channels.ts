@@ -3,7 +3,7 @@
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#channels}
  */
 
-import type { Integer, ISO8601Timestamp, Snowflake } from "@aurajs/core";
+import type { Integer, ISO8601Timestamp, Snowflake } from "../../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#thread-list-sync-thread-list-sync-event-fields}

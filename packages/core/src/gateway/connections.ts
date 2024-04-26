@@ -1,4 +1,4 @@
-import type { APIVersions } from "@aurajs/core";
+import type { APIVersions } from "../base/base";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway#connecting-gateway-url-query-string-params}

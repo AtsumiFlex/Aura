@@ -1,14 +1,16 @@
-import type { GatewayOpcodes, Integer, Snowflake } from "@aurajs/core";
+import type { Integer, Snowflake } from "../../base/base";
+import type { GatewayOpcodes } from "../../opcodes/gateway";
+import type { GatewayEvents } from "../intents";
 import type { ActivityStructure } from "./activity";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#payload-structure}
  */
 export type GatewayPayload = {
-	d: object;
+	d?: object | null;
 	op: GatewayOpcodes;
-	s: Integer;
-	t: string;
+	s?: Integer | null;
+	t?: GatewayEvents;
 };
 
 /**
@@ -16,9 +18,10 @@ export type GatewayPayload = {
  */
 export type GatewayIdentify = {
 	compress?: boolean;
+	intents: Integer;
 	large_threshold?: Integer;
-	presence: GatewayPresenceUpdateStructure; // TODO: A voir si c'est bien ça
-	properties: GatewayIdentifyConnectionProperties;
+	presence?: GatewayPresenceUpdateStructure; // TODO: A voir si c'est bien ça
+	properties?: GatewayIdentifyConnectionProperties;
 	shard?: [Integer, Integer];
 	token: string;
 };
