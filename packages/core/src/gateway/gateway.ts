@@ -59,7 +59,7 @@ export class GatewayWebSocket extends EventEmitter {
 			this.startHeartbeat();
 			this.emit("connected");
 		});
-		this.ws.on("message", (data) => {
+		this.ws.on("message", (data: GatewayPayload) => {
 			this.handleMessage(data);
 		});
 		this.ws.on("close", () => {
@@ -72,14 +72,18 @@ export class GatewayWebSocket extends EventEmitter {
 		});
 	}
 
-	private handleMessage(data: WebSocket.Data): void {
-		let message;
+	private handleMessage(data: GatewayPayload): void {
+		let message: GatewayPayload;
 		try {
 			// eslint-disable-next-line @typescript-eslint/no-base-to-string
 			message = JSON.parse(data.toString());
 		} catch {
 			this.emit("error", new Error("Failed to parse incoming message"));
 			return;
+		}
+
+		if (message.op === GatewayOpcodes.InvalidSession) {
+			this.emit("invalidSession");
 		}
 
 		this.emit("message", message);

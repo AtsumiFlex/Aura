@@ -10,7 +10,7 @@ export type GatewayPayload = {
 	d?: object | null;
 	op: GatewayOpcodes;
 	s?: Integer | null;
-	t?: GatewayEvents;
+	t?: GatewayEvents | string;
 };
 
 /**
