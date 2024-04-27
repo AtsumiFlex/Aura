@@ -1,14 +1,30 @@
 {
-  "name": "@aurajs/monorepo",
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "aurajs",
+  "private": true,
+  "packageManager": "bun@1.1.4",
+  "scripts": {
+    "dev": "turbo dev",
+    "start": "turbo start",
+    "build": "turbo build",
+    "lint": "turbo lint"
+  },
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "eslint": "^8",
-    "eslint-config-neon": "^0.1.62",
-    "eslint-formatter-pretty": "5",
-    "nodemon": "^3.1.0",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typedoc": "^0.25.13",
-    "typescript": "^5.4.5"
-  }
+    "@aurajs/eslint-config": "workspace:*",
+    "@aurajs/typescript-config": "workspace:*",
+    "@types/node": "latest",
+    "@types/bun": "latest",
+    "turbo": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "apps/*",
+    "libs/*",
+    "packages/*"
+  ]
 }

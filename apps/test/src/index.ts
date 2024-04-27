@@ -1,4 +1,3 @@
-import { GatewayIntents } from "@aurajs/core";
-import Zen from "./client";
+import type { Float } from "@aurajs/core";
 
-const zen = new Zen("token", { intents: [GatewayIntents.Guilds, GatewayIntents.GuildMembers, GatewayIntents.GuildModeration, GatewayIntents.GuildEmojisAndStickers, GatewayIntents.GuildIntegrations, GatewayIntents.GuildWebhooks, GatewayIntents.GuildInvites, GatewayIntents.GuildVoiceStates, GatewayIntents.GuildPresences, GatewayIntents.GuildMessages, GatewayIntents.GuildMessageReactions, GatewayIntents.GuildMessageTyping, GatewayIntents.DirectMessages, GatewayIntents.DirectMessageReactions, GatewayIntents.DirectMessageTyping, GatewayIntents.MessageContent, GatewayIntents.GuildScheduledEvents, GatewayIntents.AutoModerationConfigurations, GatewayIntents.AutoModerationExecution, GatewayIntents.GuildMessagePolls, GatewayIntents.DirectMessagePolls] });
+let float: Float;
