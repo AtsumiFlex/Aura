@@ -2,7 +2,7 @@
  * @fileoverview Formatters for Discord's API.
  * @see {@link https://discord.com/developers/docs/reference#message-formatting}
  */
-import type { Snowflake } from "./base";
+import type { Snowflake } from "@aurajs/types";
 
 export function formatUser(userId: Snowflake): `<@${Snowflake}>` {
 	return `<@${userId}>`;

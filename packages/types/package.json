@@ -1,10 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@aurajs/test",
-  "private": true,
+  "name": "@aurajs/types",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
   "dependencies": {
-    "@aurajs/core": "workspace:*",
-    "@aurajs/types": "workspace:*",
     "@aurajs/opcodes": "workspace:*",
     "tslib": "^2.6.2"
   },
