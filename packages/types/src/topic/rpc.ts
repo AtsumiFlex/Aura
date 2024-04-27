@@ -2,8 +2,8 @@
  * @see {@link https://discord.com/developers/docs/topics/rpc#rpc}
  */
 
-import type { RpcErrorCodes } from "@aurajs/opcodes";
 import type { Float, Integer, Snowflake } from "../globals";
+import type { RpcErrorCodes } from "./opcodes";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/rpc#rpc-rpc-versions}

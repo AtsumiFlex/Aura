@@ -2,8 +2,8 @@
  * @see {@link https://discord.com/developers/docs/topics/rate-limits#rate-limits}
  */
 
-import type { JsonErrorCodes } from "@aurajs/opcodes";
 import type { Float } from "../globals";
+import type { JsonErrorCodes } from "./opcodes";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/rate-limits#header-format-rate-limit-header-examples}

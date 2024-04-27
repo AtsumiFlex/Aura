@@ -2,6 +2,8 @@
  * @see {@link https://discord.com/developers/docs/topics/voice-connections#voice}
  */
 
+import type Buffer from "node:buffer";
+
 /**
  * @see {@link https://discord.com/developers/docs/topics/voice-connections#voice-gateway-versioning-gateway-versions}
  */

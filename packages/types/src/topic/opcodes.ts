@@ -1,6 +1,61 @@
 /**
- * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json}
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#opcodes-and-status-codes}
  */
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-opcodes}
+ */
+export enum GatewayOpcodes {
+	Dispatch = 0,
+	Heartbeat = 1,
+	Identify = 2,
+	PresenceUpdate = 3,
+	VoiceStateUpdate = 4,
+	Resume = 6,
+	Reconnect = 7,
+	RequestGuildMembers = 8,
+	InvalidSession = 9,
+	Hello = 10,
+	HeartbeatAck = 11,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
+ */
+export enum GatewayCloseCodes {
+	UnknownError = 4_000,
+	UnknownOpcode = 4_001,
+	DecodeError = 4_002,
+	NotAuthenticated = 4_003,
+	AuthenticationFailed = 4_004,
+	AlreadyAuthenticated = 4_005,
+	InvalidSeq = 4_007,
+	RateLimited = 4_008,
+	SessionTimedOut = 4_009,
+	InvalidShard = 4_010,
+	ShardingRequired = 4_011,
+	InvalidAPIVersion = 4_012,
+	InvalidIntents = 4_013,
+	DisallowedIntents = 4_014,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#http-http-response-codes}
+ */
+export enum HttpCodes {
+	Ok = 200,
+	Created = 201,
+	NoContent = 204,
+	NotModified = 304,
+	BadRequest = 400,
+	Unauthorized = 401,
+	Forbidden = 403,
+	NotFound = 404,
+	MethodNotAllowed = 405,
+	TooManyRequests = 429,
+	GatewayUnavailable = 502,
+	ServerError = 500,
+}
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
@@ -216,4 +271,73 @@ export enum JsonErrorCodes {
 	CannotEditAPollMessage = 520_003,
 	CannotUseAnEmojiIncludedWithThePoll = 520_004,
 	CannotExpireANonPollMessage = 520_006,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes}
+ */
+export enum RpcErrorCodes {
+	UnknownError = 1_000,
+	InvalidPayload = 4_000,
+	InvalidCommand = 4_002,
+	InvalidGuild = 4_003,
+	InvalidEvent = 4_004,
+	InvalidChannel = 4_005,
+	InvalidPermissions = 4_006,
+	InvalidClientId = 4_007,
+	InvalidOrigin = 4_008,
+	InvalidToken = 4_009,
+	InvalidUser = 4_010,
+	OAuth2Error = 5_000,
+	SelectChannelTimedOut = 5_001,
+	GetGuildTimedOut = 5_002,
+	SelectVoiceForceRequired = 5_003,
+	CaptureShortcutAlreadyListening = 5_004,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes}
+ */
+export enum RpcCloseCodes {
+	InvalidClientId = 4_000,
+	InvalidOrigin = 4_001,
+	RateLimited = 4_002,
+	TokenRevoked = 4_003,
+	InvalidVersion = 4_004,
+	InvalidEncoding = 4_005,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-opcodes}
+ */
+export enum VoiceOpcodes {
+	Identify = 0,
+	SelectProtocol = 1,
+	Ready = 2,
+	Heartbeat = 3,
+	SessionDescription = 4,
+	Speaking = 5,
+	HeartbeatAck = 6,
+	Resume = 7,
+	Hello = 8,
+	Resumed = 9,
+	ClientDisconnect = 13,
+}
+
+/**
+ * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes}
+ */
+export enum VoiceCloseCodes {
+	UnknownOpcode = 4_001,
+	FailedToDecodePayload = 4_002,
+	NotAuthenticated = 4_003,
+	AuthenticationFailed = 4_004,
+	AlreadyAuthenticated = 4_005,
+	SessionNoLongerValid = 4_006,
+	SessionTimeout = 4_009,
+	ServerNotFound = 4_011,
+	UnknownProtocol = 4_012,
+	Disconnected = 4_014,
+	VoiceServerCrashed = 4_015,
+	UnknownEncryptionMode = 4_016,
 }
