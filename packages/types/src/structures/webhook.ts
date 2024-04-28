@@ -5,6 +5,7 @@
 import type { Snowflake } from "../globals";
 import type { AllowedMentionsStructure, ChannelStructure, EmbedStructure, MessageFlags } from "./channel";
 import type { GuildStructure } from "./guild";
+import type { MessageComponentStructure } from "./interactions";
 import type { PollCreateRequestStructure } from "./poll";
 import type { UserStructure } from "./user";
 
@@ -68,7 +69,7 @@ export type JSONExecuteWebhook = {
 	applied_tags?: Snowflake[];
 	attachments?: object[];
 	avatar_url?: string;
-	components?: MessageComponentStructure[]; // TODO: component objects
+	components?: MessageComponentStructure[];
 	content?: string;
 	embeds?: EmbedStructure[];
 	files?: object[];
@@ -116,7 +117,7 @@ export type QueryEditWebhookMessage = {
 export type JSONEditWebhookMessage = {
 	allowed_mentions?: AllowedMentionsStructure;
 	attachments?: object[];
-	components?: MessageComponentStructure[]; // TODO: component objects
+	components?: MessageComponentStructure[];
 	content?: string;
 	embeds?: EmbedStructure[];
 	files?: object[];

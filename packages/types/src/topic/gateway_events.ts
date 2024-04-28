@@ -5,10 +5,18 @@
 import type { ApiVersion } from "@aurajs/core";
 import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
 import type { ApplicationStructure } from "../structures/application";
-import type { ChannelStructure, ThreadMemberStructure } from "../structures/channel";
+import type { AuditLogEntryStructure } from "../structures/audit";
+import type { ChannelStructure, MessageStructure, ThreadMemberStructure } from "../structures/channel";
 import type { EmojiStructure } from "../structures/emoji";
-import type { GuildMemberStructure, GuildScheduledEventStructure } from "../structures/guild";
-import type { AutoModerationActionStructure } from "../structures/moderation";
+import type { EntitlementStructure } from "../structures/entitlements";
+import type {
+	GuildMemberStructure,
+	GuildScheduledEventStructure,
+	GuildStructure,
+	IntegrationStructure,
+} from "../structures/guild";
+import type { GuildApplicationCommandPermissionStructure, InteractionStructure } from "../structures/interactions";
+import type { AutoModerationActionStructure, AutoModerationRuleStructure } from "../structures/moderation";
 import type { RoleStructure } from "../structures/role";
 import type { StageInstanceStructure } from "../structures/stage";
 import type { StickerStructure } from "../structures/sticker";
@@ -121,8 +129,151 @@ export enum StatusTypes {
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#receive-events}
  */
-export type GatewayReceiveEvents = {
-	// TODO: Add all gateway events
+export enum GatewayReceiveEvents {
+	ApplicationCommandPermissionsUpdate = "APPLICATION_COMMAND_PERMISSIONS_UPDATE",
+	AutoModerationActionExecution = "AUTO_MODERATION_ACTION_EXECUTION",
+	AutoModerationRuleCreate = "AUTO_MODERATION_RULE_CREATE",
+	AutoModerationRuleDelete = "AUTO_MODERATION_RULE_DELETE",
+	AutoModerationRuleUpdate = "AUTO_MODERATION_RULE_UPDATE",
+	ChannelCreate = "CHANNEL_CREATE",
+	ChannelDelete = "CHANNEL_DELETE",
+	ChannelPinsUpdate = "CHANNEL_PINS_UPDATE",
+	ChannelUpdate = "CHANNEL_UPDATE",
+	EntitlementCreate = "ENTITLEMENT_CREATE",
+	EntitlementDelete = "ENTITLEMENT_DELETE",
+	EntitlementUpdate = "ENTITLEMENT_UPDATE",
+	GuildAuditLogEntryCreate = "GUILD_AUDIT_LOG_ENTRY_CREATE",
+	GuildBanAdd = "GUILD_BAN_ADD",
+	GuildBanRemove = "GUILD_BAN_REMOVE",
+	GuildCreate = "GUILD_CREATE",
+	GuildDelete = "GUILD_DELETE",
+	GuildEmojisUpdate = "GUILD_EMOJIS_UPDATE",
+	GuildIntegrationsUpdate = "GUILD_INTEGRATIONS_UPDATE",
+	GuildMemberAdd = "GUILD_MEMBER_ADD",
+	GuildMemberRemove = "GUILD_MEMBER_REMOVE",
+	GuildMemberUpdate = "GUILD_MEMBER_UPDATE",
+	GuildMembersChunk = "GUILD_MEMBERS_CHUNK",
+	GuildRoleCreate = "GUILD_ROLE_CREATE",
+	GuildRoleDelete = "GUILD_ROLE_DELETE",
+	GuildRoleUpdate = "GUILD_ROLE_UPDATE",
+	GuildScheduledEventCreate = "GUILD_SCHEDULED_EVENT_CREATE",
+	GuildScheduledEventDelete = "GUILD_SCHEDULED_EVENT_DELETE",
+	GuildScheduledEventUpdate = "GUILD_SCHEDULED_EVENT_UPDATE",
+	GuildScheduledEventUserAdd = "GUILD_SCHEDULED_EVENT_USER_ADD",
+	GuildScheduledEventUserRemove = "GUILD_SCHEDULED_EVENT_USER_REMOVE",
+	GuildStickersUpdate = "GUILD_STICKERS_UPDATE",
+	GuildUpdate = "GUILD_UPDATE",
+	Hello = "HELLO",
+	IntegrationCreate = "INTEGRATION_CREATE",
+	IntegrationDelete = "INTEGRATION_DELETE",
+	IntegrationUpdate = "INTEGRATION_UPDATE",
+	InteractionCreate = "INTERACTION_CREATE",
+	InvalidSession = "INVALID_SESSION",
+	InviteCreate = "INVITE_CREATE",
+	InviteDelete = "INVITE_DELETE",
+	MessageCreate = "MESSAGE_CREATE",
+	MessageDelete = "MESSAGE_DELETE",
+	MessageDeleteBulk = "MESSAGE_DELETE_BULK",
+	MessagePollVoteAdd = "MESSAGE_POLL_VOTE_ADD",
+	MessagePollVoteRemove = "MESSAGE_POLL_VOTE_REMOVE",
+	MessageReactionAdd = "MESSAGE_REACTION_ADD",
+	MessageReactionRemove = "MESSAGE_REACTION_REMOVE",
+	MessageReactionRemoveAll = "MESSAGE_REACTION_REMOVE_ALL",
+	MessageReactionRemoveEmoji = "MESSAGE_REACTION_REMOVE_EMOJI",
+	MessageUpdate = "MESSAGE_UPDATE",
+	PresenceUpdate = "PRESENCE_UPDATE",
+	Ready = "READY",
+	Reconnect = "RECONNECT",
+	Resumed = "RESUMED",
+	StageInstanceCreate = "STAGE_INSTANCE_CREATE",
+	StageInstanceDelete = "STAGE_INSTANCE_DELETE",
+	StageInstanceUpdate = "STAGE_INSTANCE_UPDATE",
+	ThreadCreate = "THREAD_CREATE",
+	ThreadDelete = "THREAD_DELETE",
+	ThreadListSync = "THREAD_LIST_SYNC",
+	ThreadMemberUpdate = "THREAD_MEMBER_UPDATE",
+	ThreadMembersUpdate = "THREAD_MEMBERS_UPDATE",
+	ThreadUpdate = "THREAD_UPDATE",
+	TypingStart = "TYPING_START",
+	UserUpdate = "USER_UPDATE",
+	VoiceServerUpdate = "VOICE_SERVER_UPDATE",
+	VoiceStateUpdate = "VOICE_STATE_UPDATE",
+	WebhooksUpdate = "WEBHOOKS_UPDATE",
+}
+
+export type GatewayReceiveEventsOptions = {
+	[GatewayReceiveEvents.Hello]: [hello: HelloEventFields];
+	[GatewayReceiveEvents.Ready]: [ready: ReadyEventFields];
+	[GatewayReceiveEvents.Resumed]: [resumed: GatewayResumeStructure];
+	[GatewayReceiveEvents.Reconnect]: [reconnect: null];
+	[GatewayReceiveEvents.InvalidSession]: [invalidSession: false];
+	[GatewayReceiveEvents.ApplicationCommandPermissionsUpdate]: [applicationCommandPermissionsUpdate: GuildApplicationCommandPermissionStructure];
+	[GatewayReceiveEvents.AutoModerationRuleCreate]: [autoModerationRuleCreate: AutoModerationRuleStructure];
+	[GatewayReceiveEvents.AutoModerationRuleUpdate]: [autoModerationRuleUpdate: AutoModerationRuleStructure];
+	[GatewayReceiveEvents.AutoModerationRuleDelete]: [autoModerationRuleDelete: AutoModerationRuleStructure];
+	[GatewayReceiveEvents.AutoModerationActionExecution]: [autoModerationActionExecution: AutoModerationActionExecutionEventFields];
+	[GatewayReceiveEvents.ChannelCreate]: [channelCreate: ChannelStructure];
+	[GatewayReceiveEvents.ChannelUpdate]: [channelUpdate: ChannelStructure];
+	[GatewayReceiveEvents.ChannelDelete]: [channelDelete: ChannelStructure];
+	[GatewayReceiveEvents.ChannelPinsUpdate]: [channelPinsUpdate: ChannelPinsUpdateEventFields];
+	[GatewayReceiveEvents.ThreadCreate]: [threadCreate: ChannelStructure];
+	[GatewayReceiveEvents.ThreadUpdate]: [threadUpdate: ChannelStructure];
+	[GatewayReceiveEvents.ThreadDelete]: [threadDelete: ChannelStructure];
+	[GatewayReceiveEvents.ThreadListSync]: [threadListSync: ThreadListSyncEventFields];
+	[GatewayReceiveEvents.ThreadMemberUpdate]: [threadMemberUpdate: ThreadMemberStructure & ThreadMemberUpdateExtraFields];
+	[GatewayReceiveEvents.ThreadMembersUpdate]: [threadMembersUpdate: ThreadMembersUpdateEventFields];
+	[GatewayReceiveEvents.EntitlementCreate]: [entitlementCreate: EntitlementStructure];
+	[GatewayReceiveEvents.EntitlementUpdate]: [entitlementUpdate: EntitlementStructure];
+	[GatewayReceiveEvents.EntitlementDelete]: [entitlementDelete: EntitlementStructure];
+	[GatewayReceiveEvents.GuildCreate]: [guildCreate: GuildCreateExtraFields];
+	[GatewayReceiveEvents.GuildUpdate]: [guildUpdate: GuildStructure];
+	[GatewayReceiveEvents.GuildDelete]: [guildDelete: {
+		id: Snowflake;
+		unavailable: boolean;
+	}];
+	[GatewayReceiveEvents.GuildAuditLogEntryCreate]: [guildAuditLogEntryCreate: AuditLogEntryStructure];
+	[GatewayReceiveEvents.GuildBanAdd]: [guildBanAdd: GuildBanAddEventFields];
+	[GatewayReceiveEvents.GuildBanRemove]: [guildBanRemove: GuildBanRemoveEventFields];
+	[GatewayReceiveEvents.GuildEmojisUpdate]: [guildEmojisUpdate: GuildEmojisUpdateEventFields];
+	[GatewayReceiveEvents.GuildStickersUpdate]: [guildStickersUpdate: GuildStickersUpdateEventFields];
+	[GatewayReceiveEvents.GuildIntegrationsUpdate]: [guildIntegrationsUpdate: GuildIntegrationsUpdateEventFields];
+	[GatewayReceiveEvents.GuildMemberAdd]: [guildMemberAdd: GuildMemberAddExtraFields & GuildMemberStructure];
+	[GatewayReceiveEvents.GuildMemberRemove]: [guildMemberRemove: GuildMemberRemoveEventFields];
+	[GatewayReceiveEvents.GuildMemberUpdate]: [guildMemberUpdate: GuildMemberUpdateEventFields];
+	[GatewayReceiveEvents.GuildMembersChunk]: [guildMembersChunk: GuildMembersChunkEventFields];
+	[GatewayReceiveEvents.GuildRoleCreate]: [guildRoleCreate: GuildRoleCreateEventFields];
+	[GatewayReceiveEvents.GuildRoleUpdate]: [guildRoleUpdate: GuildRoleUpdateEventFields];
+	[GatewayReceiveEvents.GuildRoleDelete]: [guildRoleDelete: GuildRoleDeleteEventFields];
+	[GatewayReceiveEvents.GuildScheduledEventCreate]: [guildScheduledEventCreate: GuildScheduledEventStructure];
+	[GatewayReceiveEvents.GuildScheduledEventUpdate]: [guildScheduledEventUpdate: GuildScheduledEventStructure];
+	[GatewayReceiveEvents.GuildScheduledEventDelete]: [guildScheduledEventDelete: GuildScheduledEventStructure];
+	[GatewayReceiveEvents.GuildScheduledEventUserAdd]: [guildScheduledEventUserAdd: GuildScheduledEventUserAddEventFields];
+	[GatewayReceiveEvents.GuildScheduledEventUserRemove]: [guildScheduledEventUserRemove: GuildScheduledEventUserRemoveEventFields];
+	[GatewayReceiveEvents.IntegrationCreate]: [integrationCreate: IntegrationCreateEventAdditionalFields & IntegrationStructure];
+	[GatewayReceiveEvents.IntegrationUpdate]: [integrationUpdate: IntegrationStructure & IntegrationUpdateEventAdditionalFields];
+	[GatewayReceiveEvents.IntegrationDelete]: [integrationDelete: IntegrationDeleteEventFields];
+	[GatewayReceiveEvents.InteractionCreate]: [interactionCreate: InteractionStructure];
+	[GatewayReceiveEvents.InviteCreate]: [inviteCreate: InviteCreateEventFields];
+	[GatewayReceiveEvents.InviteDelete]: [inviteDelete: InviteDeleteEventFields];
+	[GatewayReceiveEvents.MessageCreate]: [messageCreate: MessageCreateExtraFields & MessageStructure];
+	[GatewayReceiveEvents.MessageUpdate]: [messageUpdate: MessageStructure];
+	[GatewayReceiveEvents.MessageDelete]: [messageDelete: MessageDeleteEventFields];
+	[GatewayReceiveEvents.MessageDeleteBulk]: [messageDeleteBulk: MessageDeleteBulkEventFields];
+	[GatewayReceiveEvents.MessageReactionAdd]: [messageReactionAdd: MessageReactionAddEventFields];
+	[GatewayReceiveEvents.MessageReactionRemove]: [messageReactionRemove: MessageReactionRemoveEventFields];
+	[GatewayReceiveEvents.MessageReactionRemoveAll]: [messageReactionRemoveAll: MessageReactionRemoveAllEventFields];
+	[GatewayReceiveEvents.MessageReactionRemoveEmoji]: [messageReactionRemoveEmoji: MessageReactionRemoveEmojiEventFields];
+	[GatewayReceiveEvents.PresenceUpdate]: [presenceUpdate: PresenceUpdateEventFields];
+	[GatewayReceiveEvents.StageInstanceCreate]: [stageInstanceCreate: StageInstanceStructure];
+	[GatewayReceiveEvents.StageInstanceUpdate]: [stageInstanceUpdate: StageInstanceStructure];
+	[GatewayReceiveEvents.StageInstanceDelete]: [stageInstanceDelete: StageInstanceStructure];
+	[GatewayReceiveEvents.TypingStart]: [typingStart: TypingStartEventFields];
+	[GatewayReceiveEvents.UserUpdate]: [userUpdate: UserStructure];
+	[GatewayReceiveEvents.VoiceStateUpdate]: [voiceStateUpdate: VoiceStateStructure];
+	[GatewayReceiveEvents.VoiceServerUpdate]: [voiceServerUpdate: VoiceServerUpdateEventFields];
+	[GatewayReceiveEvents.WebhooksUpdate]: [webhooksUpdate: WebhooksUpdateEventFields];
+	[GatewayReceiveEvents.MessagePollVoteAdd]: [messagePollVoteAdd: MessagePollVoteAddFields];
+	[GatewayReceiveEvents.MessagePollVoteRemove]: [messagePollVoteRemove: MessagePollVoteRemoveFields];
 };
 
 /**

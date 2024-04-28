@@ -86,7 +86,7 @@ export type MessageComponentDataStructure = {
  * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure}
  */
 export type ModalSubmitDataStructure = {
-	components: ComponentStructure[];
+	components: MessageComponentStructure[];
 	custom_id: string;
 };
 
@@ -152,7 +152,7 @@ export enum InteractionCallbackTypes {
 export type MessageInteractionResponseStructure = {
 	allowed_mentions?: object;
 	attachments?: object[];
-	components?: ComponentStructure[];
+	components?: MessageComponentStructure[];
 	content?: string;
 	embeds?: EmbedStructure[];
 	flags?: Integer;
@@ -171,7 +171,7 @@ export type AutocompleteStructure = {
  * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-modal}
  */
 export type ModalStructure = {
-	components?: ComponentStructure[];
+	components?: MessageComponentStructure[];
 	custom_id?: string;
 	title?: string;
 };
@@ -375,6 +375,11 @@ export type JSONBulkOverwriteGuildApplicationCommands = {
  */
 export type JSONEditApplicationCommandPermissions = {
 	permissions: ApplicationCommandPermissionStructure[];
+};
+
+export type MessageComponentStructure = {
+	components: ButtonStructure[] | SelectMenuStructure[] | TextInputStructure[];
+	type: ComponentTypes;
 };
 
 /**

@@ -1,9 +1,11 @@
 // ./structure
 export * from "./structures/application";
+export * from "./structures/audit";
 export * from "./structures/channel";
 export * from "./structures/emoji";
 export * from "./structures/entitlements";
 export * from "./structures/guild";
+export * from "./structures/interactions";
 export * from "./structures/invite";
 export * from "./structures/moderation";
 export * from "./structures/poll";
