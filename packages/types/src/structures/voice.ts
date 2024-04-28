@@ -2,18 +2,18 @@
  * @see {@link https://discord.com/developers/docs/resources/voice#voice-resource}
  */
 
-import type { ISO8601Timestamp, Nullable, Snowflake } from "../globals";
+import type { ISO8601Timestamp, Snowflake } from "../globals";
 
 /**
  * @see {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure}
  */
 export type VoiceStateStructure = {
-	channel_id: Nullable<Snowflake>;
+	channel_id: Snowflake | null;
 	deaf: boolean;
 	guild_id?: Snowflake;
 	member?: object; // TODO: GuildMemberStructure
 	mute: boolean;
-	request_to_speak_timestamp: Nullable<ISO8601Timestamp>;
+	request_to_speak_timestamp: ISO8601Timestamp | null;
 	self_deaf: boolean;
 	self_mute: boolean;
 	self_stream?: boolean;

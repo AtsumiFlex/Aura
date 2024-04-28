@@ -1,7 +1,17 @@
 // ./structure
+export * from "./structures/application";
+export * from "./structures/emoji";
 export * from "./structures/entitlements";
+export * from "./structures/guild";
+export * from "./structures/invite";
+export * from "./structures/moderation";
+export * from "./structures/poll";
 export * from "./structures/role";
 export * from "./structures/skus";
+export * from "./structures/stage";
+export * from "./structures/sticker";
+export * from "./structures/user";
+export * from "./structures/voice";
 
 // ./topic
 export * from "./topic/gateway";

@@ -1,5 +1,5 @@
 import type { ApiVersion } from "@aurajs/core";
-import type { Integer } from "../../globals";
+import type { Integer } from "../globals";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway#connecting-gateway-url-query-string-params}

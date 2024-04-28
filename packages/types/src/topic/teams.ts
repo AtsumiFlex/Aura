@@ -2,7 +2,7 @@
  * @see {@link https://discord.com/developers/docs/topics/teams#teams}
  */
 
-import type { Nullable, Snowflake } from "../globals";
+import type { Snowflake } from "../globals";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types}
@@ -18,7 +18,7 @@ export enum TeamMemberRoles {
  * @see {@link https://discord.com/developers/docs/topics/teams#data-models-team-object}
  */
 export type TeamObject = {
-	icon: Nullable<string>;
+	icon: string | null;
 	id: Snowflake;
 	members: TeamMemberObject[];
 	name: string;

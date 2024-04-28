@@ -3,7 +3,7 @@
  */
 
 import type { ApiVersion } from "@aurajs/core";
-import type { Integer, ISO8601Timestamp, Nullable, Snowflake } from "../globals";
+import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
 import type { GatewayIntentBits } from "./gateway";
 import type { GatewayOpcodes } from "./opcodes";
 
@@ -81,7 +81,7 @@ export type GatewayRequestGuildMembersStructure = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#update-voice-state-gateway-voice-state-update-structure}
  */
 export type GatewayVoiceStateUpdateStructure = {
-	channel_id: Nullable<Snowflake>;
+	channel_id: Snowflake | null;
 	guild_id: Snowflake;
 	self_deaf: boolean;
 	self_mute: boolean;
@@ -93,7 +93,7 @@ export type GatewayVoiceStateUpdateStructure = {
 export type GatewayPresenceUpdateStructure = {
 	activities: ActivityStructure[];
 	afk: boolean;
-	since: Nullable<Integer>;
+	since: Integer | null;
 	status: StatusTypes;
 };
 
@@ -186,7 +186,7 @@ export type ThreadMembersUpdateEventFields = {
 export type ChannelPinsUpdateEventFields = {
 	channel_id: Snowflake;
 	guild_id?: Snowflake;
-	last_pin_timestamp?: Nullable<ISO8601Timestamp>;
+	last_pin_timestamp?: ISO8601Timestamp | null;
 };
 
 /**
@@ -265,10 +265,10 @@ export type GuildMemberRemoveEventFields = {
  */
 export type GuildMemberUpdateEventFields = {
 	avatar?: string;
-	communication_disabled_until?: Nullable<ISO8601Timestamp>;
+	communication_disabled_until?: ISO8601Timestamp | null;
 	deaf: boolean;
 	guild_id: Snowflake;
-	joined_at?: Nullable<ISO8601Timestamp>;
+	joined_at?: ISO8601Timestamp | null;
 	mute: boolean;
 	nick?: string;
 	pending: boolean;
@@ -490,7 +490,7 @@ export type ActivityStructure = {
 	state?: string;
 	timestamps?: ActivityTimestamps;
 	type: ActivityTypes;
-	url?: Nullable<string>;
+	url?: string | null;
 };
 
 /**
@@ -587,7 +587,7 @@ export type TypingStartEventFields = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#voice-server-update-voice-server-update-event-fields}
  */
 export type VoiceServerUpdateEventFields = {
-	endpoint: Nullable<string>;
+	endpoint: string | null;
 	guild_id: Snowflake;
 	token: string;
 };
