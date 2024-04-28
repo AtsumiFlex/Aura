@@ -7,6 +7,13 @@
 import type { Locales } from "@aurajs/core";
 import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
 import type { OAuth2Scopes } from "../topic/oauth2";
+import type {
+	ChannelStructure,
+	ChannelTypes,
+	DefaultReactionStructure,
+	OverwriteStructure,
+	ThreadMemberStructure,
+} from "./channel";
 import type { EmojiStructure } from "./emoji";
 import type { RoleStructure } from "./role";
 import type { StickerStructure } from "./sticker";
@@ -191,7 +198,7 @@ export type GuildWidgetSettingsStructure = {
  * @see {@link https://discord.com/developers/docs/resources/guild#guild-widget-object-guild-widget-structure}
  */
 export type GuildWidgetStructure = {
-	channels: object[]; // TODO: partial channel
+	channels: ChannelStructure[];
 	id: Snowflake;
 	instant_invite?: string;
 	members: UserStructure[];
@@ -363,7 +370,7 @@ export enum GuildOnboardingPromptTypes {
 export type JSONCreateGuild = {
 	afk_channel_id?: Snowflake;
 	afk_timeout?: Integer;
-	channels?: object[]; // TODO: partial channel
+	channels?: ChannelStructure[];
 	default_message_notifications?: DefaultMessageNotificationLevels;
 	explicit_content_filter?: ExplicitContentFilterLevels;
 	icon?: string;
@@ -416,18 +423,18 @@ export type JSONCreateGuildChannel = {
 	bitrate?: Integer;
 	default_auto_archive_duration?: Integer;
 	default_forum_layout?: Integer;
-	default_reaction_emoji?: object; // TODO: default reaction object
+	default_reaction_emoji?: DefaultReactionStructure;
 	default_sort_order?: Integer;
 	default_thread_rate_limit_per_user?: Integer;
 	name: string;
 	nsfw?: boolean;
 	parent_id?: Snowflake;
-	permission_overwrites?: object[]; // TODO: overwrite object
+	permission_overwrites?: OverwriteStructure[];
 	position?: Integer;
 	rate_limit_per_user?: Integer;
 	rtc_region?: string;
 	topic?: string;
-	type: Integer; // TODO: channel types
+	type: ChannelTypes;
 	user_limit?: Integer;
 	video_quality_mode?: Integer;
 };
@@ -446,8 +453,8 @@ export type JSONModifyGuildChannelPositions = {
  * @see {@link https://discord.com/developers/docs/resources/guild#list-active-guild-threads-response-body}
  */
 export type ListActiveGuildThreadsResponse = {
-	members: object[]; // TODO: thread member
-	thread_metadata: object[]; // TODO: thread
+	members: ThreadMemberStructure[];
+	thread_metadata: ChannelStructure[];
 };
 
 /**
@@ -699,7 +706,7 @@ export type GuildScheduledEventEntityMetadata = {
  */
 export type GuildScheduledEventUserStructure = {
 	guild_scheduled_event_id: Snowflake;
-	member?: object; // TODO: partial guild member
+	member?: GuildMemberStructure;
 	user: UserStructure;
 };
 
@@ -740,7 +747,7 @@ export type GuildTemplateStructure = {
 	description?: string | null;
 	is_dirty?: boolean | null;
 	name: string;
-	serialized_source_guild: object; // TODO: partial guild
+	serialized_source_guild: GuildStructure;
 	source_guild_id: Snowflake;
 	updated_at: ISO8601Timestamp;
 	usage_count: Integer;

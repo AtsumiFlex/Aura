@@ -64,7 +64,7 @@ export enum PremiumTypes {
 export type ConnectionStructure = {
 	friend_sync: boolean;
 	id: string;
-	integrations?: object; // TODO: object mapping integration account id to an array of connection objects
+	integrations?: Record<string, ConnectionStructure[]>;
 	name: string;
 	revoked?: boolean;
 	show_activity: boolean;
@@ -112,7 +112,7 @@ export enum ConnectionVisibilityTypes {
  * @see {@link https://discord.com/developers/docs/resources/user#application-role-connection-object-application-role-connection-structure}
  */
 export type ApplicationRoleConnectionStructure = {
-	metadata?: object; // TODO: object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected
+	metadata?: Record<string, ApplicationRoleConnectionStructure>;
 	platform_name?: string;
 	platform_username?: string;
 };
@@ -154,7 +154,7 @@ export type JSONCreateGroupDMParams = {
  * @see {@link https://discord.com/developers/docs/resources/user#update-current-user-application-role-connection-json-params}
  */
 export type JSONUpdateCurrentUserApplicationRoleConnectionParams = {
-	metadata?: object; // TODO: object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected
+	metadata?: Record<string, ApplicationRoleConnectionStructure>;
 	platform_name?: string;
 	platform_username?: string;
 };

@@ -3,6 +3,12 @@
  */
 
 import type { Float, Integer, Snowflake } from "../globals";
+import type { ChannelStructure, MessageStructure } from "../structures/channel";
+import type { GuildStructure } from "../structures/guild";
+import type { UserStructure } from "../structures/user";
+import type { VoiceStateStructure } from "../structures/voice";
+import type { ActivityStructure } from "./gateway_events";
+import type { OAuth2Scopes } from "./oauth2";
 import type { RpcErrorCodes } from "./opcodes";
 
 /**
@@ -130,7 +136,7 @@ export type RpcClientEvents = {
 export type AuthorizeArgumentStructure = {
 	client_id: string;
 	rpc_token: string;
-	scopes: string[]; // TODO: array of OAuth2 scopes
+	scopes: OAuth2Scopes[];
 	username: string;
 };
 
@@ -154,8 +160,8 @@ export type AuthenticateArgumentStructure = {
 export type AuthenticateResponseStructure = {
 	application: OAuth2ApplicationStructure;
 	expires: string;
-	scopes: string[]; // TODO: array of OAuth2 scopes
-	user: object; // TODO: partial user object
+	scopes: OAuth2Scopes[];
+	user: UserStructure;
 };
 
 /**
@@ -173,7 +179,7 @@ export type OAuth2ApplicationStructure = {
  * @see {@link https://discord.com/developers/docs/topics/rpc#getguilds-get-guilds-response-structure}
  */
 export type GetGuildsResponseStructure = {
-	guilds: object[]; // TODO: array of partial guild objects
+	guilds: GuildStructure[];
 };
 
 /**
@@ -190,7 +196,7 @@ export type GetGuildArgumentStructure = {
 export type GetGuildResponseStructure = {
 	icon_url: string;
 	id: string;
-	members: object[]; // TODO: array of partial user objects
+	members: UserStructure[];
 	name: string;
 };
 
@@ -208,13 +214,13 @@ export type GetChannelResponseStructure = {
 	bitrate: Integer;
 	guild_id: Snowflake;
 	id: Snowflake;
-	messages: object[]; // TODO: array of message objects
+	messages: MessageStructure[];
 	name: string;
 	position: Integer;
 	topic: string;
 	type: Integer;
 	user_limit: Integer;
-	voice_states: object[]; // TODO: array of voice state objects
+	voice_states: VoiceStateStructure[];
 };
 
 /**
@@ -228,7 +234,7 @@ export type GetChannelsArgumentStructure = {
  * @see {@link https://discord.com/developers/docs/topics/rpc#getchannels-get-channels-response-structure}
  */
 export type GetChannelsResponseStructure = {
-	channels: object[]; // TODO: array of partial channel objects
+	channels: ChannelStructure[];
 };
 
 /**
@@ -412,7 +418,7 @@ export enum DeviceType {
  * @see {@link https://discord.com/developers/docs/topics/rpc#setactivity-set-activity-argument-structure}
  */
 export type SetActivityArgumentStructure = {
-	activity: object; // TODO: activity object
+	activity: ActivityStructure;
 	pid: Integer;
 };
 
@@ -435,7 +441,7 @@ export type CloseActivityRequestArgumentStructure = {
  */
 export type ReadyDispatchDataStructure = {
 	config: RpcServerConfigurationObject;
-	user: object; // TODO: user object
+	user: UserStructure;
 	v: Integer;
 };
 
@@ -467,7 +473,7 @@ export type GuildStatusArgumentStructure = {
  * @see {@link https://discord.com/developers/docs/topics/rpc#guildstatus-guild-status-dispatch-data-structure}
  */
 export type GuildStatusDispatchDataStructure = {
-	guild: object; // TODO: guild object
+	guild: GuildStructure;
 	online: 0;
 };
 
@@ -558,7 +564,7 @@ export type NotificationCreateDispatchDataStructure = {
 	body: string;
 	channel_id: string;
 	icon_url: string;
-	message: object; // TODO: message object
+	message: MessageStructure;
 	title: string;
 };
 
@@ -580,5 +586,5 @@ export type ActivitySpectateDispatchDataStructure = {
  * @see {@link https://discord.com/developers/docs/topics/rpc#activityjoinrequest-activity-join-request-data-structure}
  */
 export type ActivityJoinRequestDataStructure = {
-	user: object; // TODO: partial user object
+	user: UserStructure;
 };

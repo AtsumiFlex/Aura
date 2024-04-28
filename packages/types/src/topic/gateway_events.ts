@@ -4,6 +4,16 @@
 
 import type { ApiVersion } from "@aurajs/core";
 import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
+import type { ApplicationStructure } from "../structures/application";
+import type { ChannelStructure, ThreadMemberStructure } from "../structures/channel";
+import type { EmojiStructure } from "../structures/emoji";
+import type { GuildMemberStructure, GuildScheduledEventStructure } from "../structures/guild";
+import type { AutoModerationActionStructure } from "../structures/moderation";
+import type { RoleStructure } from "../structures/role";
+import type { StageInstanceStructure } from "../structures/stage";
+import type { StickerStructure } from "../structures/sticker";
+import type { UserStructure } from "../structures/user";
+import type { VoiceStateStructure } from "../structures/voice";
 import type { GatewayIntentBits } from "./gateway";
 import type { GatewayOpcodes } from "./opcodes";
 
@@ -126,12 +136,15 @@ export type HelloEventFields = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#ready-ready-event-fields}
  */
 export type ReadyEventFields = {
-	application: object; // TODO: application object
-	guilds: object[]; // TODO: unavailable guild objects
+	application: ApplicationStructure;
+	guilds: {
+		id: Snowflake;
+		unavailable?: boolean;
+	};
 	resume_gateway_url: string;
 	session_id: string;
 	shard?: [shard_id: Integer, num_shards: Integer];
-	user: object; // TODO: user object
+	user: UserStructure;
 	v: ApiVersion;
 };
 
@@ -139,7 +152,7 @@ export type ReadyEventFields = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution-auto-moderation-action-execution-event-fields}
  */
 export type AutoModerationActionExecutionEventFields = {
-	actions: object[]; // TODO: auto moderation action objects
+	actions: AutoModerationActionStructure[];
 	alert_system_message_id?: Snowflake;
 	channel_id?: Snowflake;
 	content: string;
@@ -158,8 +171,8 @@ export type AutoModerationActionExecutionEventFields = {
 export type ThreadListSyncEventFields = {
 	channel_ids: Snowflake[];
 	guild_id: Snowflake;
-	members: object[]; // TODO: thread member objects
-	threads: object[]; // TODO: channel objects
+	members: ThreadMemberStructure[];
+	threads: ChannelStructure[];
 };
 
 /**
@@ -173,7 +186,7 @@ export type ThreadMemberUpdateExtraFields = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#thread-members-update-thread-members-update-event-fields}
  */
 export type ThreadMembersUpdateEventFields = {
-	added_members?: object[]; // TODO: thread member objects
+	added_members?: ThreadMemberStructure[];
 	guild_id: Snowflake;
 	id: Snowflake;
 	member_count: Integer;
@@ -193,17 +206,17 @@ export type ChannelPinsUpdateEventFields = {
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#guild-create-guild-create-extra-fields}
  */
 export type GuildCreateExtraFields = {
-	channels: object[]; // TODO: channel objects
-	guild_scheduled_events: object[]; // TODO: guild scheduled event objects
+	channels: ChannelStructure[];
+	guild_scheduled_events: GuildScheduledEventStructure[];
 	joined_at?: ISO8601Timestamp;
 	large: boolean;
 	member_count: Integer;
-	members: object[]; // TODO: guild member objects
-	presences: object[]; // TODO: partial presence update objects
-	stage_instances: object[]; // TODO: stage instance objects
-	threads: object[]; // TODO: channel objects
+	members: GuildMemberStructure[];
+	presences: PresenceUpdateEventFields[];
+	stage_instances: StageInstanceStructure[];
+	threads: ChannelStructure[];
 	unavailable?: boolean;
-	voice_states: object[]; // TODO: partial voice state objects
+	voice_states: VoiceStateStructure[];
 };
 
 /**
@@ -211,7 +224,7 @@ export type GuildCreateExtraFields = {
  */
 export type GuildBanAddEventFields = {
 	guild_id: Snowflake;
-	user: object; // TODO: user object
+	user: UserStructure;
 };
 
 /**
@@ -219,14 +232,14 @@ export type GuildBanAddEventFields = {
  */
 export type GuildBanRemoveEventFields = {
 	guild_id: Snowflake;
-	user: object; // TODO: user object
+	user: UserStructure;
 };
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/gateway-events#guild-emojis-update-guild-emojis-update-event-fields}
  */
 export type GuildEmojisUpdateEventFields = {
-	emojis: object[]; // TODO: emoji objects
+	emojis: EmojiStructure[];
 	guild_id: Snowflake;
 };
 
@@ -235,7 +248,7 @@ export type GuildEmojisUpdateEventFields = {
  */
 export type GuildStickersUpdateEventFields = {
 	guild_id: Snowflake;
-	stickers: object[]; // TODO: sticker objects
+	stickers: StickerStructure[];
 };
 
 /**
@@ -257,7 +270,7 @@ export type GuildMemberAddExtraFields = {
  */
 export type GuildMemberRemoveEventFields = {
 	guild_id: Snowflake;
-	user: object; // TODO: user object
+	user: UserStructure;
 };
 
 /**
@@ -274,7 +287,7 @@ export type GuildMemberUpdateEventFields = {
 	pending: boolean;
 	premium_since?: string;
 	roles: Snowflake[];
-	user: object; // TODO: user object
+	user: UserStructure;
 };
 
 /**
@@ -284,10 +297,10 @@ export type GuildMembersChunkEventFields = {
 	chunk_count: Integer;
 	chunk_index: Integer;
 	guild_id: Snowflake;
-	members: object[]; // TODO: guild member objects
+	members: GuildMemberStructure[];
 	nonce?: string;
 	not_found?: Snowflake[];
-	presences?: object[]; // TODO: presence objects
+	presences?: PresenceUpdateEventFields[];
 };
 
 /**
@@ -295,7 +308,7 @@ export type GuildMembersChunkEventFields = {
  */
 export type GuildRoleCreateEventFields = {
 	guild_id: Snowflake;
-	role: object; // TODO: role object
+	role: RoleStructure;
 };
 
 /**
@@ -303,7 +316,7 @@ export type GuildRoleCreateEventFields = {
  */
 export type GuildRoleUpdateEventFields = {
 	guild_id: Snowflake;
-	role: object; // TODO: role object
+	role: RoleStructure;
 };
 
 /**
@@ -363,12 +376,12 @@ export type InviteCreateEventFields = {
 	code: string;
 	created_at: string;
 	guild_id?: Snowflake;
-	inviter?: object; // TODO: user object
+	inviter?: UserStructure;
 	max_age: Integer;
 	max_uses: Integer;
-	target_application?: object; // TODO: partial application object
+	target_application?: ApplicationStructure;
 	target_type?: Integer;
-	target_user?: object; // TODO: user object
+	target_user?: UserStructure;
 	temporary: boolean;
 	uses: Integer;
 };
@@ -387,8 +400,8 @@ export type InviteDeleteEventFields = {
  */
 export type MessageCreateExtraFields = {
 	guild_id?: Snowflake;
-	member?: object; // TODO: member object
-	mentions: object[]; // TODO: array of user objects, with an additional partial member field
+	member?: GuildMemberStructure;
+	mentions: (GuildMemberStructure & UserStructure)[];
 };
 
 /**
@@ -414,9 +427,9 @@ export type MessageDeleteBulkEventFields = {
  */
 export type MessageReactionAddEventFields = {
 	channel_id: Snowflake;
-	emoji: object; // TODO: partial emoji object
+	emoji: EmojiStructure;
 	guild_id?: Snowflake;
-	member?: object; // TODO: member object
+	member?: GuildMemberStructure;
 	message_author_id?: Snowflake;
 	message_id: Snowflake;
 	user_id: Snowflake;
@@ -427,7 +440,7 @@ export type MessageReactionAddEventFields = {
  */
 export type MessageReactionRemoveEventFields = {
 	channel_id: Snowflake;
-	emoji: object; // TODO: partial emoji object
+	emoji: EmojiStructure;
 	guild_id?: Snowflake;
 	message_id: Snowflake;
 	user_id: Snowflake;
@@ -447,7 +460,7 @@ export type MessageReactionRemoveAllEventFields = {
  */
 export type MessageReactionRemoveEmojiEventFields = {
 	channel_id: Snowflake;
-	emoji: object; // TODO: partial emoji object
+	emoji: EmojiStructure;
 	guild_id?: Snowflake;
 	message_id: Snowflake;
 };
@@ -460,7 +473,7 @@ export type PresenceUpdateEventFields = {
 	client_status: ClientStatus;
 	guild_id: Snowflake;
 	status: string;
-	user: object; // TODO: user object
+	user: UserStructure;
 };
 
 /**
@@ -578,7 +591,7 @@ export type ActivityButtons = {
 export type TypingStartEventFields = {
 	channel_id: Snowflake;
 	guild_id?: Snowflake;
-	member?: object; // TODO: member object
+	member?: GuildMemberStructure;
 	timestamp: Integer;
 	user_id: Snowflake;
 };

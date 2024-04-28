@@ -6,6 +6,7 @@ import type { Locales } from "@aurajs/core";
 import type { Snowflake } from "../globals";
 import type { OAuth2Scopes } from "../topic/oauth2";
 import type { TeamObject } from "../topic/teams";
+import type { GuildStructure } from "./guild";
 import type { UserStructure } from "./user";
 
 /**
@@ -20,7 +21,7 @@ export type ApplicationStructure = {
 	custom_install_url?: string;
 	description: string;
 	flags?: number;
-	guild?: Partial<object>; // TODO: partial guild
+	guild?: Partial<GuildStructure>;
 	guild_id?: Snowflake;
 	icon: string | null;
 	id: Snowflake;

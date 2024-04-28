@@ -4,6 +4,8 @@
 
 import type { AuthenticationType } from "@aurajs/core";
 import type { Integer, ISO8601Timestamp, SetString, Snowflake } from "../globals";
+import type { ApplicationStructure } from "../structures/application";
+import type { UserStructure } from "../structures/user";
 import type { BitwisePermissionFlags } from "./permissions";
 
 /**
@@ -85,8 +87,8 @@ export type BotAuthorizationParameters = {
  * @see {@link https://discord.com/developers/docs/topics/oauth2#get-current-authorization-information-response-structure}
  */
 export type CurrentAuthorizationInformationResponse = {
-	application: object; // TODO: partial application object
+	application: ApplicationStructure;
 	expires: ISO8601Timestamp;
 	scopes: SetString<OAuth2Scopes>[];
-	user?: object; // TODO: user object
+	user?: UserStructure;
 };

@@ -1,4 +1,5 @@
 import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
+import type { EmojiStructure } from "./emoji";
 import type { UserStructure } from "./user";
 
 /**
@@ -34,7 +35,7 @@ export enum LayoutType {
  * @see {@link https://discord.com/developers/docs/resources/poll#poll-media-object-poll-media-object-structure}
  */
 export type PollMediaStructure = {
-	emoji: object; // TODO: partial emoji
+	emoji: EmojiStructure;
 	text?: string;
 };
 

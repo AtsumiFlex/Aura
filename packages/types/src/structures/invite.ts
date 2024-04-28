@@ -3,6 +3,9 @@
  */
 
 import type { Integer, ISO8601Timestamp, Snowflake } from "../globals";
+import type { ApplicationStructure } from "./application";
+import type { ChannelStructure } from "./channel";
+import type { GuildMemberStructure, GuildScheduledEventStructure, GuildStructure } from "./guild";
 import type { UserStructure } from "./user";
 
 /**
@@ -11,14 +14,14 @@ import type { UserStructure } from "./user";
 export type InviteStructure = {
 	approximate_member_count?: Integer;
 	approximate_presence_count?: Integer;
-	channel: object | null; // TODO: partial channel
+	channel: ChannelStructure | null;
 	code: string;
 	expires_at?: ISO8601Timestamp | null;
-	guild?: object; // TODO: partial guild
-	guild_scheduled_event?: object; // TODO: partial guild scheduled event
+	guild?: GuildStructure;
+	guild_scheduled_event?: GuildScheduledEventStructure;
 	inviter?: Pick<UserStructure, "avatar" | "discriminator" | "id" | "public_flags" | "username">;
 	stage_instance?: InviteStageInstanceStructure;
-	target_application?: object; // TODO: partial application
+	target_application?: ApplicationStructure;
 	target_type?: InviteTargetTypes;
 	target_user?: Pick<UserStructure, "avatar" | "discriminator" | "id" | "public_flags" | "username">;
 };
@@ -46,7 +49,7 @@ export type InviteMetadataStructure = {
  * @see {@link https://discord.com/developers/docs/resources/invite#invite-stage-instance-object-invite-stage-instance-structure}
  */
 export type InviteStageInstanceStructure = {
-	members: object; // TODO: array of guild members
+	members: GuildMemberStructure;
 	participant_count: Integer;
 	speaker_count: Integer;
 	topic: string;

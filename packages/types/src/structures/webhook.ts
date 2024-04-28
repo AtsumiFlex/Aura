@@ -2,7 +2,9 @@
  * @see {@link https://discord.com/developers/docs/resources/webhook#webhook-resource}
  */
 
-import type { Integer, Snowflake } from "../globals";
+import type { Snowflake } from "../globals";
+import type { AllowedMentionsStructure, ChannelStructure, EmbedStructure, MessageFlags } from "./channel";
+import type { GuildStructure } from "./guild";
 import type { PollCreateRequestStructure } from "./poll";
 import type { UserStructure } from "./user";
 
@@ -16,8 +18,8 @@ export type WebhookStructure = {
 	guild_id?: Snowflake;
 	id: Snowflake;
 	name: string | null;
-	source_channel?: object; // TODO: partial channel
-	source_guild?: object; // TODO: partial guild
+	source_channel?: ChannelStructure;
+	source_guild?: GuildStructure;
 	token?: string;
 	type: WebhookTypes;
 	url?: string;
@@ -62,15 +64,15 @@ export type QueryExecuteWebhook = {
  * @see {@link https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params}
  */
 export type JSONExecuteWebhook = {
-	allowed_mentions?: object; // TODO: allowed mention object
+	allowed_mentions?: AllowedMentionsStructure;
 	applied_tags?: Snowflake[];
 	attachments?: object[];
 	avatar_url?: string;
-	components?: object[]; // TODO: component objects
+	components?: MessageComponentStructure[]; // TODO: component objects
 	content?: string;
-	embeds?: object[]; // TODO: embed objects
+	embeds?: EmbedStructure[];
 	files?: object[];
-	flags?: Integer; // TODO: Message flags
+	flags?: MessageFlags;
 	payload_json?: string;
 	poll?: PollCreateRequestStructure;
 	thread_name?: string;
@@ -112,11 +114,11 @@ export type QueryEditWebhookMessage = {
  * @see {@link https://discord.com/developers/docs/resources/webhook#edit-webhook-message-jsonform-params}
  */
 export type JSONEditWebhookMessage = {
-	allowed_mentions?: object; // TODO: allowed mention object
+	allowed_mentions?: AllowedMentionsStructure;
 	attachments?: object[];
-	components?: object[]; // TODO: component objects
+	components?: MessageComponentStructure[]; // TODO: component objects
 	content?: string;
-	embeds?: object[]; // TODO: embed objects
+	embeds?: EmbedStructure[];
 	files?: object[];
 	payload_json?: string;
 };

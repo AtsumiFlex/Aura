@@ -1,5 +1,6 @@
 // ./structure
 export * from "./structures/application";
+export * from "./structures/channel";
 export * from "./structures/emoji";
 export * from "./structures/entitlements";
 export * from "./structures/guild";
@@ -12,6 +13,7 @@ export * from "./structures/stage";
 export * from "./structures/sticker";
 export * from "./structures/user";
 export * from "./structures/voice";
+export * from "./structures/webhook";
 
 // ./topic
 export * from "./topic/gateway";

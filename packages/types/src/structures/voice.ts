@@ -3,6 +3,7 @@
  */
 
 import type { ISO8601Timestamp, Snowflake } from "../globals";
+import type { GuildMemberStructure } from "./guild";
 
 /**
  * @see {@link https://discord.com/developers/docs/resources/voice#voice-state-object-voice-state-structure}
@@ -11,7 +12,7 @@ export type VoiceStateStructure = {
 	channel_id: Snowflake | null;
 	deaf: boolean;
 	guild_id?: Snowflake;
-	member?: object; // TODO: GuildMemberStructure
+	member?: GuildMemberStructure;
 	mute: boolean;
 	request_to_speak_timestamp: ISO8601Timestamp | null;
 	self_deaf: boolean;

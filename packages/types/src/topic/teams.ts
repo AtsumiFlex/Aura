@@ -3,6 +3,7 @@
  */
 
 import type { Snowflake } from "../globals";
+import type { UserStructure } from "../structures/user";
 
 /**
  * @see {@link https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types}
@@ -32,7 +33,7 @@ export type TeamMemberObject = {
 	membership_state: MembershipState;
 	role: TeamMemberRoles;
 	team_id: Snowflake;
-	user: object; // TODO: partial user object
+	user: UserStructure;
 };
 
 /**
