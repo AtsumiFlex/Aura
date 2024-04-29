@@ -1,3 +1,3 @@
 {
-  "extends": "@aurajs/typescript-config/base.json"
+  "extends": "@aurajs/ts-config/base.json"
 }

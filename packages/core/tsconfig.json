@@ -1,9 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@aurajs/typescript-config/base.json",
+  "extends": "@aurajs/ts-config/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./dist/.tsbuildinfo",
     "rootDir": "./src",
+    "baseUrl": "./src",
     "outDir": "./dist"
   },
   "include": [
