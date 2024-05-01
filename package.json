@@ -23,7 +23,8 @@
   "devDependencies": {
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typedoc": "^0.25.13"
   },
   "engines": {
     "node": ">=18"

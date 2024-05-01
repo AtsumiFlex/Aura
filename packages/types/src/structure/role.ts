@@ -15,7 +15,7 @@ export const RoleTagsStructure = z.object({
 	available_for_purchase: z.null().optional(),
 	guild_connections: z.null().optional(),
 });
-export type RoleTagsType = z.infer<typeof RoleTagsStructure>;
+export type RoleTagsInfer = z.infer<typeof RoleTagsStructure>;
 
 export const RoleStructure = z.object({
 	id: Snowflake,
@@ -31,4 +31,4 @@ export const RoleStructure = z.object({
 	tags: RoleTagsStructure.optional(),
 	flags: RoleFlagsEnum,
 });
-export type RoleType = z.infer<typeof RoleStructure>;
+export type RoleInfer = z.infer<typeof RoleStructure>;

@@ -1,3 +1,20 @@
+// ./structure/*
+export * from "./structure/application";
+export * from "./structure/channel";
+export * from "./structure/emoji";
+export * from "./structure/entitlements";
+export * from "./structure/guild";
+export * from "./structure/invite";
+export * from "./structure/moderation";
+export * from "./structure/poll";
+export * from "./structure/role";
+export * from "./structure/skus";
+export * from "./structure/stage";
+export * from "./structure/sticker";
+export * from "./structure/user";
+export * from "./structure/voice";
+export * from "./structure/webhook";
+
 // ./topic/**
 export * from "./topic/gateway-events/channels";
 export * from "./topic/gateway-events/guilds";
@@ -10,7 +27,6 @@ export * from "./topic/gateway-events/presences";
 export * from "./topic/gateway-events/typings";
 export * from "./topic/gateway-events/voices";
 export * from "./topic/gateway-events/webhooks";
-// ./topic/*
 export * from "./topic/gateway";
 export * from "./topic/oauth2";
 export * from "./topic/opcodes";
