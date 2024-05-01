@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { Integer, ISO8601, Mixed, Snowflake } from "../../globals";
+import { Integer, ISO8601, Snowflake } from "../../globals";
+import { ChannelStructure, ThreadMemberStructure } from "../../structure/channel";
 
 export const GatewayChannelPinsUpdateFields = z.object({
 	guild_id: Snowflake.optional(),
@@ -12,7 +13,7 @@ export const GatewayThreadMembersUpdateFields = z.object({
 	id: Snowflake,
 	guild_id: Snowflake,
 	member_count: Integer,
-	added_members: z.array(Mixed).optional(), // TODO: ThreadMember object
+	added_members: z.array(ThreadMemberStructure).optional(),
 	removed_member_ids: z.array(Snowflake).optional(),
 });
 export type GatewayThreadMembersUpdateInfer = z.infer<typeof GatewayThreadMembersUpdateFields>;
@@ -23,7 +24,7 @@ export type GatewayThreadMemberUpdateInfer = z.infer<typeof GatewayThreadMemberU
 export const GatewayThreadListSyncFields = z.object({
 	guild_id: Snowflake,
 	channel_ids: z.array(Snowflake).optional(),
-	threads: z.array(Mixed), // TODO: Channel object
-	members: z.array(Mixed), // TODO: ThreadMember object
+	threads: z.array(ChannelStructure),
+	members: z.array(ThreadMemberStructure),
 });
 export type GatewayThreadListSyncInfer = z.infer<typeof GatewayThreadListSyncFields>;

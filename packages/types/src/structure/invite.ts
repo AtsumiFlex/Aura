@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { Integer, ISO8601, Mixed } from "../globals";
+import { Integer, ISO8601 } from "../globals";
+import { ApplicationStructure } from "./application";
+import { ChannelStructure } from "./channel";
 import { GuildMemberStructure, GuildScheduledEventStructure, GuildStructure } from "./guild";
 import { UserStructure } from "./user";
 
@@ -30,11 +32,11 @@ export const InviteTargetTypesEnum = z.nativeEnum(InviteTargetTypes);
 export const InviteStructure = z.object({
 	code: z.string(),
 	guild: GuildStructure.partial().optional(),
-	channel: Mixed.nullable(), // TODO: Partial Channel Structure
+	channel: ChannelStructure.partial().nullable(),
 	inviter: UserStructure.optional(),
 	target_type: InviteTargetTypesEnum.optional(),
 	target_user: UserStructure.optional(),
-	target_application: Mixed.optional(), // TODO: Partial Application Structure
+	target_application: ApplicationStructure.partial().optional(),
 	approximate_presence_count: Integer.optional(),
 	approximate_member_count: Integer.optional(),
 	expires_at: ISO8601.optional().nullable(),

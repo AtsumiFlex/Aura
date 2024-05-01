@@ -1,9 +1,20 @@
 import { z } from "zod";
-import { Integer, ISO8601, Mixed, Snowflake } from "../globals";
+import type { SnowflakeInfer } from "../globals";
+import { Integer, ISO8601, Snowflake } from "../globals";
+import type { ApplicationInstallationType } from "./application";
+import { ApplicationInstallationTypeEnum, ApplicationStructure } from "./application";
 import { EmojiStructure } from "./emoji";
 import { GuildMemberStructure } from "./guild";
+import type { InteractionTypes } from "./interactions";
+import {
+	InteractionTypesEnum,
+	MessageComponentStructure,
+	MessageInteractionStructure,
+	ResolvedDataStructure,
+} from "./interactions";
 import { PollCreateRequestStructure } from "./poll";
 import { StickerItemStructure, StickerStructure } from "./sticker";
+import type { UserInfer } from "./user";
 import { UserStructure } from "./user";
 
 export enum ChannelTypes {
@@ -232,16 +243,25 @@ export const MessageReferenceStructure = z.object({
 });
 export type MessageReferenceInfer = z.infer<typeof MessageReferenceStructure>;
 
-export const MessageInteractionMetadataStructure = z.lazy(() => z.object({
+export type MessageInteractionMetadataInfer = {
+	authorizing_integration_owners: Record<string, ApplicationInstallationType>;
+	id: SnowflakeInfer;
+	interacted_message_id?: SnowflakeInfer;
+	original_response_message_id?: SnowflakeInfer;
+	triggering_interaction_metadata?: MessageInteractionMetadataInfer;
+	type: InteractionTypes;
+	user: UserInfer;
+};
+
+export const MessageInteractionMetadataStructure: z.ZodType<MessageInteractionMetadataInfer> = z.object({
 	id: Snowflake,
-	type: z.string(), // TODO: Interaction Type
+	type: InteractionTypesEnum,
 	user: UserStructure,
-	authorizing_integration_owners: z.record(z.string()), // TODO: User ID -> Integration Type
+	authorizing_integration_owners: z.record(ApplicationInstallationTypeEnum),
 	original_response_message_id: Snowflake.optional(),
 	interacted_message_id: Snowflake.optional(),
-	triggering_interaction_metadata: MessageInteractionMetadataStructure.optional(),
-}));
-export type MessageInteractionMetadataInfer = z.infer<typeof MessageInteractionMetadataStructure>;
+	triggering_interaction_metadata: z.lazy(() => MessageInteractionMetadataStructure).optional(),
+});
 
 export enum MessageFlags {
 	Crossposted = 1,
@@ -397,20 +417,20 @@ export const MessageStructure = z.object({
 	webhook_id: Snowflake.optional(),
 	type: MessageTypesEnum,
 	activity: MessageActivityStructure.optional(),
-	application: Mixed.optional(), // TODO: Assuming PartialApplicationStructure is defined
+	application: ApplicationStructure.partial().optional(),
 	application_id: Snowflake.optional(),
 	message_reference: MessageReferenceStructure.optional(),
 	flags: z.number().optional(),
-	referenced_message: MessageStructure.optional(),
+	referenced_message: z.lazy(() => MessageStructure).optional(),
 	interaction_metadata: MessageInteractionMetadataStructure.optional(),
-	interaction: MessageInteractionStructure.optional(), // TODO:  Assuming MessageInteractionStructure is defined
+	interaction: MessageInteractionStructure.optional(),
 	thread: ChannelStructure.optional(),
-	components: z.array(MessageComponentStructure).optional(), // TODO: Assuming MessageComponentStructure is defined
+	components: z.array(MessageComponentStructure).optional(),
 	sticker_items: z.array(StickerItemStructure).optional(),
 	stickers: z.array(StickerStructure).optional(),
 	position: z.number().optional(),
 	role_subscription_data: RoleSubscriptionDataObjectStructure.optional(),
-	resolved: Mixed.optional(), // TODO:  Assuming ResolvedDataStructure is defined
+	resolved: ResolvedDataStructure.optional(),
 	poll: PollCreateRequestStructure.optional(),
 });
 export type MessageInfer = z.infer<typeof MessageStructure>;

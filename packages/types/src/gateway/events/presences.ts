@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { Integer, Mixed, Snowflake } from "../../globals";
+import { Integer, Snowflake } from "../../globals";
+import { UserStructure } from "../../structure/user";
 import { GatewayStatusTypesEnum } from "../gateway";
 
 export enum GatewayActivityTypes {
@@ -93,7 +94,7 @@ export const GatewayClientStatusStructure = z.object({
 export type GatewayClientStatusInfer = z.infer<typeof GatewayClientStatusStructure>;
 
 export const GatewayPresenceUpdateFields = z.object({
-	user: Mixed, // TODO: User Structure
+	user: UserStructure,
 	guild_id: Snowflake.optional(),
 	status: GatewayStatusTypesEnum,
 	activities: z.array(GatewayActivityStructure),

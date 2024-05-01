@@ -1,6 +1,7 @@
 import { LocalesEnum } from "@aurajs/core";
 import { z } from "zod";
-import { Mixed, Snowflake } from "../globals";
+import { Snowflake } from "../globals";
+import { IntegrationStructure } from "./guild";
 
 export const ApplicationRoleConnectionStructure = z.object({
 	platform_name: z.string().nullable(),
@@ -46,7 +47,7 @@ export const UserConnectionStructure = z.object({
 	name: z.string(),
 	type: UserServiceTypesEnum,
 	revoked: z.boolean().optional(),
-	integrations: z.array(Mixed.optional()), // TODO: an array of partial server integrations
+	integrations: z.array(IntegrationStructure.partial().optional()),
 	verified: z.boolean(),
 	friend_sync: z.boolean(),
 	show_activity: z.boolean(),

@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { Mixed, Snowflake } from "../globals";
+import { Snowflake } from "../globals";
+import { ChannelStructure } from "./channel";
 import { GuildStructure } from "./guild";
 import { UserStructure } from "./user";
 
@@ -22,7 +23,7 @@ export const WebhookStructure = z.object({
 	token: z.string().optional(),
 	application_id: Snowflake.nullable(),
 	source_guild: GuildStructure.partial().optional(),
-	source_channel: Mixed.optional(), // TODO: Partial Channel Structure
+	source_channel: ChannelStructure.partial().optional(),
 	url: z.string().optional(),
 });
 export type WebhookInfer = z.infer<typeof WebhookStructure>;

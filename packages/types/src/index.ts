@@ -1,3 +1,17 @@
+// ./gateway/*
+export * from "./gateway/events/channels";
+export * from "./gateway/events/guilds";
+export * from "./gateway/events/integrations";
+export * from "./gateway/events/invites";
+export * from "./gateway/events/messages";
+export * from "./gateway/events/moderation";
+export * from "./gateway/events/polls";
+export * from "./gateway/events/presences";
+export * from "./gateway/events/typings";
+export * from "./gateway/events/voices";
+export * from "./gateway/events/webhooks";
+export * from "./gateway/gateway";
+
 // ./structure/*
 export * from "./structure/application";
 export * from "./structure/channel";
@@ -11,29 +25,17 @@ export * from "./structure/role";
 export * from "./structure/skus";
 export * from "./structure/stage";
 export * from "./structure/sticker";
+export * from "./structure/teams";
 export * from "./structure/user";
 export * from "./structure/voice";
 export * from "./structure/webhook";
 
-// ./topic/**
-export * from "./topic/gateway-events/channels";
-export * from "./topic/gateway-events/guilds";
-export * from "./topic/gateway-events/integrations";
-export * from "./topic/gateway-events/invites";
-export * from "./topic/gateway-events/messages";
-export * from "./topic/gateway-events/moderation";
-export * from "./topic/gateway-events/polls";
-export * from "./topic/gateway-events/presences";
-export * from "./topic/gateway-events/typings";
-export * from "./topic/gateway-events/voices";
-export * from "./topic/gateway-events/webhooks";
-export * from "./topic/gateway";
-export * from "./topic/oauth2";
-export * from "./topic/opcodes";
-export * from "./topic/permissions";
-export * from "./topic/rate";
-export * from "./topic/teams";
-export * from "./topic/voice";
+// ./globals/*
+export * from "./globals/oauth2";
+export * from "./globals/opcodes";
+export * from "./globals/permissions";
+export * from "./globals/rate";
+export * from "./globals/voice";
 
 // ./*
 export * from "./globals";

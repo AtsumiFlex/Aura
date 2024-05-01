@@ -7,7 +7,7 @@
     "node.js"
   ],
   "devDependencies": {
-    "@types/eslint": "latest",
+    "@types/eslint": "^8.56.10",
     "eslint": "^8.57.0",
     "eslint-config-neon": "^0.1.62"
   }

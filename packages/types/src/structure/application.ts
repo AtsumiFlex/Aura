@@ -1,9 +1,9 @@
 import { LocalesEnum } from "@aurajs/core";
 import { z } from "zod";
 import { Integer, Snowflake } from "../globals";
-import { Oauth2ScopesEnum } from "../topic/oauth2";
-import { TeamStructure } from "../topic/teams";
+import { Oauth2ScopesEnum } from "../globals/oauth2";
 import { GuildStructure } from "./guild";
+import { TeamStructure } from "./teams";
 import { UserStructure } from "./user";
 
 export enum ApplicationRoleConnectionMetadataType {

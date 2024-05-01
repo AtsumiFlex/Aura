@@ -1,17 +1,22 @@
 import { ApiVersionEnum } from "@aurajs/core";
 import { z } from "zod";
 import { Integer, Mixed, Snowflake } from "../globals";
-import { GatewayPresenceUpdateFields } from "./gateway-events/presences";
-import { GatewayOpcodesEnum } from "./opcodes";
+import { GatewayOpcodesEnum } from "../globals/opcodes";
+import { ApplicationStructure } from "../structure/application";
+import { UserStructure } from "../structure/user";
+import { GatewayPresenceUpdateFields } from "./events/presences";
 
 export const GatewayReadyFields = z.object({
 	v: ApiVersionEnum,
-	user: Mixed, // TODO: User object
-	guilds: z.array(Mixed), // TODO: Unavailable Guild object
+	user: UserStructure,
+	guilds: z.array(z.object({
+		id: Snowflake,
+		unavailable: z.boolean(),
+	})),
 	session_id: z.string(),
 	resume_gateway_url: z.string(),
 	shard: z.array(Integer).length(2).optional(),
-	application: Mixed, // TODO: Partial Application object
+	application: ApplicationStructure,
 });
 export type GatewayReadyInfer = z.infer<typeof GatewayReadyFields>;
 

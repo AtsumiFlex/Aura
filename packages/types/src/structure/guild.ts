@@ -1,7 +1,8 @@
 import { LocalesEnum } from "@aurajs/core";
 import { z } from "zod";
-import { Integer, ISO8601, Mixed, Snowflake } from "../globals";
-import { Oauth2ScopesEnum } from "../topic/oauth2";
+import { Integer, ISO8601, Snowflake } from "../globals";
+import { Oauth2ScopesEnum } from "../globals/oauth2";
+import { ChannelStructure } from "./channel";
 import { EmojiStructure } from "./emoji";
 import { RoleStructure } from "./role";
 import { StickerStructure } from "./sticker";
@@ -144,7 +145,7 @@ export const GuildWidgetStructure = z.object({
 	id: Snowflake,
 	name: z.string(),
 	instant_invite: z.string().nullable(),
-	channels: z.array(Mixed), // TODO: an array of partial channel objects
+	channels: z.array(ChannelStructure.partial()),
 	members: z.array(UserStructure.partial()),
 	presence_count: Integer,
 });

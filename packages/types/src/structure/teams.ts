@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Snowflake } from "../globals";
-import { UserStructure } from "../structure/user";
+import { UserStructure } from "./user";
 
 export enum MembershipState {
 	Invited = 1,

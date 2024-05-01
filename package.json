@@ -1,8 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "aurajs",
+  "name": "@aurajs/monorepo",
   "version": "1.0.0",
-  "packageManager": "bun@1.1.6",
   "readme": "README.md",
   "license": "AGPL-3.0-only",
   "description": "Aurajs is a monorepo for building web applications with TypeScript.",
@@ -16,22 +15,17 @@
   },
   "scripts": {
     "build": "turbo build",
-    "build:watch": "turbo build:watch",
-    "lint": "turbo lint",
-    "test": "turbo test"
+    "dev": "turbo dev",
+    "lint": "turbo lint"
   },
   "devDependencies": {
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
-    "turbo": "latest",
-    "typedoc": "^0.25.13"
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5"
   },
   "engines": {
     "node": ">=18"
   },
-  "workspaces": [
-    "apps/*",
-    "config/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@9.0.6+sha1.648f6014eb363abb36618f2ba59282a9eeb3e879"
 }

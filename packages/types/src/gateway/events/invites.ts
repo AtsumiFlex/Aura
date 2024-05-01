@@ -1,6 +1,8 @@
 import { z } from "zod";
-import { Integer, ISO8601, Mixed, Snowflake } from "../../globals";
+import { Integer, ISO8601, Snowflake } from "../../globals";
+import { ApplicationStructure } from "../../structure/application";
 import { InviteTargetTypesEnum } from "../../structure/invite";
+import { UserStructure } from "../../structure/user";
 
 export const GatewayInviteDeleteFields = z.object({
 	channel_id: Snowflake,
@@ -14,12 +16,12 @@ export const GatewayInviteCreateFields = z.object({
 	code: z.string(),
 	created_at: ISO8601,
 	guild_id: Snowflake.optional(),
-	inviter: Mixed.optional(), // TODO: User Structure
+	inviter: UserStructure.optional(),
 	max_age: Integer,
 	max_uses: Integer,
 	target_type: InviteTargetTypesEnum.optional(),
-	target_user: Mixed.optional(), // TODO: User Structure
-	target_application: Mixed.optional(), // TODO: Application Structure
+	target_user: UserStructure.optional(),
+	target_application: ApplicationStructure.optional(),
 	temporary: z.boolean(),
 	uses: Integer,
 });
