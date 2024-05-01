@@ -101,8 +101,8 @@ export type GatewayIdentifyInfer = z.infer<typeof GatewayIdentifyFields>;
 export const GatewayPayloadStructure = z.object({
 	op: GatewayOpcodesEnum,
 	d: Mixed.nullable(),
-	s: Integer.nullable(),
-	t: z.string().nullable(),
+	s: Integer.nullable().optional(),
+	t: z.string().nullable().optional(),
 });
 export type GatewayPayloadInfer = z.infer<typeof GatewayPayloadStructure>;
 

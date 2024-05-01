@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Snowflake } from "../globals";
+import { UserStructure } from "../structure/user";
 
 export enum MembershipState {
 	Invited = 1,
@@ -11,7 +12,7 @@ export const MembershipStateEnum = z.nativeEnum(MembershipState);
 export const TeamMemberStructure = z.object({
 	membership_state: MembershipStateEnum,
 	team_id: Snowflake,
-	user: z.object({}), // TODO: PartialUserStructure
+	user: UserStructure.partial(),
 	role: z.string(),
 });
 export type TeamMemberInfer = z.infer<typeof TeamMemberStructure>;
