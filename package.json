@@ -16,17 +16,14 @@
   },
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "build:watch": "turbo build:watch",
     "lint": "turbo lint",
-    "start": "turbo start"
+    "test": "turbo test"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "latest",
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
-    "turbo": "latest",
-    "typescript": "latest"
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=18"

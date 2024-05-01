@@ -1,118 +1,71 @@
-/**
- * @description Discord's API is based around two core layers, a HTTPS/REST API for general operations, and persistent secure WebSocket based connection for sending and subscribing to real-time events. The most common use case of the Discord API will be providing a service, or access to a platform through the OAuth2 API.
- * @see {@link https://discord.com/developers/docs/reference#api-reference | Discord API Reference}
- */
+import { z } from "zod";
 
-// Importing Integer type from extra module
-import type { Integer } from "./extra";
+export const BaseUrl = "https://discord.com/api";
+export const BaseCdnUrl = "https://cdn.discordapp.com";
 
-/**
- * Base URL for Discord's API
- *
- * @see {@link https://discord.com/developers/docs/reference#api-reference-base-url}
- */
-export const BaseUrlApi = "https://discord.com/api";
-
-/**
- * Base URL for Discord's CDN
- *
- * @see {@link https://discord.com/developers/docs/reference#image-formatting-image-base-url}
- */
-export const BaseUrlCdn = "https://cdn.discordapp.com";
-
-/**
- * Enum for Discord's API versions
- *
- * @see {@link https://discord.com/developers/docs/reference#api-versioning-api-versions}
- */
 export enum ApiVersion {
-	V3 = 3,
-	V4 = 4,
-	V5 = 5,
-	V6 = 6,
-	V7 = 7,
-	V8 = 8,
-	V9 = 9,
 	V10 = 10,
+	V9 = 9,
+	V8 = 8,
+	V7 = 7,
+	V6 = 6,
+	V5 = 5,
+	V4 = 4,
+	V3 = 3,
 }
 
-/**
- * Type for Discord's API array error
- *
- * @see {@link https://discord.com/developers/docs/reference#error-messages-array-error}
- */
-export type ApiArrayError = {
-	code: Integer;
-	errors: {
-		[key: string]: {
-			[key: string]: {
-				[key: string]: {
-					_errors: { code: string; message: string; }[];
-				};
-			};
-		};
-	};
-	message: string;
-};
+export const ApiVersionEnum = z.nativeEnum(ApiVersion);
 
-/**
- * Type for Discord's API object error
- *
- * @see {@link https://discord.com/developers/docs/reference#error-messages-object-error}
- */
-export type ApiObjectError = {
-	code: Integer;
-	errors: {
-		[key: string]: {
-			_errors: { code: string; message: string; }[];
-		};
-	};
-	message: string;
-};
+export const ApiArrayError = z.object({
+	code: z.number(),
+	errors: z.record(z.record(z.record(z.object({
+		_errors: z.array(z.object({
+			code: z.string(),
+			message: z.string(),
+		})),
+	})))),
+	message: z.string(),
+});
+export type ApiArrayErrorInfer = z.infer<typeof ApiArrayError>;
 
-/**
- * Type for Discord's API request error
- *
- * @see {@link https://discord.com/developers/docs/reference#error-messages-request-error}
- */
-export type ApiRequestError = {
-	code: Integer;
-	errors: {
-		_errors: { code: string; message: string; }[];
-	};
-	message: string;
-};
+export const ApiObjectError = z.object({
+	code: z.number(),
+	errors: z.record(z.object({
+		_errors: z.array(z.object({
+			code: z.string(),
+			message: z.string(),
+		})),
+	})),
+	message: z.string(),
+});
+export type ApiObjectErrorInfer = z.infer<typeof ApiObjectError>;
 
-/**
- * Type for Discord's API authentication types
- *
- * @see {@link https://discord.com/developers/docs/reference#authentication}
- */
-export type ApiAuthenticationType = "Bearer" | "Bot";
+export const ApiRequestError = z.object({
+	code: z.number(),
+	errors: z.object({
+		_errors: z.array(z.object({
+			code: z.string(),
+			message: z.string(),
+		})),
+	}),
+	message: z.string(),
+});
+export type ApiRequestErrorInfer = z.infer<typeof ApiRequestError>;
 
-/**
- * Type for Discord's API authentication header
- */
-export type ApiAuthenticationHeader = {
-	Authorization: string;
-	"User-Agent"?: string;
-	"X-RateLimit-Bucket"?: string;
-	"X-RateLimit-Global"?: boolean;
-	"X-RateLimit-Limit"?: number;
-	"X-RateLimit-Remaining"?: number;
-	"X-RateLimit-Reset"?: number;
-	"X-RateLimit-Reset-After"?: number;
-	"X-RateLimit-Scope"?: "global" | "shared" | "user";
-};
+export const AuthenticationType = z.union([z.literal("Bearer"), z.literal("Bot")]);
+export type AuthenticationTypeInfer = z.infer<typeof AuthenticationType>;
 
-/**
- * Type for Discord's Snowflake ID
- *
- * @see {@link https://discord.com/developers/docs/reference#snowflakes}
- */
-export type Snowflake = string;
+export const ApiAuthenticationHeader = z.object({
+	Authorization: z.string(),
+	"User-Agent": z.string(),
+	"X-RateLimit-Bucket": z.string(),
+	"X-RateLimit-Global": z.boolean(),
+	"X-RateLimit-Limit": z.number(),
+	"X-RateLimit-Remaining": z.number(),
+	"X-RateLimit-Reset": z.number(),
+	"X-RateLimit-Reset-After": z.number(),
+	"X-RateLimit-Scope": z.union([z.literal("global"), z.literal("shared"), z.literal("user")]),
+}).partial();
+export type ApiAuthenticationHeaderInfer = z.infer<typeof ApiAuthenticationHeader>;
 
-/**
- * Constant for Discord's Epoch time
- */
-export const DiscordEpoch = 1_420_070_400_000;
+export const DiscordEpoch = 1_420_070_400_000n;

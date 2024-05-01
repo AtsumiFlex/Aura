@@ -1,16 +1,5 @@
-/**
- * @description This module defines the supported languages in the application.
- * @see {@link https://discord.com/developers/docs/reference#locales}
- */
+import { z } from "zod";
 
-/**
- * Enum for supported languages.
- * Each key represents the language code and the value is the full name of the language in English.
- *
- * @example
- * // To get the full name of the language for the code 'en'
- * const languageName = Locales.en; // 'English'
- */
 export enum Locales {
 	bg = "Bulgarian",
 	cs = "Czech",
@@ -43,22 +32,4 @@ export enum Locales {
 	zh = "Chinese",
 }
 
-/**
- * Type for language code.
- * It is a key of the Locales enum.
- *
- * @example
- * // To define a variable with a language code
- * let languageCode: LocaleString = 'en';
- */
-export type LocaleString = keyof typeof Locales;
-
-/**
- * Type for full name of the language.
- * It is a value of the Locales enum.
- *
- * @example
- * // To define a variable with a language name
- * let languageName: LocaleStringName = 'English';
- */
-export type LocaleStringName = typeof Locales[LocaleString];
+export const LocalesEnum = z.nativeEnum(Locales);
