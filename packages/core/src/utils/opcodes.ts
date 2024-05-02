@@ -1,7 +1,8 @@
 /**
  * Opcodes and Status Codes
  *
- * @description Discord uses a variety of opcodes and status codes to communicate with the client.
+ * Discord uses a variety of opcodes and status codes to communicate with the client.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#opcodes-and-status-codes}
  */
 
@@ -10,7 +11,8 @@ import { z } from "zod";
 /**
  * Gateway Opcodes
  *
- * @description All gateway events in Discord are tagged with an opcode that denotes the payload type. Your connection to our gateway may also sometimes close. When it does, you will receive a close code that tells you what happened.
+ * All gateway events in Discord are tagged with an opcode that denotes the payload type. Your connection to our gateway may also sometimes close. When it does, you will receive a close code that tells you what happened.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway}
  */
 export enum GatewayOpcodes {
@@ -60,12 +62,16 @@ export enum GatewayOpcodes {
 	HeartbeatAck = 11,
 }
 
+/**
+ * Gateway Opcodes Enum is a zod enum that represents the Gateway Opcodes.
+ */
 export const GatewayOpcodesEnum = z.nativeEnum(GatewayOpcodes);
 
 /**
  * Gateway Close Event Codes
  *
- * @description In order to prevent broken reconnect loops, you should consider some close codes as a signal to stop reconnecting. This can be because your token expired, or your identification is invalid. This table explains what the application defined close codes for the gateway are, and which close codes you should not attempt to reconnect.
+ * In order to prevent broken reconnect loops, you should consider some close codes as a signal to stop reconnecting. This can be because your token expired, or your identification is invalid. This table explains what the application defined close codes for the gateway are, and which close codes you should not attempt to reconnect.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#gateway-gateway-close-event-codes}
  */
 export enum GatewayCloseEventCodes {
@@ -127,12 +133,16 @@ export enum GatewayCloseEventCodes {
 	DisallowedIntents = 4_014,
 }
 
+/**
+ * Gateway Close Event Codes Enum is a zod enum that represents the Gateway Close Event Codes.
+ */
 export const GatewayCloseEventCodesEnum = z.nativeEnum(GatewayCloseEventCodes);
 
 /**
  * Voice Opcodes
  *
- * @description Our voice gateways have their own set of opcodes and close codes.
+ * Our voice gateways have their own set of opcodes and close codes.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice}
  */
 export enum VoiceOpcodes {
@@ -182,12 +192,16 @@ export enum VoiceOpcodes {
 	ClientDisconnect = 13,
 }
 
+/**
+ * Voice Opcodes Enum is a zod enum that represents the Voice Opcodes.
+ */
 export const VoiceOpcodesEnum = z.nativeEnum(VoiceOpcodes);
 
 /**
  * Voice Close Event Codes
  *
- * @description The following table explains the application-defined close codes for the voice gateway, and which close codes you should not attempt to reconnect.
+ * The following table explains the application-defined close codes for the voice gateway, and which close codes you should not attempt to reconnect.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#voice-voice-close-event-codes}
  */
 export enum VoiceCloseEventCodes {
@@ -241,12 +255,16 @@ export enum VoiceCloseEventCodes {
 	UnknownEncryptionMode = 4_016,
 }
 
+/**
+ * Voice Close Event Codes Enum is a zod enum that represents the Voice Close Event Codes.
+ */
 export const VoiceCloseEventCodesEnum = z.nativeEnum(VoiceCloseEventCodes);
 
 /**
  * HTTP Response Codes
  *
- * @description Our API will return semantically valid HTTP response codes based on the success of your request. The following table can be used as a reference for response codes it will return
+ * Our API will return semantically valid HTTP response codes based on the success of your request. The following table can be used as a reference for response codes it will return
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#http-http-response-codes}
  */
 export enum HttpResponseCodes {
@@ -300,12 +318,16 @@ export enum HttpResponseCodes {
 	ServerError = 500,
 }
 
+/**
+ * HTTP Response Codes Enum is a zod enum that represents the HTTP Response Codes.
+ */
 export const HttpResponseCodesEnum = z.nativeEnum(HttpResponseCodes);
 
 /**
  * JSON Error Codes
  *
- * @description Along with the HTTP error code, our API can also return more detailed error codes through a code key in the JSON error response. The response will also contain a message key containing a more friendly error string. Some of these errors may include additional details in the form of Error Messages provided by an errors object.
+ * Along with the HTTP error code, our API can also return more detailed error codes through a code key in the JSON error response. The response will also contain a message key containing a more friendly error string. Some of these errors may include additional details in the form of Error Messages provided by an errors object.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#json-json-error-codes}
  */
 export enum JsonErrorCodes {
@@ -1151,12 +1173,16 @@ export enum JsonErrorCodes {
 	CannotExpireANonPollMessage = 520_006,
 }
 
+/**
+ * Json Error Codes Enum is a zod enum that represents the Json Error Codes.
+ */
 export const JsonErrorCodesEnum = z.nativeEnum(JsonErrorCodes);
 
 /**
  * RPC Error Codes
  *
- * @description RPC is the local Discord server running on localhost. Access to the RPC server requires approval from Discord.
+ * RPC is the local Discord server running on localhost. Access to the RPC server requires approval from Discord.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-error-codes}
  */
 export enum RpcErrorCodes {
@@ -1226,12 +1252,16 @@ export enum RpcErrorCodes {
 	CaptureShortcutAlreadyListening = 5_004,
 }
 
+/**
+ * Rpc Error Codes Enum is a zod enum that represents the Rpc Error Codes.
+ */
 export const RpcErrorCodesEnum = z.nativeEnum(RpcErrorCodes);
 
 /**
  * RPC Close Event Codes
  *
- * @description The following table explains the application-defined close codes for the RPC gateway, and which close codes you should not attempt to reconnect.
+ * The following table explains the application-defined close codes for the RPC gateway, and which close codes you should not attempt to reconnect.
+ *
  * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#rpc-rpc-close-event-codes}
  */
 export enum RpcCloseEventCodes {
@@ -1261,4 +1291,7 @@ export enum RpcCloseEventCodes {
 	InvalidEncoding = 4_005,
 }
 
+/**
+ * Rpc Close Event Codes Enum is a zod enum that represents the Rpc Close Event Codes.
+ */
 export const RpcCloseEventCodesEnum = z.nativeEnum(RpcCloseEventCodes);

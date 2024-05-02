@@ -3,7 +3,8 @@ import { z } from "zod";
 /**
  * Locales
  *
- * @description Discord supports a variety of locales that can be used to format timestamps in messages.
+ * Discord supports a variety of locales that can be used to format timestamps in messages.
+ *
  * @see {@link https://discord.com/developers/docs/reference#locales}
  */
 export enum Locales {
@@ -38,4 +39,7 @@ export enum Locales {
 	zh = "Chinese",
 }
 
+/**
+ * Locales Enum is a zod enum that represents the locales.
+ */
 export const LocalesEnum = z.nativeEnum(Locales);

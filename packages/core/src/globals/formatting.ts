@@ -1,18 +1,14 @@
 /**
  * Message Formatting
  *
- * @description Discord utilizes a subset of markdown for rendering message content on its clients, while also adding some custom functionality to enable things like mentioning users and channels. This functionality uses the following formats:
- * @see {@link https://discord.com/developers/docs/reference#message-formatting}
+ * Discord utilizes a subset of markdown for rendering message content on its clients, while also adding some custom functionality to enable things like mentioning users and channels. This functionality uses the following formats:
+ *
+ * @see {@link https://discord.com/developers/docs/reference#message-formatting | https://discord.com/developers/docs/reference#message-formatting-formats}
  */
 
 import { z } from "zod";
 import type { SnowflakeInfer } from "./globals";
 
-/**
- * Formats
- *
- * @see {@link https://discord.com/developers/docs/reference#message-formatting-formats}
- */
 export function formatUser(userId: SnowflakeInfer): `<@${SnowflakeInfer}>` {
 	return `<@${userId}>`;
 }
@@ -53,7 +49,8 @@ export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer, an
 /**
  * Timestamp Styles
  *
- * @description Discord supports a variety of timestamp styles that can be used to format timestamps in messages.
+ * Discord supports a variety of timestamp styles that can be used to format timestamps in messages.
+ *
  * @see {@link https://discord.com/developers/docs/reference#message-formatting-timestamp-styles}
  */
 export enum TimestampStyles {
@@ -102,7 +99,8 @@ export function formatUnixTimestamp(timestamp: SnowflakeInfer, style?: Timestamp
 /**
  * Guild Navigation Types
  *
- * @description Discord supports a variety of navigation types that can be used to navigate to different parts of a guild.
+ * Discord supports a variety of navigation types that can be used to navigate to different parts of a guild.
+ *
  * @see {@link https://discord.com/developers/docs/reference#message-formatting-guild-navigation-types}
  */
 export const GuildNavigationTypes = z.enum(["customize", "browse", "guide"]);
@@ -115,7 +113,8 @@ export function formatGuildNavigation(guildId: SnowflakeInfer, navigationType: G
 /**
  * Image Formats
  *
- * @description Discord supports a variety of image formats that can be used to display images in messages.
+ * Discord supports a variety of image formats that can be used to display images in messages.
+ *
  * @see {@link https://discord.com/developers/docs/reference#image-formatting-image-formats}
  */
 export enum ImageFormats {
@@ -143,11 +142,6 @@ export enum ImageFormats {
 
 export const ImageFormatsEnum = z.nativeEnum(ImageFormats);
 
-/**
- * Markdown Text
- *
- * @description Discord supports a variety of markdown text that can be used to format text in messages.
- */
 export function bold(text: string): `**${string}**` {
 	return `**${text}**`;
 }

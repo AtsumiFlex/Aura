@@ -24,3 +24,13 @@ export const Integer = z.number().int();
  * IntegerInfer is a type alias for the inferred type of the Integer schema.
  */
 export type IntegerInfer = z.infer<typeof Integer>;
+
+/**
+ * ISO8601 is a regular expression pattern for ISO8601 timestamps.
+ */
+export const ISO8601 = z.string().refine((value) => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?<temp1>\.\d{3})?Z$/.test(value), { message: "Value is not a valid ISO8601 timestamp." });
+
+/**
+ * ISO8601Infer is a type alias for the inferred type of the ISO8601 schema.
+ */
+export type ISO8601Infer = z.infer<typeof ISO8601>;

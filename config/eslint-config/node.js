@@ -9,4 +9,8 @@ module.exports = {
 	extends: ["neon/common", "neon/node", "neon/typescript"],
 	parserOptions: { project },
 	ignorePatterns: ["**/dist/*"],
+	rules: {
+		"line-comment-position": "off",
+		"no-inline-comments": "off",
+	},
 };
