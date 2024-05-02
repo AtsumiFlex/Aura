@@ -1,4 +1,5 @@
-// ./reference/*
-export * from "./reference/api";
-export * from "./reference/formatters";
-export * from "./reference/locales";
+// ./globals/*
+export * from "./globals/api";
+export * from "./globals/formatting";
+export * from "./globals/globals";
+export * from "./globals/locales";

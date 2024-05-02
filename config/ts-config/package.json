@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/ts-config",
-  "license": "AGPL-3.0-only",
   "private": true,
   "publishConfig": {
     "access": "public"

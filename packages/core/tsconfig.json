@@ -5,13 +5,7 @@
     "tsBuildInfoFile": "./dist/.tsbuildinfo",
     "rootDir": "./src",
     "baseUrl": "./src",
-    "outDir": "./dist"
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "outDir": "./dist",
+    "declarationDir": "./dist/types"
+  }
 }

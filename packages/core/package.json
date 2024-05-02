@@ -1,24 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/core",
-  "license": "AGPL-3.0-only",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "build:watch": "tsc -p tsconfig.json --watch",
-    "lint": "eslint . --ext .ts --ext .js",
-    "test": "jest"
+    "lint": "eslint . --ext .ts --fix"
   },
   "dependencies": {
-    "@aurajs/types": "workspace:*",
-    "eventemitter3": "^5.0.1",
     "tslib": "^2.6.2",
-    "ws": "^8.17.0",
     "zod": "^3.23.5"
   },
   "devDependencies": {
-    "@types/ws": "^8.5.10",
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*"
   }

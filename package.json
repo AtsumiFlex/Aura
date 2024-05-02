@@ -1,18 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/monorepo",
-  "version": "1.0.0",
-  "readme": "README.md",
-  "license": "AGPL-3.0-only",
-  "description": "Aurajs is a monorepo for building web applications with TypeScript.",
-  "author": {
-    "name": "AtsumiFlex",
-    "url": "https://github.com/AtsumiFlex"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Aurajs.git"
-  },
+  "packageManager": "pnpm@9.0.6",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -21,11 +10,10 @@
   "devDependencies": {
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
-    "turbo": "^1.13.3",
+    "turbo": "latest",
     "typescript": "^5.4.5"
   },
   "engines": {
     "node": ">=18"
-  },
-  "packageManager": "pnpm@9.0.6+sha1.648f6014eb363abb36618f2ba59282a9eeb3e879"
+  }
 }

@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/eslint-config",
-  "license": "AGPL-3.0-only",
   "private": true,
   "files": [
     "node.js"
   ],
   "devDependencies": {
     "@types/eslint": "^8.56.10",
-    "eslint": "^8.57.0",
-    "eslint-config-neon": "^0.1.62"
+    "eslint": "^8",
+    "eslint-config-neon": "^0.1.62",
+    "eslint-formatter-pretty": "5"
   }
 }
