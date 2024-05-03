@@ -22,6 +22,8 @@
 import { z } from "zod";
 import { Integer, Snowflake } from "../globals/globals";
 import { LocalesEnum } from "../globals/locales";
+import { ApplicationRoleConnectionMetadataStructure } from "./applications";
+import { IntegrationStructure } from "./guilds";
 
 /**
  * Application Role Connection Structure
@@ -33,7 +35,7 @@ import { LocalesEnum } from "../globals/locales";
 export const ApplicationRoleConnectionStructure = z.object({
 	platform_name: z.string().optional(),
 	platform_username: z.string().optional(),
-	metadata: z.record(z.any()).optional(), // TODO: application role connection metadata
+	metadata: z.record(ApplicationRoleConnectionMetadataStructure).optional(),
 });
 
 /**
@@ -88,7 +90,7 @@ export const ConnectionStructure = z.object({
 	name: z.string(),
 	type: UserService,
 	revoked: z.boolean().optional(),
-	integrations: z.array(z.any()).optional(), // TODO: partial server integrations
+	integrations: z.array(IntegrationStructure.partial()).optional(),
 	verified: z.boolean(),
 	friend_sync: z.boolean(),
 	show_activity: z.boolean(),

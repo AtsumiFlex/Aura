@@ -8,6 +8,7 @@
 
 import { z } from "zod";
 import { ISO8601, Snowflake } from "../globals/globals";
+import { GuildMemberStructure } from "./guilds";
 
 /**
  * Voice Region Structure
@@ -42,7 +43,7 @@ export const VoiceStateStructure = z.object({
 	guild_id: Snowflake.optional(),
 	channel_id: Snowflake.nullable(),
 	user_id: Snowflake,
-	member: z.any().optional(), // TODO: Guild Member Structure
+	member: GuildMemberStructure.optional(),
 	session_id: z.string(),
 	deaf: z.boolean(),
 	mute: z.boolean(),
