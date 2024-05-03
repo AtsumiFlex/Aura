@@ -8,6 +8,7 @@
 
 import { z } from "zod";
 import { Snowflake } from "../globals/globals";
+import { UserStructure } from "./user";
 
 /**
  * Membership State Enum
@@ -71,7 +72,7 @@ export const TeamMemberRoleEnum = z.nativeEnum(TeamMemberRole);
 export const TeamMemberStructure = z.object({
 	membership_state: MembershipStateEnum,
 	team_id: Snowflake,
-	user: z.any(), // TODO: Partial user object
+	user: UserStructure.partial(),
 	role: TeamMemberRoleEnum,
 });
 
