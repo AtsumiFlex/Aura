@@ -1,3 +1,19 @@
+// ./gateway/*
+export * from "./gateway/events/channels";
+export * from "./gateway/events/globals";
+export * from "./gateway/events/guilds";
+export * from "./gateway/events/integrations";
+export * from "./gateway/events/invites";
+export * from "./gateway/events/messages";
+export * from "./gateway/events/moderations";
+export * from "./gateway/events/polls";
+export * from "./gateway/events/presences";
+export * from "./gateway/events/typings";
+export * from "./gateway/events/voices";
+export * from "./gateway/events/webhooks";
+export * from "./gateway/client";
+export * from "./gateway/websockets";
+
 // ./globals/*
 export * from "./globals/api";
 export * from "./globals/formatting";
