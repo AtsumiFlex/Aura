@@ -7,7 +7,7 @@
  */
 
 import { z } from "zod";
-import { Snowflake } from "../../globals/globals";
+import { Snowflake } from "../../../core/src/globals/globals";
 
 /**
  * Webhooks Update Event Fields

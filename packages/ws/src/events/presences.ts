@@ -7,8 +7,8 @@
  */
 
 import { z } from "zod";
-import { Integer, Snowflake } from "../../globals/globals";
-import { UserStructure } from "../../structures/user";
+import { Integer, Snowflake } from "../../../core/src/globals/globals";
+import { UserStructure } from "../../../core/src/structures/user";
 
 /**
  * Activity Button Structure

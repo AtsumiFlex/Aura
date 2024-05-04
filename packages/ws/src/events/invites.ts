@@ -7,10 +7,10 @@
  */
 
 import { z } from "zod";
-import { Integer, Snowflake } from "../../globals/globals";
-import { ApplicationStructure } from "../../structures/applications";
-import { InviteTargetTypesEnum } from "../../structures/invites";
-import { UserStructure } from "../../structures/user";
+import { Integer, Snowflake } from "../../../core/src/globals/globals";
+import { ApplicationStructure } from "../../../core/src/structures/applications";
+import { InviteTargetTypesEnum } from "../../../core/src/structures/invites";
+import { UserStructure } from "../../../core/src/structures/user";
 
 /**
  * Invite Delete Event Fields

@@ -17,6 +17,12 @@ export class GatewayWebSocket extends EventEmitter {
 		this.connect();
 	}
 
+	public send(data: any) {
+		if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+			this.ws.send(JSON.stringify(data));
+		}
+	}
+
 	private connect() {
 		this.ws = new WebSocket(this._url);
 
@@ -49,17 +55,19 @@ export class GatewayWebSocket extends EventEmitter {
 			this._sequence = message.s;
 		}
 
-		this.emit("message", message);
+		console.log("Received message:", message);
+
+		// GatewayEventExtends[message.t] ? this.emit(message.t, GatewayEventExtends[message.t](message.d)) : null;
 	}
 
 	private startHeartbeat() {
 		const interval = 41_250;
 		this._heartbeatInterval = setInterval(() => {
 			if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-				this.ws.send(JSON.stringify({
+				this.send({
 					op: 1,
 					d: this._sequence,
-				}));
+				});
 				this.emit("debug", "Heartbeat sent");
 			}
 		}, interval);

@@ -11,13 +11,13 @@ import { IntegerInfer } from "./globals";
 export const API_BASE_URL = "https://discord.com/api";
 
 /**
- * Image Base Url
+ * CDN Base Url
  *
  * The base URL for all images.
  *
  * @see {@link https://discord.com/developers/docs/reference#image-formatting-image-base-url}
  */
-export const API_IMAGE_BASE_URL = "https://cdn.discordapp.com/";
+export const API_CDN_BASE_URL = "https://cdn.discordapp.com/";
 
 /**
  * API Versioning

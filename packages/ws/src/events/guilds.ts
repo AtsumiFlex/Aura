@@ -7,15 +7,15 @@
  */
 
 import { z } from "zod";
-import { Integer, ISO8601, Snowflake } from "../../globals/globals";
-import { ChannelStructure } from "../../structures/channels";
-import { EmojiStructure } from "../../structures/emojis";
-import { GuildMemberStructure } from "../../structures/guilds";
-import { RoleStructure } from "../../structures/roles";
-import { StageInstanceStructure } from "../../structures/stages";
-import { StickerStructure } from "../../structures/stickers";
-import { UserStructure } from "../../structures/user";
-import { VoiceStateStructure } from "../../structures/voices";
+import { Integer, ISO8601, Snowflake } from "../../../core/src/globals/globals";
+import { ChannelStructure } from "../../../core/src/structures/channels";
+import { EmojiStructure } from "../../../core/src/structures/emojis";
+import { GuildMemberStructure } from "../../../core/src/structures/guilds";
+import { RoleStructure } from "../../../core/src/structures/roles";
+import { StageInstanceStructure } from "../../../core/src/structures/stages";
+import { StickerStructure } from "../../../core/src/structures/stickers";
+import { UserStructure } from "../../../core/src/structures/user";
+import { VoiceStateStructure } from "../../../core/src/structures/voices";
 import { PresenceUpdateEventFields } from "./presences";
 
 /**

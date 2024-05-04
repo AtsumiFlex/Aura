@@ -11,9 +11,9 @@
  */
 
 import { z } from "zod";
+import { OAuth2ScopesEnum } from "../../../utils/src/globals/oauth2";
 import { Integer, ISO8601, Snowflake } from "../globals/globals";
 import { LocalesEnum } from "../globals/locales";
-import { OAuth2ScopesEnum } from "../utils/oauth2";
 import { ChannelStructure } from "./channels";
 import { EmojiStructure } from "./emojis";
 import { RoleStructure } from "./roles";

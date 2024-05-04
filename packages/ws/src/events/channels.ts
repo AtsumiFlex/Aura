@@ -7,8 +7,8 @@
  */
 
 import { z } from "zod";
-import { Integer, ISO8601, Snowflake } from "../../globals/globals";
-import { ThreadMemberStructure } from "../../structures/channels";
+import { Integer, ISO8601, Snowflake } from "../../../core/src/globals/globals";
+import { ThreadMemberStructure } from "../../../core/src/structures/channels";
 
 /**
  * Channel Pins Update Event Fields

@@ -7,8 +7,8 @@
  */
 
 import { z } from "zod";
-import { Snowflake } from "../../globals/globals";
-import { AutoModerationActionStructure, TriggerTypesEnum } from "../../structures/moderations";
+import { Snowflake } from "../../../core/src/globals/globals";
+import { AutoModerationActionStructure, TriggerTypesEnum } from "../../../core/src/structures/moderations";
 
 /**
  * Auto Moderation Action Execution Event Fields

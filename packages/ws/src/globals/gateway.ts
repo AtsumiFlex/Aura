@@ -1,9 +1,72 @@
 import { z } from "zod";
-import { ApiVersionEnum } from "../../globals/api";
-import { Integer, Snowflake } from "../../globals/globals";
-import { ApplicationStructure } from "../../structures/applications";
-import { UserStructure } from "../../structures/user";
-import { ActivityStructure } from "./presences";
+import { ApiVersionEnum } from "../../../core/src/globals/api";
+import type { SnowflakeInfer } from "../../../core/src/globals/globals";
+import { Integer, Snowflake } from "../../../core/src/globals/globals";
+import { ApplicationStructure } from "../../../core/src/structures/applications";
+import type { AuditLogEntryStructureInfer } from "../../../core/src/structures/audits";
+import type {
+	ChannelStructureInfer,
+	MessageStructureInfer,
+	ThreadMemberStructureInfer,
+} from "../../../core/src/structures/channels";
+import type { EntitlementStructureInfer } from "../../../core/src/structures/entitlements";
+import type {
+	GuildMemberStructureInfer,
+	GuildScheduledEventStructureInfer,
+	GuildStructureInfer,
+	IntegrationStructureInfer,
+} from "../../../core/src/structures/guilds";
+import type {
+	GuildApplicationCommandPermissionsStructureInfer,
+	InteractionStructureInfer,
+} from "../../../core/src/structures/interactions";
+import type { AutoModerationRuleStructureInfer } from "../../../core/src/structures/moderations";
+import type { StageInstanceStructureInfer } from "../../../core/src/structures/stages";
+import type { UserStructureInfer } from "../../../core/src/structures/user";
+import { UserStructure } from "../../../core/src/structures/user";
+import type { VoiceStateStructureInfer } from "../../../core/src/structures/voices";
+import type {
+	ChannelPinsUpdateEventFieldsInfer,
+	ThreadListSyncEventFieldsInfer,
+	ThreadMembersUpdateEventFieldsInfer,
+	ThreadMemberUpdateEventExtraFieldsInfer,
+} from "../events/channels";
+import type {
+	GuildBanAddEventFieldsInfer,
+	GuildCreateEventFieldsInfer,
+	GuildEmojisUpdateEventFieldsInfer,
+	GuildIntegrationsUpdateEventFieldsInfer,
+	GuildMemberAddEventFieldsInfer,
+	GuildMemberRemoveEventFieldsInfer,
+	GuildMembersChunkEventFieldsInfer,
+	GuildMemberUpdateEventFieldsInfer,
+	GuildRoleCreateEventFieldsInfer,
+	GuildScheduledEventUserAddEventFieldsInfer,
+	GuildScheduledEventUserRemoveEventFieldsInfer,
+	GuildStickersUpdateEventFieldsInfer,
+} from "../events/guilds";
+import type {
+	IntegrationCreateEventFieldsInfer,
+	IntegrationDeleteEventFieldsInfer,
+	IntegrationUpdateEventFieldsInfer,
+} from "../events/integrations";
+import type { InviteCreateEventFieldsInfer, InviteDeleteEventFieldsInfer } from "../events/invites";
+import type {
+	MessageCreateEventFieldsInfer,
+	MessageDeleteBulkEventFieldsInfer,
+	MessageDeleteEventFieldsInfer,
+	MessageReactionAddEventFieldsInfer,
+	MessageReactionRemoveAllEventFieldsInfer,
+	MessageReactionRemoveEmojiEventFieldsInfer,
+	MessageReactionRemoveEventFieldsInfer,
+} from "../events/messages";
+import type { AutoModerationActionExecutionEventFieldsInfer } from "../events/moderations";
+import type { MessagePollVoteAddFieldsInfer, MessagePollVoteRemoveFieldsInfer } from "../events/polls";
+import type { PresenceUpdateEventFieldsInfer } from "../events/presences";
+import { ActivityStructure } from "../events/presences";
+import type { TypingStartEventFieldsInfer } from "../events/typings";
+import type { VoiceServerUpdateEventFieldsInfer } from "../events/voices";
+import type { WebhooksUpdateEventFieldsInfer } from "../events/webhooks";
 
 /**
  * Ready Event Fields
@@ -482,5 +545,132 @@ export const GatewayEventsEnum = z.nativeEnum(GatewayEvents);
 export type GatewayReceiveEvents = {
 	[GatewayEvents.Hello]: [hello: HelloStructureInfer];
 	[GatewayEvents.Ready]: [ready: ReadyEventFieldsInfer];
-	[GatewayEvents.Resumed]: [resumed: null];
+	[GatewayEvents.Resumed]: [resumed: ResumeStructureInfer];
+	[GatewayEvents.Reconnect]: [reconned: null];
+	[GatewayEvents.InvalidSession]: [reconned: false];
+	[GatewayEvents.ApplicationCommandPermissionsUpdate]: [applicationData: GuildApplicationCommandPermissionsStructureInfer];
+	[GatewayEvents.AutoModerationRuleCreate]: [moderation: AutoModerationRuleStructureInfer];
+	[GatewayEvents.AutoModerationRuleUpdate]: [moderation: AutoModerationRuleStructureInfer];
+	[GatewayEvents.AutoModerationRuleDelete]: [moderation: AutoModerationRuleStructureInfer];
+	[GatewayEvents.AutoModerationActionExecution]: [action: AutoModerationActionExecutionEventFieldsInfer];
+	[GatewayEvents.ChannelCreate]: [channel: ChannelStructureInfer];
+	[GatewayEvents.ChannelDelete]: [channel: ChannelStructureInfer];
+	[GatewayEvents.ChannelDelete]: [channel: ChannelStructureInfer];
+	[GatewayEvents.ThreadCreate]: [thread: ChannelStructureInfer];
+	[GatewayEvents.ThreadUpdate]: [thread: ChannelStructureInfer];
+	[GatewayEvents.ThreadDelete]: [thread: ChannelStructureInfer];
+	[GatewayEvents.ThreadListSync]: [thread: ThreadListSyncEventFieldsInfer];
+	[GatewayEvents.ThreadMemberUpdate]: [thread: ThreadMemberStructureInfer & ThreadMemberUpdateEventExtraFieldsInfer];
+	[GatewayEvents.ThreadMembersUpdate]: [thread: ThreadMemberStructureInfer & ThreadMembersUpdateEventFieldsInfer];
+	[GatewayEvents.ChannelPinsUpdate]: [channel: ChannelPinsUpdateEventFieldsInfer];
+	[GatewayEvents.EntitlementCreate]: [entitlement: EntitlementStructureInfer];
+	[GatewayEvents.EntitlementUpdate]: [entitlement: EntitlementStructureInfer];
+	[GatewayEvents.EntitlementDelete]: [entitlement: EntitlementStructureInfer];
+	[GatewayEvents.GuildCreate]: [guild: {
+		id: SnowflakeInfer;
+		unavailable: boolean;
+	} | GuildCreateEventFieldsInfer & GuildStructureInfer];
+	[GatewayEvents.GuildUpdate]: [guild: GuildStructureInfer];
+	[GatewayEvents.GuildDelete]: [guild: GuildCreateEventFieldsInfer | {
+		id: SnowflakeInfer;
+		unavailable: boolean;
+	}];
+	[GatewayEvents.GuildAuditLogEntryCreate]: [audit: AuditLogEntryStructureInfer];
+	[GatewayEvents.GuildBanAdd]: [ban: GuildBanAddEventFieldsInfer];
+	[GatewayEvents.GuildBanRemove]: [ban: GuildBanAddEventFieldsInfer];
+	[GatewayEvents.GuildEmojisUpdate]: [emojis: GuildEmojisUpdateEventFieldsInfer];
+	[GatewayEvents.GuildStickersUpdate]: [stickers: GuildStickersUpdateEventFieldsInfer];
+	[GatewayEvents.GuildIntegrationsUpdate]: [integration: GuildIntegrationsUpdateEventFieldsInfer];
+	[GatewayEvents.GuildMemberAdd]: [member: GuildMemberAddEventFieldsInfer & GuildMemberStructureInfer];
+	[GatewayEvents.GuildMemberRemove]: [member: GuildMemberRemoveEventFieldsInfer];
+	[GatewayEvents.GuildMemberUpdate]: [member: GuildMemberUpdateEventFieldsInfer];
+	[GatewayEvents.GuildMembersChunk]: [members: GuildMembersChunkEventFieldsInfer];
+	[GatewayEvents.GuildRoleCreate]: [role: GuildRoleCreateEventFieldsInfer];
+	[GatewayEvents.GuildRoleUpdate]: [role: GuildRoleCreateEventFieldsInfer];
+	[GatewayEvents.GuildRoleDelete]: [role: GuildRoleCreateEventFieldsInfer];
+	[GatewayEvents.GuildScheduledEventCreate]: [schedule: GuildScheduledEventStructureInfer];
+	[GatewayEvents.GuildScheduledEventUpdate]: [schedule: GuildScheduledEventStructureInfer];
+	[GatewayEvents.GuildScheduledEventDelete]: [schedule: GuildScheduledEventStructureInfer];
+	[GatewayEvents.GuildScheduledEventUserAdd]: [user: GuildScheduledEventUserAddEventFieldsInfer];
+	[GatewayEvents.GuildScheduledEventUserRemove]: [user: GuildScheduledEventUserRemoveEventFieldsInfer];
+	[GatewayEvents.IntegrationCreate]: [integrations: IntegrationCreateEventFieldsInfer & IntegrationStructureInfer];
+	[GatewayEvents.IntegrationUpdate]: [integrations: IntegrationStructureInfer & IntegrationUpdateEventFieldsInfer];
+	[GatewayEvents.IntegrationDelete]: [integrations: IntegrationDeleteEventFieldsInfer & IntegrationStructureInfer];
+	[GatewayEvents.InviteCreate]: [invite: InviteCreateEventFieldsInfer];
+	[GatewayEvents.InviteDelete]: [invite: InviteDeleteEventFieldsInfer];
+	[GatewayEvents.MessageCreate]: [message: MessageCreateEventFieldsInfer & MessageStructureInfer];
+	[GatewayEvents.MessageUpdate]: [message: MessageCreateEventFieldsInfer & MessageStructureInfer];
+	[GatewayEvents.MessageDelete]: [message: MessageDeleteEventFieldsInfer];
+	[GatewayEvents.MessageDeleteBulk]: [messages: MessageDeleteBulkEventFieldsInfer];
+	[GatewayEvents.MessageReactionAdd]: [reaction: MessageReactionAddEventFieldsInfer];
+	[GatewayEvents.MessageReactionRemove]: [reaction: MessageReactionRemoveEventFieldsInfer];
+	[GatewayEvents.MessageReactionRemoveAll]: [reaction: MessageReactionRemoveAllEventFieldsInfer];
+	[GatewayEvents.MessageReactionRemoveEmoji]: [reaction: MessageReactionRemoveEmojiEventFieldsInfer];
+	[GatewayEvents.PresenceUpdate]: [presence: PresenceUpdateEventFieldsInfer];
+	[GatewayEvents.TypingStart]: [typing: TypingStartEventFieldsInfer];
+	[GatewayEvents.UserUpdate]: [user: UserStructureInfer];
+	[GatewayEvents.VoiceStateUpdate]: [state: VoiceStateStructureInfer];
+	[GatewayEvents.VoiceServerUpdate]: [server: VoiceServerUpdateEventFieldsInfer];
+	[GatewayEvents.WebhooksUpdate]: [webhooks: WebhooksUpdateEventFieldsInfer];
+	[GatewayEvents.InteractionCreate]: [interaction: InteractionStructureInfer];
+	[GatewayEvents.StageInstanceCreate]: [stage: StageInstanceStructureInfer];
+	[GatewayEvents.StageInstanceUpdate]: [stage: StageInstanceStructureInfer];
+	[GatewayEvents.StageInstanceDelete]: [stage: StageInstanceStructureInfer];
+	[GatewayEvents.MessagePollVoteAdd]: [poll: MessagePollVoteAddFieldsInfer];
+	[GatewayEvents.MessagePollVoteRemove]: [poll: MessagePollVoteRemoveFieldsInfer];
 };
+
+/**
+ * Gateway Payload
+ *
+ * @see {@link https://discord.com/developers/docs/topics/gateway#payloads-gateway-payload-structure}
+ */
+export const GatewayPayload = z.object({
+	op: Integer,
+	d: z.any().nullable(),
+	s: Integer.optional(),
+	t: z.string(),
+});
+
+/**
+ * Gateway Payload Infer
+ *
+ * Infer the type of a {@link GatewayPayload} object.
+ */
+export type GatewayPayloadInfer = z.infer<typeof GatewayPayload>;
+
+/**
+ * Gateway Intents
+ *
+ * @see {@link https://discord.com/developers/docs/topics/gateway#gateway-intents}
+ */
+export enum GatewayIntents {
+	Guilds = 1,
+	GuildMembers = 2,
+	GuildModeration = 4,
+	GuildEmojisAndStickers = 8,
+	GuildIntegrations = 16,
+	GuildWebhooks = 32,
+	GuildInvites = 64,
+	GuildVoiceStates = 128,
+	GuildPresences = 256,
+	GuildMessages = 512,
+	GuildMessageReactions = 1_024,
+	GuildMessageTyping = 2_048,
+	DirectMessages = 4_096,
+	DirectMessageReactions = 8_192,
+	DirectMessageTyping = 16_384,
+	MessageContent = 32_768,
+	GuildScheduledEvents = 65_536,
+	AutoModerationConfiguration = 1_048_576,
+	AutoModerationExecution = 2_097_152,
+	GuildMessagePolls = 16_777_216,
+	DirectMessagePolls = 33_554_432,
+}
+
+/**
+ * Gateway Intents Enum
+ *
+ * Enum for Gateway Intents {@link GatewayIntents}
+ */
+export const GatewayIntentsEnum = z.nativeEnum(GatewayIntents);

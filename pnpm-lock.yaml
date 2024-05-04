@@ -26,9 +26,15 @@ importers:
       '@aurajs/core':
         specifier: workspace:*
         version: link:../../packages/core
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
+      undici:
+        specifier: ^6.15.0
+        version: 6.15.0
       zod:
         specifier: ^3.23.5
         version: 3.23.5
@@ -39,6 +45,9 @@ importers:
       '@aurajs/ts-config':
         specifier: workspace:*
         version: link:../../config/ts-config
+      '@types/ws':
+        specifier: ^8.5.10
+        version: 8.5.10
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.11.24)(typescript@5.4.5)
@@ -64,6 +73,69 @@ importers:
   config/ts-config: {}
 
   packages/core:
+    dependencies:
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      ws:
+        specifier: ^8.17.0
+        version: 8.17.0
+      zod:
+        specifier: ^3.23.5
+        version: 3.23.5
+    devDependencies:
+      '@aurajs/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@aurajs/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@types/ws':
+        specifier: ^8.5.10
+        version: 8.5.10
+
+  packages/rest:
+    dependencies:
+      '@aurajs/core':
+        specifier: workspace:*
+        version: link:../core
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      undici:
+        specifier: ^6.15.0
+        version: 6.15.0
+      zod:
+        specifier: ^3.23.5
+        version: 3.23.5
+    devDependencies:
+      '@aurajs/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@aurajs/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+
+  packages/utils:
+    dependencies:
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      zod:
+        specifier: ^3.23.5
+        version: 3.23.5
+    devDependencies:
+      '@aurajs/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@aurajs/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+
+  packages/ws:
     dependencies:
       eventemitter3:
         specifier: ^5.0.1
@@ -2544,6 +2616,10 @@ packages:
 
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
+  undici@6.15.0:
+    resolution: {integrity: sha512-VviMt2tlMg1BvQ0FKXxrz1eJuyrcISrL2sPfBf7ZskX/FCEc/7LeThQaoygsMJpNqrATWQIsRVx+1Dpe4jaYuQ==}
+    engines: {node: '>=18.17'}
 
   unified-engine@11.2.1:
     resolution: {integrity: sha512-xBAdZ8UY2X4R9Hm6X6kMne4Nz0PlpOc1oE6DPeqJnewr5Imkb8uT5Eyvy1h7xNekPL3PSWh3ZJyNrMW6jnNQBg==}
@@ -5866,6 +5942,8 @@ snapshots:
       which-boxed-primitive: 1.0.2
 
   undici-types@5.26.5: {}
+
+  undici@6.15.0: {}
 
   unified-engine@11.2.1:
     dependencies:

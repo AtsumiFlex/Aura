@@ -7,10 +7,10 @@
  */
 
 import { z } from "zod";
-import { Snowflake } from "../../globals/globals";
-import { EmojiStructure } from "../../structures/emojis";
-import { GuildMemberStructure } from "../../structures/guilds";
-import { UserStructure } from "../../structures/user";
+import { Snowflake } from "../../../core/src/globals/globals";
+import { EmojiStructure } from "../../../core/src/structures/emojis";
+import { GuildMemberStructure } from "../../../core/src/structures/guilds";
+import { UserStructure } from "../../../core/src/structures/user";
 
 /**
  * Message Reaction Remove Emoji Event Fields
@@ -25,6 +25,13 @@ export const MessageReactionRemoveEmojiEventFields = z.object({
 	message_id: Snowflake,
 	emoji: EmojiStructure.partial(),
 });
+
+/**
+ * Message Reaction Remove Emoji Event Fields Infer
+ *
+ * Infer the type of a {@link MessageReactionRemoveEmojiEventFields} object.
+ */
+export type MessageReactionRemoveEmojiEventFieldsInfer = z.infer<typeof MessageReactionRemoveEmojiEventFields>;
 
 /**
  * Message Reaction Remove All Event Fields

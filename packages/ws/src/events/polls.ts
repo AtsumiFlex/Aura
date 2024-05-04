@@ -7,7 +7,7 @@
  */
 
 import { z } from "zod";
-import { Integer, Snowflake } from "../../globals/globals";
+import { Integer, Snowflake } from "../../../core/src/globals/globals";
 
 /**
  * Message Poll Vote Remove Fields

@@ -7,8 +7,8 @@
  */
 
 import { z } from "zod";
-import { Integer, Snowflake } from "../../globals/globals";
-import { GuildMemberStructure } from "../../structures/guilds";
+import { Integer, Snowflake } from "../../../core/src/globals/globals";
+import { GuildMemberStructure } from "../../../core/src/structures/guilds";
 
 /**
  * Typing Start Event Fields
