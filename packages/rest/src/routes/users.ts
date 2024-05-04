@@ -7,30 +7,10 @@ import type {
 	SnowflakeInfer,
 	UserStructureInfer,
 } from "@aurajs/core";
-import {
-	ApplicationRoleConnectionMetadataStructure,
-	Integer,
-	Snowflake,
-} from "@aurajs/core";
+import { ApplicationRoleConnectionMetadataStructure, Integer, Snowflake } from "@aurajs/core";
 import { z } from "zod";
 import type { RestRequestOptions } from "../globals/rest";
-
-/**
- * JSON Modify Current User
- *
- * @see {@link https://discord.com/developers/docs/resources/user#modify-current-user-json-params}
- */
-export const JSONModifyCurrentUser = z.object({
-	username: z.string().optional(),
-	avatar: z.string().nullable(),
-});
-
-/**
- * JSON Modify Current User Infer
- *
- * Is the inferred type of the {@link JSONModifyCurrentUser} zod object.
- */
-export type JSONModifyCurrentUserInfer = z.infer<typeof JSONModifyCurrentUser>;
+import { JSONCreateWebhook } from "./webhooks";
 
 /**
  * Get Current User
@@ -61,6 +41,23 @@ export function GetUser<T extends UserStructureInfer>(userId: SnowflakeInfer): R
 }
 
 /**
+ * JSON Modify Current User
+ *
+ * @see {@link https://discord.com/developers/docs/resources/user#modify-current-user-json-params}
+ */
+export const JSONModifyCurrentUser = z.object({
+	username: z.string().optional(),
+	avatar: z.string().nullable(),
+});
+
+/**
+ * JSON Modify Current User Infer
+ *
+ * Is the inferred type of the {@link JSONModifyCurrentUser} zod object.
+ */
+export type JSONModifyCurrentUserInfer = z.infer<typeof JSONModifyCurrentUser>;
+
+/**
  * Modify Current User
  *
  * Modify the requester's user account settings. Returns a user object on success.
@@ -71,7 +68,7 @@ export function ModifyCurrentUser<T extends UserStructureInfer>(json: JSONModify
 	return {
 		url: "/users/@me",
 		method: "PATCH",
-		body: json,
+		body: JSONModifyCurrentUser.parse(json),
 	};
 }
 
@@ -105,7 +102,7 @@ export function GetCurrentUserGuilds<T extends Partial<GuildStructureInfer>>(que
 	return {
 		url: "/users/@me/guilds",
 		method: "GET",
-		query,
+		query: QueryGetCurrentUserGuilds.parse(query),
 	};
 }
 
@@ -130,7 +127,7 @@ export function GetCurrentUserGuildMember<T extends GuildMemberStructureInfer>(g
  *
  * @see {@link https://discord.com/developers/docs/resources/user#leave-guild}
  */
-export function LeaveGuild(guildId: SnowflakeInfer): RestRequestOptions<null> {
+export function LeaveGuild(guildId: SnowflakeInfer): RestRequestOptions<void> {
 	return {
 		url: `/users/@me/guilds/${guildId}`,
 		method: "DELETE",
@@ -162,7 +159,7 @@ export function CreateDM<T extends ChannelStructureInfer>(json: JSONCreateDMInfe
 	return {
 		url: "/users/@me/channels",
 		method: "POST",
-		body: json,
+		body: JSONCreateWebhook.parse(json),
 	};
 }
 
@@ -195,7 +192,7 @@ export function CreateGroupDM<T extends ChannelStructureInfer>(json: JSONCreateG
 	return {
 		url: "/users/@me/channels",
 		method: "POST",
-		body: json,
+		body: JSONCreateGroupDM.parse(json),
 	};
 }
 
@@ -256,6 +253,6 @@ export function UpdateCurrentUserApplicationRoleConnection<T extends Application
 	return {
 		url: `/users/@me/applications/${applicationId}/role-connection`,
 		method: "PUT",
-		body: json,
+		body: JSONUpdateCurrentUserApplicationRoleConnection.parse(json),
 	};
 }

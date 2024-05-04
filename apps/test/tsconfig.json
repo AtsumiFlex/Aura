@@ -6,6 +6,5 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "outDir": "./dist",
-    "declarationDir": "./dist/types"
   }
 }

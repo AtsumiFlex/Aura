@@ -2,10 +2,8 @@ import type { AuthenticationTypeInfer } from "@aurajs/core";
 import { API_BASE_URL, API_CDN_BASE_URL, ApiVersion } from "@aurajs/core";
 import { type Dispatcher, request } from "undici";
 
-export type RestRequestOptions<T> = {
-	body?: object;
-	method: Dispatcher.HttpMethod;
-	query?: Dispatcher.DispatchOptions["query"];
+export type RestRequestOptions<T> = Partial<Dispatcher.DispatchOptions> & {
+	body?: any;
 	type?: T;
 	url: string;
 };
@@ -40,8 +38,8 @@ export class Rest {
 		return `${this.baseUrl}/v${this.version}`;
 	}
 
-	public async makeRequest<T>(options: RestRequestOptions<T>) {
-		return request(`${this.url}/${options.url}`, {
+	public async makeRequest<T>(options: RestRequestOptions<T>): Promise<T> {
+		const response = await request(`${this.url}${options.url}`, {
 			query: options.query,
 			body: options.body,
 			method: options.method,
@@ -49,7 +47,16 @@ export class Rest {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `${this.authenticationType} ${this.token}`,
+				...options.headers,
 			},
 		});
+
+		let data = {} as T;
+
+		for await (const chunk of response.body) {
+			data = JSON.parse(chunk.toString());
+		}
+
+		return data;
 	}
 }
