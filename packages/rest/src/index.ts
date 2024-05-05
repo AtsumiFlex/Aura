@@ -4,6 +4,7 @@ export * from "./globals/rest";
 // ./routes/*
 export * from "./routes/applications";
 export * from "./routes/audits";
+export * from "./routes/channels";
 export * from "./routes/emojis";
 export * from "./routes/entitlements";
 export * from "./routes/gateway";
