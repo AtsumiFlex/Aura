@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@aurajs/rest",
   "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "type": "commonjs",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
+    "@aurajs/utils": "workspace:*",
     "tslib": "^2.6.2",
     "undici": "^6.15.0",
     "zod": "^3.23.5"

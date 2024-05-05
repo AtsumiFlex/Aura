@@ -102,6 +102,9 @@ importers:
       '@aurajs/core':
         specifier: workspace:*
         version: link:../core
+      '@aurajs/utils':
+        specifier: workspace:*
+        version: link:../utils
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
