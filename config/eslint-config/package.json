@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@aurajs/eslint-config",
+  "private": true,
+  "files": [
+    "next.js",
+    "node.js"
+  ],
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-neon": "^0.1.62"
+  }
+}

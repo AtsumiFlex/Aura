@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "aurajs",
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@aurajs/eslint-config": "workspace:*",
+    "@aurajs/ts-config": "workspace:*",
+    "@types/node": "^20.12.10",
+    "typescript": "^5.4.5"
+  }
+}
