@@ -84,7 +84,7 @@ export const ConnectionStructure = z.object({
 	name: z.string(),
 	type: UserServices,
 	revoked: z.boolean().optional(),
-	integrations: z.array(IntegrationStructure.partial()).optional(),
+	integrations: z.array(z.lazy(() => IntegrationStructure.partial())).optional(),
 	verified: z.boolean(),
 	friend_sync: z.boolean(),
 	show_activity: z.boolean(),

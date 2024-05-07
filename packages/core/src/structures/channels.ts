@@ -475,7 +475,7 @@ export const ThreadMemberStructure = z.object({
 	user_id: Snowflake.optional(),
 	join_timestamp: ISO8601Timestamp,
 	flags: Integer,
-	member: GuildMemberStructure.optional(),
+	member: z.lazy(() => GuildMemberStructure.optional()),
 });
 
 /**
@@ -1137,7 +1137,7 @@ export const MessageStructure: any /* A Changer le types*/ = z.object({
 	webhook_id: Snowflake.optional(),
 	type: MessageTypesEnum,
 	activity: MessageActivityStructure.optional(),
-	application: ApplicationStructure.optional(),
+	application: z.lazy(() => ApplicationStructure.optional()),
 	application_id: Snowflake.optional(),
 	message_reference: MessageReferenceStructure.optional(),
 	flags: MessageFlagsEnum.optional(),

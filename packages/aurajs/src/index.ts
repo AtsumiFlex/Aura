@@ -4,7 +4,7 @@ const rest = new Rest("");
 const func = async () => {
 	const data = await rest.makeRequest({
 		method: "GET",
-		url: "/users/@me",
+		url: "/users/@me/guilds",
 	});
 
 	console.log(data);

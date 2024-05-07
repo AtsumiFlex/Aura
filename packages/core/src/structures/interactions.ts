@@ -569,10 +569,10 @@ export const InteractionCallbackDataStructure = z.object({
 	tts: z.boolean().optional(),
 	content: z.string().optional(),
 	embeds: z.array(EmbedStructure).max(10).optional(),
-	allowed_mentions: AllowedMentionsStructure.optional(),
-	flags: MessageFlagsEnum.optional(),
+	allowed_mentions: z.lazy(() => AllowedMentionsStructure.optional()),
+	flags: z.lazy(() => MessageFlagsEnum.optional()),
 	components: z.array(z.any()).optional(), // TODO: Message Components
-	attachments: z.array(AttachmentStructure.partial()).optional(),
+	attachments: z.array(z.lazy(() => AttachmentStructure.partial())).optional(),
 	poll: PollCreateRequestStructure.optional(),
 });
 
@@ -700,7 +700,7 @@ export const MessageInteractionStructure = z.object({
 	type: InteractionTypesEnum,
 	name: z.string(),
 	user: UserStructure,
-	member: GuildMemberStructure.partial().optional(),
+	member: z.lazy(() => GuildMemberStructure.partial()).optional(),
 });
 
 /**
@@ -747,10 +747,10 @@ export const ApplicationCommandInteractionDataOptionStructure: z.ZodType<Applica
  */
 export const ResolvedDataStructure = z.object({
 	users: z.record(Snowflake, UserStructure).optional(),
-	members: z.record(Snowflake, GuildMemberStructure.partial()).optional(),
+	members: z.record(Snowflake, z.lazy(() => GuildMemberStructure.partial())).optional(),
 	roles: z.record(Snowflake, RoleStructure).optional(),
-	channels: z.record(Snowflake, ChannelStructure.partial()).optional(),
-	messages: z.record(Snowflake, MessageStructure.partial()).optional(),
+	channels: z.record(Snowflake, z.lazy(() => ChannelStructure.partial())).optional(),
+	messages: z.record(Snowflake, z.lazy(() => MessageStructure.partial())).optional(),
 	attachments: z.record(Snowflake, AttachmentStructure).optional(),
 });
 
@@ -867,13 +867,13 @@ export const InteractionStructure = z.object({
 	type: InteractionTypesEnum,
 	data: ApplicationCommandDataStructure.optional(),
 	guild_id: Snowflake.optional(),
-	channel: ChannelStructure.partial().optional(),
+	channel: z.lazy(() => ChannelStructure.partial()).optional(),
 	channel_id: Snowflake.optional(),
-	member: GuildMemberStructure.partial().optional(),
+	member: z.lazy(() => GuildMemberStructure.partial()).optional(),
 	user: UserStructure.optional(),
 	token: z.string(),
 	version: Integer,
-	message: MessageStructure.partial().optional(),
+	message: z.lazy(() => MessageStructure.partial()).optional(),
 	app_permissions: z.string().optional(),
 	locale: z.string().optional(),
 	guild_locale: z.string().optional(),

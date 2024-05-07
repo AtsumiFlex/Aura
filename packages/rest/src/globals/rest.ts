@@ -30,7 +30,7 @@ export class Rest {
 	}
 
 	public async makeRequest(options: RestMakeRequestOptions) {
-		const response = await request(options.url, {
+		const response = await request(`${this.api}${options.url}`, {
 			method: options.method,
 			body: options.body,
 			query: options.query,
