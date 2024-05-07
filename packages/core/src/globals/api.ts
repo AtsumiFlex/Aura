@@ -93,7 +93,7 @@ export const ApiVersionsEnum = z.nativeEnum(ApiVersions);
  *
  * @see {@link https://discord.com/developers/docs/reference#api-reference-authorization-types}
  */
-export const AuthorizationTypesEnum = z.enum(["Bearer", "Bot"]);
+export const AuthorizationTypes = z.enum(["Bearer", "Bot"]);
 
 /**
  * Discord Epoch

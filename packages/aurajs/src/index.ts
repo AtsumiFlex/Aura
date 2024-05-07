@@ -1,10 +1,18 @@
-import type { DiscordHeadersInfer } from "@aurajs/core";
-import { DiscordHeaders } from "@aurajs/core";
+import type { UserStructureInfer } from "@aurajs/core";
+import { UserStructure } from "@aurajs/core";
 
-try {
-	const headers: DiscordHeadersInfer = { "Content-Type": "multipart/form-data" };
-	DiscordHeaders.parse(headers);
-	console.log("Validation réussie !", user);
-} catch (error) {
-	console.error("Échec de la validation :", error.message);
-}
+(async () => {
+	try {
+		const user: UserStructureInfer = {
+			id: "123456789012378",
+			username: "Example",
+			discriminator: "1234",
+			global_name: "Example#1234",
+			avatar: "a_1234567890abcdef1234567890abcdef",
+		};
+		await UserStructure.parseAsync(user);
+		console.log("User is valid");
+	} catch (error) {
+		console.error(error);
+	}
+})();
