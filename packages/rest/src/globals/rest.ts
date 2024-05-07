@@ -3,9 +3,10 @@ import { ApiVersions, BASE_URL, CDN_URL } from "@aurajs/core";
 import type { Dispatcher } from "undici";
 import { request } from "undici";
 
-export type RestMakeRequestOptions = Pick<Dispatcher.DispatchOptions, "method" | "query"> & {
+export type RestMakeRequestOptions<T> = Pick<Dispatcher.DispatchOptions, "method" | "query"> & {
 	body?: any;
 	headers?: DiscordHeadersInfer;
+	type?: T;
 	url: string;
 };
 
@@ -22,14 +23,15 @@ export class Rest {
 		this.token = token;
 	}
 
-	public get headers(): Pick<DiscordHeadersInfer, "Authorization" | "User-Agent"> {
+	public get headers(): Pick<DiscordHeadersInfer, "Authorization" | "Content-Type" | "User-Agent"> {
 		return {
 			Authorization: `Bot ${this.token}`,
 			"User-Agent": `AuraJs (${this.api}, ${this.version})`,
+			"Content-Type": "application/json",
 		};
 	}
 
-	public async makeRequest(options: RestMakeRequestOptions) {
+	public async makeRequest<T>(options: RestMakeRequestOptions<T>): Promise<T> {
 		const response = await request(`${this.api}${options.url}`, {
 			method: options.method,
 			body: options.body,
@@ -45,6 +47,6 @@ export class Rest {
 			data += chunk;
 		}
 
-		return JSON.parse(data);
+		return JSON.parse(data) as T;
 	}
 }

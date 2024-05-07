@@ -1,11 +1,8 @@
-import { Rest } from "@aurajs/rest";
+import { GetGuildEmoji, Rest } from "@aurajs/rest";
 
 const rest = new Rest("");
 const func = async () => {
-	const data = await rest.makeRequest({
-		method: "GET",
-		url: "/users/@me/guilds",
-	});
+	const data = await rest.makeRequest(GetGuildEmoji("1213054538760855582", "1223921994416914473"));
 
 	console.log(data);
 };
