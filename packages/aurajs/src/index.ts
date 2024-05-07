@@ -4,7 +4,7 @@ import { UserStructure } from "@aurajs/core";
 (async () => {
 	try {
 		const user: UserStructureInfer = {
-			id: "123456789012378",
+			id: "12345678901237823",
 			username: "Example",
 			discriminator: "1234",
 			global_name: "Example#1234",
