@@ -32,6 +32,10 @@ export class Rest {
 	}
 
 	public async makeRequest<T>(options: RestMakeRequestOptions<T>): Promise<T> {
+		if (!this.token) {
+			throw new Error("No token provided");
+		}
+
 		const response = await request(`${this.api}${options.url}`, {
 			method: options.method,
 			body: options.body,

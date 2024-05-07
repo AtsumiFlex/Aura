@@ -10,10 +10,16 @@ import { z } from "zod";
 import { Integer, ISO8601Timestamp, Snowflake } from "../globals/formatters";
 import { DiscordHeaders } from "../globals/headers";
 import { BitwisePermissionFlagsEnum } from "../libs/permissions";
-import { ApplicationStructure } from "./applications";
+import type { ApplicationIntegrationTypes } from "./applications";
+import { ApplicationIntegrationTypesEnum, ApplicationStructure } from "./applications";
 import { EmojiStructure } from "./emojis";
 import { GuildMemberStructure } from "./guilds";
-import { MessageInteractionStructure, ResolvedDataStructure } from "./interactions";
+import {
+	InteractionTypesEnum,
+	MessageComponentsStructure,
+	MessageInteractionStructure,
+	ResolvedDataStructure,
+} from "./interactions";
 import type { PollCreateRequestStructureInfer } from "./polls";
 import { PollCreateRequestStructure } from "./polls";
 import type { StickerItemStructureInfer, StickerStructureInfer } from "./stickers";
@@ -634,7 +640,7 @@ export type MessageReferenceStructureInfer = z.infer<typeof MessageReferenceStru
  * The inferred type of {@link MessageInteractionMetadataStructure}
  */
 export type MessageInteractionMetadataStructureInfer = {
-	authorizing_integration_owners: Record<string, string>;
+	authorizing_integration_owners: Record<string, ApplicationIntegrationTypes>;
 	id: string;
 	interacted_message_id?: string | null;
 	original_response_message_id?: string | null;
@@ -652,9 +658,9 @@ export type MessageInteractionMetadataStructureInfer = {
  */
 export const MessageInteractionMetadataStructure: z.ZodType<MessageInteractionMetadataStructureInfer> = z.object({
 	id: Snowflake,
-	type: z.number(), // TODO: Interaction Type
+	type: InteractionTypesEnum,
 	user: UserStructure,
-	authorizing_integration_owners: z.record(z.string()), // TODO: dictionary with keys of application integration types. IDs for installation context(s) related to an interaction. Details in Authorizing Integration Owners Object
+	authorizing_integration_owners: z.record(Snowflake, ApplicationIntegrationTypesEnum),
 	original_response_message_id: Snowflake.optional(),
 	interacted_message_id: Snowflake.optional(),
 	triggering_interaction_metadata: z.lazy(() => MessageInteractionMetadataStructure).optional(),
@@ -1145,11 +1151,11 @@ export const MessageStructure: any /* A Changer le types*/ = z.object({
 	interaction_metadata: MessageInteractionMetadataStructure.optional(),
 	interaction: MessageInteractionStructure.optional(),
 	thread: ChannelStructure.optional(),
-	components: z.array(z.any()).optional(), // TODO: Component Structure - sent if the message contains components like buttons, action rows, or other interactive components
+	components: z.array(MessageComponentsStructure).optional(),
 	sticker_items: z.array(StickerItemStructure).optional(),
 	stickers: z.array(StickerStructure).optional(),
 	position: Integer.optional(),
 	role_subscription_data: RoleSubscriptionDataStructure.optional(),
-	resolved: ResolvedDataStructure.optional(), // TODO: Resolved Data
+	resolved: ResolvedDataStructure.optional(),
 	poll: PollCreateRequestStructure.optional(),
 });

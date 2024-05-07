@@ -490,39 +490,6 @@ export enum ApplicationCommandTypes {
 export const ApplicationCommandTypesEnum = z.nativeEnum(ApplicationCommandTypes);
 
 /**
- * Application Command Structure
- *
- * Represents an application command.
- *
- * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure}
- */
-export const ApplicationCommandStructure = z.object({
-	id: Snowflake,
-	type: ApplicationCommandTypesEnum.optional(),
-	application_id: Snowflake,
-	guild_id: Snowflake.optional(),
-	name: z.string().min(1).max(32),
-	name_localizations: z.record(LocalesKeysEnum, z.string().min(1).max(32)).optional().nullable(),
-	description: z.string().min(1).max(100),
-	description_localizations: z.record(LocalesKeysEnum, z.string().min(1).max(100)).optional().nullable(),
-	options: z.array(ApplicationCommandOptionStructure).optional(),
-	default_member_permissions: z.string().nullable(),
-	dm_permission: z.boolean().optional(),
-	default_permission: z.boolean().optional().nullable(),
-	nsfw: z.boolean().optional(),
-	integration_types: z.array(ApplicationIntegrationTypesEnum).optional().nullable(),
-	contexts: z.array(z.string()).optional().nullable(), // TODO: Interaction Context Types
-	version: Snowflake,
-});
-
-/**
- * Application Command Structure Infer
- *
- * The inferred type of {@link ApplicationCommandStructure}
- */
-export type ApplicationCommandStructureInfer = z.infer<typeof ApplicationCommandStructure>;
-
-/**
  * Modal Structure
  *
  * Represents a modal component.
@@ -559,6 +526,23 @@ export const AutocompleteStructure = z.object({ choices: z.array(ApplicationComm
 export type AutocompleteStructureInfer = z.infer<typeof AutocompleteStructure>;
 
 /**
+ * Message Components Structure
+ *
+ * Represents the components of a message.
+ */
+export const MessageComponentsStructure = z.object({
+	type: ComponentTypesEnum,
+	components: z.array(z.union([ButtonStructure, SelectMenuStructure, ModalStructure])),
+});
+
+/**
+ * Message Components Structure Infer
+ *
+ * The inferred type of {@link MessageComponentsStructure}
+ */
+export type MessageComponentsStructureInfer = z.infer<typeof MessageComponentsStructure>;
+
+/**
  * Interaction Callback Data Structure
  *
  * Represents the data for an interaction callback.
@@ -571,7 +555,7 @@ export const InteractionCallbackDataStructure = z.object({
 	embeds: z.array(EmbedStructure).max(10).optional(),
 	allowed_mentions: z.lazy(() => AllowedMentionsStructure.optional()),
 	flags: z.lazy(() => MessageFlagsEnum.optional()),
-	components: z.array(z.any()).optional(), // TODO: Message Components
+	components: z.array(MessageComponentsStructure).optional(),
 	attachments: z.array(z.lazy(() => AttachmentStructure.partial())).optional(),
 	poll: PollCreateRequestStructure.optional(),
 });
@@ -770,7 +754,7 @@ export type ResolvedDataStructureInfer = z.infer<typeof ResolvedDataStructure>;
  */
 export const ModalSubmitDataStructure = z.object({
 	custom_id: z.string().max(100),
-	components: z.array(z.any()).optional(), // TODO: Message Components
+	components: z.array(MessageComponentsStructure).optional(),
 });
 
 /**
@@ -853,6 +837,39 @@ export enum InteractionContextTypes {
  * Is a zod enum that represents the available {@link InteractionContextTypes}.
  */
 export const InteractionContextTypesEnum = z.nativeEnum(InteractionContextTypes);
+
+/**
+ * Application Command Structure
+ *
+ * Represents an application command.
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure}
+ */
+export const ApplicationCommandStructure = z.object({
+	id: Snowflake,
+	type: ApplicationCommandTypesEnum.optional(),
+	application_id: Snowflake,
+	guild_id: Snowflake.optional(),
+	name: z.string().min(1).max(32),
+	name_localizations: z.record(LocalesKeysEnum, z.string().min(1).max(32)).optional().nullable(),
+	description: z.string().min(1).max(100),
+	description_localizations: z.record(LocalesKeysEnum, z.string().min(1).max(100)).optional().nullable(),
+	options: z.array(ApplicationCommandOptionStructure).optional(),
+	default_member_permissions: z.string().nullable(),
+	dm_permission: z.boolean().optional(),
+	default_permission: z.boolean().optional().nullable(),
+	nsfw: z.boolean().optional(),
+	integration_types: z.array(ApplicationIntegrationTypesEnum).optional().nullable(),
+	contexts: z.array(InteractionContextTypesEnum).optional().nullable(),
+	version: Snowflake,
+});
+
+/**
+ * Application Command Structure Infer
+ *
+ * The inferred type of {@link ApplicationCommandStructure}
+ */
+export type ApplicationCommandStructureInfer = z.infer<typeof ApplicationCommandStructure>;
 
 /**
  * Interaction Structure
