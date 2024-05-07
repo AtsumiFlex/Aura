@@ -1,21 +1,22 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "aurajs",
+  "name": "@aurajs/rest",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "lint": "eslint . --ext .ts --fix"
   },
   "dependencies": {
     "@aurajs/core": "workspace:^",
-    "@aurajs/rest": "workspace:^",
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "undici": "^6.16.0",
+    "zod": "^3.23.6"
   },
   "devDependencies": {
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
     "@types/node": "^20.12.10",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5"
   }
 }

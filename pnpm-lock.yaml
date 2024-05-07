@@ -80,6 +80,9 @@ importers:
       '@aurajs/core':
         specifier: workspace:^
         version: link:../core
+      '@aurajs/rest':
+        specifier: workspace:^
+        version: link:../rest
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
@@ -108,6 +111,34 @@ importers:
       tslib:
         specifier: ^2.6.2
         version: 2.6.2
+      zod:
+        specifier: ^3.23.6
+        version: 3.23.6
+    devDependencies:
+      '@aurajs/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@aurajs/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@types/node':
+        specifier: ^20.12.10
+        version: 20.12.10
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
+  packages/rest:
+    dependencies:
+      '@aurajs/core':
+        specifier: workspace:^
+        version: link:../core
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      undici:
+        specifier: ^6.16.0
+        version: 6.16.0
       zod:
         specifier: ^3.23.6
         version: 3.23.6
@@ -5426,6 +5457,11 @@ packages:
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
+
+  /undici@6.16.0:
+    resolution: {integrity: sha512-HQfVddOTb5PJtfLnJ1Px8bNGyIg/z7WTj1hjUSna1Itsv59Oca9JdclIU08ToNqvWWXjFLRzc9rqjnpfw5UWcQ==}
+    engines: {node: '>=18.17'}
+    dev: false
 
   /unified-engine@11.2.1:
     resolution: {integrity: sha512-xBAdZ8UY2X4R9Hm6X6kMne4Nz0PlpOc1oE6DPeqJnewr5Imkb8uT5Eyvy1h7xNekPL3PSWh3ZJyNrMW6jnNQBg==}
