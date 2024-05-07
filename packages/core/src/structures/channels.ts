@@ -13,6 +13,7 @@ import { BitwisePermissionFlagsEnum } from "../libs/permissions";
 import { ApplicationStructure } from "./applications";
 import { EmojiStructure } from "./emojis";
 import { GuildMemberStructure } from "./guilds";
+import { MessageInteractionStructure, ResolvedDataStructure } from "./interactions";
 import type { PollCreateRequestStructureInfer } from "./polls";
 import { PollCreateRequestStructure } from "./polls";
 import type { StickerItemStructureInfer, StickerStructureInfer } from "./stickers";
@@ -1116,7 +1117,7 @@ export type MessageStructureInfer = {
  *
  * @see {@link https://discord.com/developers/docs/resources/channel#message-object-message-structure}
  */
-export const MessageStructure: z.ZodType<MessageStructureInfer> = z.object({
+export const MessageStructure: any /* A Changer le types*/ = z.object({
 	id: Snowflake,
 	channel_id: Snowflake,
 	author: UserStructure.optional(),
@@ -1142,13 +1143,13 @@ export const MessageStructure: z.ZodType<MessageStructureInfer> = z.object({
 	flags: MessageFlagsEnum.optional(),
 	referenced_message: z.lazy(() => MessageStructure).optional().nullable(),
 	interaction_metadata: MessageInteractionMetadataStructure.optional(),
-	interaction: z.any().optional(), // TODO: Message Interactions
+	interaction: MessageInteractionStructure.optional(),
 	thread: ChannelStructure.optional(),
 	components: z.array(z.any()).optional(), // TODO: Component Structure - sent if the message contains components like buttons, action rows, or other interactive components
 	sticker_items: z.array(StickerItemStructure).optional(),
 	stickers: z.array(StickerStructure).optional(),
 	position: Integer.optional(),
 	role_subscription_data: RoleSubscriptionDataStructure.optional(),
-	resolved: z.any().optional(), // TODO: Resolved Data
+	resolved: ResolvedDataStructure.optional(), // TODO: Resolved Data
 	poll: PollCreateRequestStructure.optional(),
 });

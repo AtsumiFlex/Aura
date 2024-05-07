@@ -17,10 +17,9 @@ import type {
 	GuildStructureInfer,
 	IntegrationStructureInfer,
 } from "./guilds";
-import {
-	GuildScheduledEventStructure,
-	IntegrationStructure,
-} from "./guilds";
+import { GuildScheduledEventStructure, IntegrationStructure } from "./guilds";
+import type { ApplicationCommandPermissionsStructureInfer } from "./interactions";
+import { ApplicationCommandStructure } from "./interactions";
 import type { InviteMetadataStructureInfer, InviteStructureInfer } from "./invites";
 import type { AutoModerationRuleStructureInfer } from "./moderation";
 import { AutoModerationRuleStructure } from "./moderation";
@@ -374,7 +373,7 @@ export type AuditLogEventsChanges = {
 	[AuditLogEvents.ThreadCreate]: [thread: ChannelStructureInfer];
 	[AuditLogEvents.ThreadUpdate]: [thread: ChannelStructureInfer];
 	[AuditLogEvents.ThreadDelete]: [thread: ChannelStructureInfer];
-	[AuditLogEvents.ApplicationCommandPermissionUpdate]: [command: ApplicationCommandPermissionStructureInfer];
+	[AuditLogEvents.ApplicationCommandPermissionUpdate]: [command: ApplicationCommandPermissionsStructureInfer];
 	[AuditLogEvents.AutoModerationRuleCreate]: [rule: AutoModerationRuleStructureInfer];
 	[AuditLogEvents.AutoModerationRuleUpdate]: [rule: AutoModerationRuleStructureInfer];
 	[AuditLogEvents.AutoModerationRuleDelete]: [rule: AutoModerationRuleStructureInfer];

@@ -19,6 +19,7 @@ export * from "./structures/channels";
 export * from "./structures/emojis";
 export * from "./structures/entitlements";
 export * from "./structures/guilds";
+export * from "./structures/interactions";
 export * from "./structures/invites";
 export * from "./structures/moderation";
 export * from "./structures/polls";
