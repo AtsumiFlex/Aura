@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Integer, Snowflake } from "../globals/formatters";
 import { LocalesEnum } from "../globals/locales";
 import { ApplicationRoleConnectionMetadataStructure } from "./applications";
+import { IntegrationStructure } from "./guilds";
 
 /**
  * Application Role Connection Structure
@@ -83,7 +84,7 @@ export const ConnectionStructure = z.object({
 	name: z.string(),
 	type: UserServices,
 	revoked: z.boolean().optional(),
-	integrations: z.array(z.any()).optional(), // TODO: array of partial server integration objects
+	integrations: z.array(IntegrationStructure.partial()).optional(),
 	verified: z.boolean(),
 	friend_sync: z.boolean(),
 	show_activity: z.boolean(),

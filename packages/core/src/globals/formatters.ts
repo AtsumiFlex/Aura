@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { zodErrorMessage } from "../utils/errors";
+import { zodErrorMessage } from "../libs/errors";
 
 /**
  * Snowflake

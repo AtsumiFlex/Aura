@@ -9,8 +9,10 @@
 import { z } from "zod";
 import { Integer, ISO8601Timestamp, Snowflake } from "../globals/formatters";
 import { DiscordHeaders } from "../globals/headers";
-import { BitwisePermissionFlagsEnum } from "../utils/permissions";
+import { BitwisePermissionFlagsEnum } from "../libs/permissions";
+import { ApplicationStructure } from "./applications";
 import { EmojiStructure } from "./emojis";
+import { GuildMemberStructure } from "./guilds";
 import type { PollCreateRequestStructureInfer } from "./polls";
 import { PollCreateRequestStructure } from "./polls";
 import type { StickerItemStructureInfer, StickerStructureInfer } from "./stickers";
@@ -472,7 +474,7 @@ export const ThreadMemberStructure = z.object({
 	user_id: Snowflake.optional(),
 	join_timestamp: ISO8601Timestamp,
 	flags: Integer,
-	member: z.object({}).optional(), // TODO: Guild Member Structure
+	member: GuildMemberStructure.optional(),
 });
 
 /**
@@ -1134,7 +1136,7 @@ export const MessageStructure: z.ZodType<MessageStructureInfer> = z.object({
 	webhook_id: Snowflake.optional(),
 	type: MessageTypesEnum,
 	activity: MessageActivityStructure.optional(),
-	application: z.any().optional(), // TODO: Application Structure
+	application: ApplicationStructure.optional(),
 	application_id: Snowflake.optional(),
 	message_reference: MessageReferenceStructure.optional(),
 	flags: MessageFlagsEnum.optional(),
