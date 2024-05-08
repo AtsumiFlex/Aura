@@ -3,6 +3,7 @@ import { ApiVersions, GatewayOpcodes } from "@aurajs/core";
 import EventEmitter from "eventemitter3";
 import WebSocket from "ws";
 import type { GatewayPayloadStructureInfer } from "../structures/payload";
+import type { GatewaySendEvents } from "./events";
 
 export class GatewayWebSocket extends EventEmitter {
 	public ws: WebSocket | null = null;
@@ -22,13 +23,20 @@ export class GatewayWebSocket extends EventEmitter {
 		return `wss://gateway.discord.gg/?v=${ApiVersions.V10}&encoding=json`;
 	}
 
-	public send(data: Partial<GatewayPayloadStructureInfer>) {
+	public send<T extends keyof GatewaySendEvents>(opcodes: T, ...data: GatewaySendEvents[T]) {
 		if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
 			this.emit("error", new Error("WebSocket is not connected"));
 			return;
 		}
 
-		this.ws.send(JSON.stringify(data));
+		const payload: GatewayPayloadStructureInfer = {
+			op: opcodes,
+			d: data,
+			s: null,
+			t: null,
+		};
+
+		this.ws.send(JSON.stringify(payload));
 	}
 
 	private _connect() {
@@ -58,8 +66,6 @@ export class GatewayWebSocket extends EventEmitter {
 			this._interval = data.d.heartbeat_interval;
 			this._heartbeat();
 			this.emit("hello");
-		} else if (data.op === GatewayOpcodes.Dispatch) {
-			this.emit(data.t as string, data.d);
 		} else if (data.op === GatewayOpcodes.Reconnect) {
 			this.emit("debug", "[WS] Received Reconnect opcode from gateway");
 			this.ws?.close();
@@ -79,7 +85,7 @@ export class GatewayWebSocket extends EventEmitter {
 
 		this._heartbeatInterval = setInterval(() => {
 			this.emit("debug", `[WS] Sending heartbeat to gateway with interval: ${this._interval}ms`);
-			this.send({ op: GatewayOpcodes.Heartbeat });
+			this.send(GatewayOpcodes.Heartbeat, null);
 		}, this._interval);
 	}
 }

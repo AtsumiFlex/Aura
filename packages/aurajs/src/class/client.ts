@@ -30,10 +30,7 @@ export class Client extends EventEmitter {
 				},
 			};
 
-			this.ws.send({
-				op: GatewayOpcodes.Identify,
-				d: identity,
-			});
+			this.ws.send(GatewayOpcodes.Identify, identity);
 		});
 	}
 
