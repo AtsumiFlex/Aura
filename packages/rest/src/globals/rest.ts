@@ -19,7 +19,7 @@ export class Rest {
 
 	public cdn = CDN_URL;
 
-	public constructor(token: string | null) {
+	public constructor(token: string) {
 		this.token = token;
 	}
 

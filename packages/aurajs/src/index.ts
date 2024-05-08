@@ -1,10 +1,17 @@
-import { ListGuildEmojis, Rest } from "@aurajs/rest";
+import { GatewayIntents } from "@aurajs/ws";
+import { Client } from "./class/client";
 
-const rest = new Rest("");
 const func = async () => {
-	const data = await rest.makeRequest(ListGuildEmojis("1213054538760855582"));
-
-	console.log(data);
+	const client = new Client("", { intents: [GatewayIntents.Guilds] });
+	client.ws.on("debug", (message) => {
+		console.log(message);
+	});
+	client.ws.on("close", (code, reason) => {
+		console.log(code, reason);
+	});
+	client.ws.on("error", (error) => {
+		console.log(error);
+	});
 };
 
 void func();

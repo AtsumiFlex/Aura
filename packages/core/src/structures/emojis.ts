@@ -20,7 +20,7 @@ import { UserStructure } from "./users";
 export const EmojiStructure = z.object({
 	id: Snowflake.nullable(),
 	name: z.string().nullable(),
-	roles: z.array(Snowflake),
+	roles: z.array(Snowflake).optional(),
 	user: UserStructure.optional(),
 	require_colons: z.boolean(),
 	managed: z.boolean().optional(),

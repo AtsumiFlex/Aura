@@ -12,5 +12,6 @@ module.exports = {
 	rules: {
 		"line-comment-position": "off",
 		"no-inline-comments": "off",
+		"id-length": "off",
 	},
 };
