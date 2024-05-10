@@ -1258,11 +1258,9 @@ export const GuildTemplateStructure = z.object({
 	/**
 	 * The guild snapshot this template contains
 	 *
-	 * TODO: Partial Guild Structure
-	 *
 	 * @see {@link GuildStructure}
 	 */
-	serialized_source_guild: z.object({}),
+	serialized_source_guild: GuildStructure.partial(),
 	/**
 	 * Whether the template has unsynced changes
 	 */
@@ -1275,3 +1273,209 @@ export const GuildTemplateStructure = z.object({
  * The inferred zod object from {@link GuildTemplateStructure}
  */
 export type GuildTemplateStructureInfer = z.infer<typeof GuildTemplateStructure>;
+
+/**
+ * Guild Scheduled Event User Structure
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure}
+ */
+export const GuildScheduledEventUserStructure = z.object({
+	/**
+	 * The scheduled event id which the user subscribed to
+	 */
+	guild_scheduled_event_id: Snowflake,
+	/**
+	 * User which subscribed to an event
+	 *
+	 * @see {@link UserStructure}
+	 */
+	user: UserStructure,
+	/**
+	 * Guild member data for this user for the guild which this event belongs to, if any
+	 *
+	 * @see {@link GuildMemberStructure}
+	 */
+	member: GuildMemberStructure.optional(),
+});
+
+/**
+ * Guild Scheduled Event User Structure Infer
+ *
+ * The inferred zod object from {@link GuildScheduledEventUserStructure}
+ */
+export type GuildScheduledEventUserStructureInfer = z.infer<typeof GuildScheduledEventUserStructure>;
+
+/**
+ * Guild Scheduled Event Entity Metadata
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata}
+ */
+export const GuildScheduledEventEntityMetadata = z.object({
+	/**
+	 * Location of the event (1-100 characters)
+	 */
+	location: z.string().min(1).max(100).optional(),
+});
+
+/**
+ * Guild Scheduled Event Entity Metadata Infer
+ *
+ * The inferred zod object from {@link GuildScheduledEventEntityMetadata}
+ */
+export type GuildScheduledEventEntityMetadataInfer = z.infer<typeof GuildScheduledEventEntityMetadata>;
+
+/**
+ * Guild Scheduled Event Status
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status}
+ */
+export enum GuildScheduledEventStatus {
+	/**
+	 * Scheduled
+	 */
+	Scheduled = 1,
+	/**
+	 * Active
+	 */
+	Active = 2,
+	/**
+	 * Completed
+	 */
+	Completed = 3,
+	/**
+	 * Canceled
+	 */
+	Canceled = 4,
+}
+
+/**
+ * Guild Scheduled Event Status Enum
+ *
+ * Is a zod enum that represents the available {@link GuildScheduledEventStatus}.
+ */
+export const GuildScheduledEventStatusEnum = z.nativeEnum(GuildScheduledEventStatus);
+
+/**
+ * Guild Scheduled Event Entity Types
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types}
+ */
+export enum GuildScheduledEventEntityTypes {
+	/**
+	 * Stage Instance
+	 */
+	StageInstance = 1,
+	/**
+	 * Voice
+	 */
+	Voice = 2,
+	/**
+	 * External
+	 */
+	External = 3,
+}
+
+/**
+ * Guild Scheduled Event Entity Types Enum
+ *
+ * Is a zod enum that represents the available {@link GuildScheduledEventEntityTypes}.
+ */
+export const GuildScheduledEventEntityTypesEnum = z.nativeEnum(GuildScheduledEventEntityTypes);
+
+/**
+ * Guild Scheduled Event Privacy Level
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level}
+ */
+export enum GuildScheduledEventPrivacyLevel {
+	/**
+	 * The scheduled event is only accessible to guild members
+	 */
+	GuildOnly = 2,
+}
+
+/**
+ * Guild Scheduled Event Privacy Level Enum
+ *
+ * Is a zod enum that represents the available {@link GuildScheduledEventPrivacyLevel}.
+ */
+export const GuildScheduledEventPrivacyLevelEnum = z.nativeEnum(GuildScheduledEventPrivacyLevel);
+
+/**
+ * Guild Scheduled Event Structure
+ *
+ * @see {@link https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-structure}
+ */
+export const GuildScheduledEventStructure = z.object({
+	/**
+	 * The id of the scheduled event
+	 */
+	id: Snowflake,
+	/**
+	 * The guild id which the scheduled event belongs to
+	 */
+	guild_id: Snowflake,
+	/**
+	 * The channel id in which the scheduled event will be hosted, or null if scheduled entity type is EXTERNAL
+	 */
+	channel_id: Snowflake.nullable(),
+	/**
+	 * The id of the user that created the scheduled event
+	 */
+	creator_id: Snowflake.optional().nullable(),
+	/**
+	 * The name of the scheduled event (1-100 characters)
+	 */
+	name: z.string().min(1).max(100),
+	/**
+	 * The description of the scheduled event (1-1000 characters)
+	 */
+	description: z.string().min(1).max(1_000).optional().nullable(),
+	/**
+	 * The time the scheduled event will start
+	 */
+	scheduled_start_time: ISO8601Timestamp,
+	/**
+	 * The time the scheduled event will end, required if entity_type is EXTERNAL
+	 */
+	scheduled_end_time: ISO8601Timestamp.nullable(),
+	/**
+	 * The privacy level of the scheduled event
+	 */
+	privacy_level: GuildScheduledEventPrivacyLevelEnum,
+	/**
+	 * The status of the scheduled event
+	 */
+	status: GuildScheduledEventStatusEnum,
+	/**
+	 * The type of the scheduled event
+	 */
+	entity_type: GuildScheduledEventEntityTypesEnum,
+	/**
+	 * The id of an entity associated with a guild scheduled event
+	 */
+	entity_id: Snowflake.nullable(),
+	/**
+	 * Additional metadata for the guild scheduled event
+	 */
+	entity_metadata: GuildScheduledEventEntityMetadata.nullable(),
+	/**
+	 * The user that created the scheduled event
+	 */
+	creator: UserStructure.optional(),
+	/**
+	 * The number of users subscribed to the scheduled event
+	 */
+	user_count: Integer.optional(),
+	/**
+	 * The cover image hash of the scheduled event
+	 */
+	image: z.string().optional().nullable(),
+});
+
+/**
+ * Guild Scheduled Event Structure Infer
+ *
+ * The inferred zod object from {@link GuildScheduledEventStructure}
+ */
+export type GuildScheduledEventStructureInfer = z.infer<typeof GuildScheduledEventStructure>;
