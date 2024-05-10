@@ -22,3 +22,4 @@ export * from "./structures/stages";
 export * from "./structures/stickers";
 export * from "./structures/teams";
 export * from "./structures/users";
+export * from "./structures/voices";
