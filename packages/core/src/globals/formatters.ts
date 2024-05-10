@@ -1,14 +1,13 @@
 import { z } from "zod";
-import { zodErrorMessage } from "../libs/errors";
 
 /**
  * Snowflake
  *
- * Snowflake is a unique identifier for a Discord object.
+ * A snowflake is a unique identifier used to identify resources in Discord.
  *
  * @see {@link https://discord.com/developers/docs/reference#snowflakes}
  */
-export const Snowflake = z.string().refine((value) => /^\d{16,19}$/.test(value), { message: "Value must be a valid Snowflake." });
+export const Snowflake = z.string().refine((value) => /^\d{17,19}$/.test(value), { message: "Value must be a 17-19 digit number" });
 
 /**
  * Snowflake Infer
@@ -20,9 +19,9 @@ export type SnowflakeInfer = z.infer<typeof Snowflake>;
 /**
  * Integer
  *
- * Integer is a number that is not a fraction.
+ * An integer is a whole number that can be positive, negative, or zero.
  *
- * @see {@link https://discord.com/developers/docs/reference#integer}
+ * @see {@link https://en.wikipedia.org/wiki/Integer}
  */
 export const Integer = z.number().int();
 
@@ -36,11 +35,11 @@ export type IntegerInfer = z.infer<typeof Integer>;
 /**
  * ISO8601 Timestamp
  *
- * ISO8601 Timestamp is a string that represents a date and time in the ISO 8601 format.
+ * A string representing a timestamp in ISO8601 format.
  *
- * @see {@link https://discord.com/developers/docs/reference#timestamp}
+ * @see {@link https://en.wikipedia.org/wiki/ISO_8601}
  */
-export const ISO8601Timestamp = z.string().refine((value) => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value), { message: "Value must be a valid ISO8601 Timestamp." });
+export const ISO8601Timestamp = z.string().refine((value) => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?<temp1>\.\d{3})?Z$/.test(value), { message: "Value must be a string representing a timestamp in ISO8601 format" });
 
 /**
  * ISO8601 Timestamp Infer
@@ -50,69 +49,116 @@ export const ISO8601Timestamp = z.string().refine((value) => /^\d{4}-\d{2}-\d{2}
 export type ISO8601TimestampInfer = z.infer<typeof ISO8601Timestamp>;
 
 /**
- * Message Formatting
+ * Formats a user ID into a mentionable string.
  *
- * Discord utilizes a subset of markdown for rendering message content on its clients, while also adding some custom functionality to enable things like mentioning users and channels. This functionality uses the following formats.
- *
- * @see {@link https://discord.com/developers/docs/reference#message-formatting | https://discord.com/developers/docs/reference#message-formatting-formats}
+ * @param {SnowflakeInfer} userId - The ID of the user to be formatted.
+ * @returns {string} The formatted user ID.
  */
-export function formatUser(userId: SnowflakeInfer): `<@${SnowflakeInfer}>` {
-	try {
-		Snowflake.parse(userId);
-		return `<@${userId}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
-	}
+export function formatUser(userId: SnowflakeInfer): `<@${string}>` {
+	return `<@${userId}>`;
 }
 
-export function formatChannel(channelId: SnowflakeInfer): `<#${SnowflakeInfer}>` {
-	try {
-		Snowflake.parse(channelId);
-		return `<#${channelId}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
-	}
+/**
+ * Formats a channel ID into a mentionable string.
+ *
+ * @param {SnowflakeInfer} channelId - The ID of the channel to be formatted.
+ * @returns {string} The formatted channel ID.
+ */
+export function formatChannel(channelId: SnowflakeInfer): `<#${string}>` {
+	return `<#${channelId}>`;
 }
 
-export function formatRole(roleId: SnowflakeInfer): `<@&${SnowflakeInfer}>` {
-	try {
-		Snowflake.parse(roleId);
-		return `<@&${roleId}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
-	}
+/**
+ * Formats a role ID into a mentionable string.
+ *
+ * @param {SnowflakeInfer} roleId - The ID of the role to be formatted.
+ * @returns {string} The formatted role ID.
+ */
+export function formatRole(roleId: SnowflakeInfer): `<@&${string}>` {
+	return `<@&${roleId}>`;
 }
 
-export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer): `</${string}:${SnowflakeInfer}>`;
-export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandName: string): `</${string} ${string}:${SnowflakeInfer}>`;
-export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandGroupName: string, subCommandName: string): `</${string} ${string} ${string}:${SnowflakeInfer}>`;
-export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandName?: string, subCommandGroupName?: string): string {
-	try {
-		Snowflake.parse(commandId);
-		if (subCommandName && subCommandGroupName) {
-			return `</${commandName} ${subCommandGroupName} ${subCommandName}:${commandId}>`;
-		} else if (subCommandName) {
-			return `</${commandName} ${subCommandName}:${commandId}>`;
-		}
+/**
+ * Formats a slash command into a mentionable string.
+ *
+ * @param {string} commandName - The name of the command.
+ * @param {SnowflakeInfer} commandId - The ID of the command.
+ * @returns {string} The formatted slash command.
+ */
+export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer): `</${string}:${string}>`;
 
+/**
+ * Formats a slash command with a sub-command into a mentionable string.
+ *
+ * @param {string} commandName - The name of the command.
+ * @param {SnowflakeInfer} commandId - The ID of the command.
+ * @param {string} subCommandName - The name of the sub-command.
+ * @returns {string} The formatted slash command with a sub-command.
+ */
+export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandName: string): `</${string} ${string}:${string}>`;
+
+/**
+ * Formats a slash command with a sub-command group and a sub-command into a mentionable string.
+ *
+ * @param {string} commandName - The name of the command.
+ * @param {SnowflakeInfer} commandId - The ID of the command.
+ * @param {string} subCommandGroupName - The name of the sub-command group.
+ * @param {string} subCommandName - The name of the sub-command.
+ * @returns {string} The formatted slash command with a sub-command group and a sub-command.
+ */
+export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandGroupName: string, subCommandName: string): `</${string} ${string} ${string}:${string}>`;
+
+/**
+ * Formats a slash command with an optional sub-command group and sub-command into a mentionable string.
+ *
+ * @param {string} commandName - The name of the command.
+ * @param {SnowflakeInfer} commandId - The ID of the command.
+ * @param {string} [subCommandGroupName] - The name of the sub-command group.
+ * @param {string} [subCommandName] - The name of the sub-command.
+ * @returns {string} The formatted slash command with an optional sub-command group and sub-command.
+ */
+export function formatSlashCommand(commandName: string, commandId: SnowflakeInfer, subCommandGroupName?: string, subCommandName?: string): string {
+	if (subCommandGroupName && subCommandName) {
+		return `</${commandName} ${subCommandGroupName} ${subCommandName}:${commandId}>`;
+	} else if (subCommandName) {
+		return `</${commandName} ${subCommandName}:${commandId}>`;
+	} else {
 		return `</${commandName}:${commandId}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
 	}
 }
 
-export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer): `<:${string}:${SnowflakeInfer}>`;
-export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer, animated: boolean): `<a:${string}:${SnowflakeInfer}>`;
-export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer, animated = false): string {
-	try {
-		Snowflake.parse(emojiId);
-		if (animated) {
-			return `<a:${emojiName}:${emojiId}>`;
-		} else {
-			return `<:${emojiName}:${emojiId}>`;
-		}
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
+/**
+ * Formats a custom emoji into a mentionable string.
+ *
+ * @param {string} emojiName - The name of the emoji.
+ * @param {SnowflakeInfer} emojiId - The ID of the emoji.
+ * @returns {string} The formatted custom emoji.
+ */
+export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer): `<:${string}:${string}>`;
+
+/**
+ * Formats an animated custom emoji into a mentionable string.
+ *
+ * @param {string} emojiName - The name of the emoji.
+ * @param {SnowflakeInfer} emojiId - The ID of the emoji.
+ * @param {boolean} animated - Whether the emoji is animated.
+ * @returns {string} The formatted animated custom emoji.
+ */
+export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer, animated: boolean): `<a:${string}:${string}>`;
+
+/**
+ * Formats a custom emoji into a mentionable string, with an optional animation flag.
+ *
+ * @param {string} emojiName - The name of the emoji.
+ * @param {SnowflakeInfer} emojiId - The ID of the emoji.
+ * @param {boolean} [animated] - Whether the emoji is animated.
+ * @returns {string} The formatted custom emoji, animated if specified.
+ */
+export function formatCustomEmoji(emojiName: string, emojiId: SnowflakeInfer, animated?: boolean): string {
+	if (animated) {
+		return `<a:${emojiName}:${emojiId}>`;
+	} else {
+		return `<:${emojiName}:${emojiId}>`;
 	}
 }
 
@@ -161,20 +207,36 @@ export enum TimestampStyles {
  */
 export const TimestampStylesEnum = z.nativeEnum(TimestampStyles);
 
-export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer): `<:${ISO8601TimestampInfer}>`;
-export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer, style: TimestampStyles): `<t:${ISO8601TimestampInfer}:${TimestampStyles}>`;
-export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer, style?: TimestampStyles): string {
-	try {
-		ISO8601Timestamp.parse(timestamp);
-		TimestampStylesEnum.parse(style);
-		if (style) {
-			return `<t:${timestamp}:${style}>`;
-		}
+/**
+ * Formats a Unix timestamp into a mentionable string.
+ *
+ * @param {ISO8601TimestampInfer} timestamp - The Unix timestamp to be formatted.
+ * @returns {string} The formatted Unix timestamp.
+ */
+export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer): `<t:${ISO8601TimestampInfer}>`;
 
-		return `<t:${timestamp}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
+/**
+ * Formats a Unix timestamp into a mentionable string with a specific style.
+ *
+ * @param {ISO8601TimestampInfer} timestamp - The Unix timestamp to be formatted.
+ * @param {TimestampStyles} style - The style to format the timestamp.
+ * @returns {string} The formatted Unix timestamp with a specific style.
+ */
+export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer, style: TimestampStyles): `<t:${ISO8601TimestampInfer}:${TimestampStyles}>`;
+
+/**
+ * Formats a Unix timestamp into a mentionable string with an optional style.
+ *
+ * @param {ISO8601TimestampInfer} timestamp - The Unix timestamp to be formatted.
+ * @param {TimestampStyles} [style] - The optional style to format the timestamp.
+ * @returns {string} The formatted Unix timestamp with an optional style.
+ */
+export function formatUnixTimestamp(timestamp: ISO8601TimestampInfer, style?: TimestampStyles): string {
+	if (style) {
+		return `<t:${timestamp}:${style}>`;
 	}
+
+	return `<t:${timestamp}>`;
 }
 
 /**
@@ -206,14 +268,15 @@ export enum GuildNavigationTypes {
  */
 export const GuildNavigationTypesEnum = z.nativeEnum(GuildNavigationTypes);
 
+/**
+ * Formats a guild ID and a navigation type into a mentionable string.
+ *
+ * @param {SnowflakeInfer} guildId - The ID of the guild to be formatted.
+ * @param {GuildNavigationTypes} navigationType - The type of navigation to be formatted.
+ * @returns {string} The formatted guild navigation.
+ */
 export function formatGuildNavigation(guildId: SnowflakeInfer, navigationType: GuildNavigationTypes): `<${SnowflakeInfer}:${GuildNavigationTypes}>` {
-	try {
-		Snowflake.parse(guildId);
-		GuildNavigationTypesEnum.parse(navigationType);
-		return `<${guildId}:${navigationType}>`;
-	} catch (error) {
-		throw new Error(zodErrorMessage(error));
-	}
+	return `<${guildId}:${navigationType}>`;
 }
 
 /**
@@ -256,3 +319,4 @@ export enum ImageFormats {
  * Is a zod enum that represents the available {@link ImageFormats}.
  */
 export const ImageFormatsEnum = z.nativeEnum(ImageFormats);
+

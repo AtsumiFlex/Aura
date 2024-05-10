@@ -26,6 +26,15 @@ export const BASE_URL = "https://discord.com/api";
 export const CDN_URL = "https://cdn.discordapp.com";
 
 /**
+ * Discord Epoch
+ *
+ * The Discord epoch is 1420070400000.
+ *
+ * @see {@link https://discord.com/developers/docs/reference#timestamp}
+ */
+export const DISCORD_EPOCH = 1_420_070_400_000;
+
+/**
  * API Versioning
  *
  * Discord exposes different versions of our API. You should specify which version to use by including it in the request path like https://discord.com/api/v{version_number}. Omitting the version number from the route will route requests to the current default version (marked below). You can find the change log for the newest API version here.
@@ -94,12 +103,3 @@ export const ApiVersionsEnum = z.nativeEnum(ApiVersions);
  * @see {@link https://discord.com/developers/docs/reference#api-reference-authorization-types}
  */
 export const AuthorizationTypes = z.enum(["Bearer", "Bot"]);
-
-/**
- * Discord Epoch
- *
- * The Discord epoch is 1420070400000.
- *
- * @see {@link https://discord.com/developers/docs/reference#timestamp}
- */
-export const DISCORD_EPOCH = 1_420_070_400_000;

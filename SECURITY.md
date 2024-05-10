@@ -2,40 +2,48 @@
 
 ## Supported Versions
 
-Use this section to tell users about which versions of your project are currently being supported with security updates.
+Use this section to tell people about which versions of your project are currently being supported with security
+updates.
 
 | Version | Supported          |
 |---------|--------------------|
-| 1.0.x   | :white_check_mark: |
+| 1.2.x   | :white_check_mark: |
+| 1.1.x   | :white_check_mark: |
+| 1.0.x   | :x:                |
 | < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-The AuraJs team takes the security of the software seriously. If you believe you have found a security vulnerability in
-AuraJs, please report it to us as follows:
+If you discover a security issue in this project, please report it by opening an issue in this GitHub repository. If the
+issue is confirmed, we will release a patch as soon as possible depending on the complexity of the fix.
 
-- **Email**: Send an email to [minecraftytom22@gmail.com]. This will reach our core team who handle security issues.
-  Please do not report security vulnerabilities through public GitHub issues.
-- **Format**: Try to include as much information as possible. This could include:
-    - The version of AuraJs you are using.
-    - A description of the vulnerability and impact.
-    - A step-by-step guide to reproduce the issue or a proof of concept.
+### Steps to follow:
 
-We request that you do not publicly disclose the issue until we have had a chance to address it.
+1. Go to the [Issues section](https://github.com/AtsumiFlex/AuraJs/issues) of our GitHub repository.
+2. Click on 'New Issue' and choose a relevant template if available, or create a general issue.
+3. Describe the vulnerability in detail. Please include the steps to reproduce and the potential impact. Do not disclose
+   this information publicly until we have addressed the security issue.
+4. We will review the issue and contact you to discuss the impact and planned mitigation.
 
-## What to Expect
+Please do not disclose security vulnerabilities publicly until we have had the opportunity to investigate and address
+the reported issue.
 
-After reporting a security issue, you should receive an acknowledgment from one of our team members within 48 hours. We
-will then work to verify the issue and determine the affected versions. Our team will keep you informed throughout the
-process with regular updates:
+## Security Updates
 
-- **Acknowledgment of receipt of your report**.
-- **Confirmation of the vulnerability** (after initial investigation).
-- **Notification of any proposed fixes and release plan**.
+We will update this policy as needed to reflect new security measures and protocols. Please check back periodically for
+any changes.
 
-We aim to patch the issue and release an update as swiftly as possible, depending on the complexity of the fix. We
-appreciate your support in responsibly identifying and reporting security vulnerabilities in AuraJs.
+## Contact
 
-## Attribution
+For urgent or sensitive security issues, you may also contact the project maintainers directly
+via [GitHub profiles](https://github.com/AtsumiFlex).
 
-This security policy is based on the format provided by GitHub and other open source projects.
+## Acknowledgements
+
+We appreciate your help in improving the security of AuraJs. Your efforts and responsible disclosure are greatly valued.
+
+## General Recommendations
+
+Always use the latest version of AuraJs to ensure you have the latest patches and updates.
+
+Thank you for supporting AuraJs and helping us ensure a safe environment for all our users.
