@@ -12,6 +12,7 @@
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
     "turbo": "latest",
+    "typedoc": "^0.25.13",
     "typescript": "^5.4.5"
   },
   "engines": {

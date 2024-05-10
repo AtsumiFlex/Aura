@@ -23,7 +23,7 @@ export type SnowflakeInfer = z.infer<typeof Snowflake>;
  *
  * @see {@link https://en.wikipedia.org/wiki/Integer}
  */
-export const Integer = z.number().int();
+export const Integer = z.number().int().positive();
 
 /**
  * Integer Infer
