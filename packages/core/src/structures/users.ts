@@ -9,6 +9,7 @@
 import { z } from "zod";
 import { Integer, Snowflake } from "../globals/formatters";
 import { LocalesEnum } from "../globals/locales";
+import { IntegrationStructure } from "./guilds";
 
 /**
  * Application Role Connection Structure
@@ -126,9 +127,9 @@ export const ConnectionStructure = z.object({
 	 */
 	revoked: z.boolean().optional(),
 	/**
-	 * TODO: An array of partial server integrations
+	 * An array of partial server integrations
 	 */
-	integrations: z.array(z.unknown()).optional(),
+	integrations: z.array(z.lazy(() => IntegrationStructure.partial())).optional(),
 	/**
 	 * Whether the connection is verified
 	 */
