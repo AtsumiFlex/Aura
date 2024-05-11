@@ -9,6 +9,7 @@
 import { z } from "zod";
 import { Integer, Snowflake } from "../globals/formatters";
 import { LocalesEnum } from "../globals/locales";
+import { ApplicationRoleConnectionMetadataStructure } from "./applications";
 import { IntegrationStructure } from "./guilds";
 
 /**
@@ -28,9 +29,9 @@ export const ApplicationRoleConnectionStructure = z.object({
 	 */
 	platform_username: z.string().max(100).nullable(),
 	/**
-	 * TODO: Object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected
+	 * Object mapping application role connection metadata keys to their string-ified value (max 100 characters) for the user on the platform a bot has connected
 	 */
-	metadata: z.object({}).optional(),
+	metadata: z.record(z.string(), ApplicationRoleConnectionMetadataStructure).optional(),
 });
 
 /**

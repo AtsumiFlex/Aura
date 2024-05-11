@@ -11,6 +11,7 @@ export * from "./libs/opcodes";
 
 // ./structures/*
 export * from "./structures/applications";
+// export * from "./structures/audits";
 export * from "./structures/channels";
 export * from "./structures/emojis";
 export * from "./structures/entitlements";
@@ -25,3 +26,4 @@ export * from "./structures/stickers";
 export * from "./structures/teams";
 export * from "./structures/users";
 export * from "./structures/voices";
+export * from "./structures/webhooks";
