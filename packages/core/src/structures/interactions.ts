@@ -26,10 +26,22 @@
 
 import { z } from "zod";
 import { Integer, Snowflake } from "../globals/formatters";
-import { LocalesKeys } from "../globals/locales";
+import { LocalesEnum, LocalesKeys } from "../globals/locales";
 import { ApplicationIntegrationTypesEnum } from "./applications";
+import {
+	AllowedMentionsStructure,
+	AttachmentStructure,
+	ChannelStructure,
+	EmbedStructure,
+	MessageFlagsEnum,
+	MessageStructure,
+} from "./channels";
 import { EmojiStructure } from "./emojis";
+import { EntitlementStructure } from "./entitlements";
+import { GuildMemberStructure } from "./guilds";
 import { PollCreateRequestStructure } from "./polls";
+import { RoleStructure } from "./roles";
+import { UserStructure } from "./users";
 
 /**
  * Component Types
@@ -790,27 +802,422 @@ export const InteractionCallbackDataStructure = z.object({
 	 */
 	content: z.string().optional(),
 	/**
-	 * TODO: Supports up to 10 embeds
+	 * Supports up to 10 embeds
 	 */
-	embeds: z.array(z.object({})).max(10).optional(),
+	embeds: z.array(EmbedStructure).max(10).optional(),
 	/**
-	 * TODO: Allowed mentions object
+	 * Allowed mentions object
 	 */
-	allowed_mentions: z.object({}).optional(),
+	allowed_mentions: AllowedMentionsStructure.optional(),
 	/**
-	 * TODO: Message flags combined as a bitfield (only SUPPRESS_EMBEDS, EPHEMERAL, and SUPPRESS_NOTIFICATIONS can be set)
+	 * Message flags combined as a bitfield (only SUPPRESS_EMBEDS, EPHEMERAL, and SUPPRESS_NOTIFICATIONS can be set)
 	 */
-	flags: z.number().optional(),
+	flags: z.union([z.literal(MessageFlagsEnum.enum.SuppressEmbeds), z.literal(MessageFlagsEnum.enum.Ephemeral), z.literal(MessageFlagsEnum.enum.SuppressNotifications), z.bigint()]).optional(),
 	/**
 	 * TODO: Message components
 	 */
 	components: z.array(z.object({})).optional(),
 	/**
-	 * TODO: Attachment objects with filename and description
+	 * Attachment objects with filename and description
 	 */
-	attachments: z.array(z.object({})).optional(),
+	attachments: z.array(AttachmentStructure).optional(),
 	/**
 	 * A poll!
 	 */
 	poll: PollCreateRequestStructure.optional(),
 });
+
+/**
+ * Interaction Callback Data Structure Infer
+ *
+ * Is used to infer the type of the {@link InteractionCallbackDataStructure} object.
+ */
+export type InteractionCallbackDataStructureInfer = z.infer<typeof InteractionCallbackDataStructure>;
+
+/**
+ * Interaction Callback Type
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type}
+ */
+export enum InteractionCallbackType {
+	/**
+	 * ACK a Ping
+	 */
+	Pong = 1,
+	/**
+	 * Respond to an interaction with a message
+	 */
+	ChannelMessageWithSource = 4,
+	/**
+	 * ACK an interaction and edit a response later, the user sees a loading state
+	 */
+	DeferredChannelMessageWithSource = 5,
+	/**
+	 * For components, ACK an interaction and edit the original message later; the user does not see a loading state
+	 */
+	DeferredUpdateMessage = 6,
+	/**
+	 * For components, edit the message the component was attached to
+	 */
+	UpdateMessage = 7,
+	/**
+	 * Respond to an autocomplete interaction with suggested choices
+	 */
+	ApplicationCommandAutocompleteResult = 8,
+	/**
+	 * Respond to an interaction with a popup modal
+	 */
+	Modal = 9,
+	/**
+	 * Respond to an interaction with an upgrade button, only available for apps with monetization enabled
+	 */
+	PremiumRequired = 10,
+}
+
+/**
+ * Interaction Callback Type Enum
+ *
+ * Is a zod enum that represents the available {@link InteractionCallbackType}.
+ */
+export const InteractionCallbackTypeEnum = z.nativeEnum(InteractionCallbackType);
+
+/**
+ * Interaction Response Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure}
+ */
+export const InteractionResponseStructure = z.object({
+	/**
+	 * The type of response
+	 */
+	type: InteractionCallbackTypeEnum,
+	/**
+	 * An optional response message
+	 */
+	data: InteractionCallbackDataStructure.optional(),
+});
+
+/**
+ * Interaction Response Structure Infer
+ *
+ * Is used to infer the type of the {@link InteractionResponseStructure} object.
+ */
+export type InteractionResponseStructureInfer = z.infer<typeof InteractionResponseStructure>;
+
+/**
+ * Message Interaction Structure
+ *
+ * This is sent on the message object when the message is a response to an Interaction without an existing message.
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure}
+ */
+export const MessageInteractionStructure = z.object({
+	/**
+	 * ID of the interaction
+	 */
+	id: Snowflake,
+	/**
+	 * The type of interaction
+	 */
+	type: InteractionTypeEnum,
+	/**
+	 * The name of the interaction
+	 */
+	name: z.string(),
+	/**
+	 * The user who invoked the interaction
+	 */
+	user: UserStructure,
+	/**
+	 * Member who invoked the interaction in the guild
+	 */
+	member: GuildMemberStructure.partial().optional(),
+});
+
+/**
+ * Message Interaction Structure Infer
+ *
+ * Is used to infer the type of the {@link MessageInteractionStructure} object.
+ */
+export type MessageInteractionStructureInfer = z.infer<typeof MessageInteractionStructure>;
+
+/**
+ * Application Command Interaction Data Option Structure Infer
+ *
+ * Is used to infer the type of the {@link ApplicationCommandInteractionDataOptionStructure} object.
+ */
+export type ApplicationCommandInteractionDataOptionStructureInfer = {
+	focused?: boolean;
+	name: string;
+	options?: ApplicationCommandInteractionDataOptionStructureInfer[];
+	type: ApplicationCommandOptionType;
+	value?: boolean | number | string;
+};
+
+/**
+ * Application Command Interaction Data Option Structure
+ *
+ * All options have names, and an option can either be a parameter and input value--in which case value will be set--or it can denote a subcommand or group--in which case it will contain a top-level key and another array of options.
+ *
+ * value and options are mutually exclusive.
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure}
+ */
+export const ApplicationCommandInteractionDataOptionStructure: z.ZodType<ApplicationCommandInteractionDataOptionStructureInfer> = z.object({
+	/**
+	 * Name of the parameter
+	 */
+	name: z.string(),
+	/**
+	 * Value of application command option type
+	 */
+	type: ApplicationCommandOptionTypeEnum,
+	/**
+	 * Value of the option resulting from user input
+	 */
+	value: z.union([z.string(), Integer, z.boolean()]).optional(),
+	/**
+	 * Present if this option is a group or subcommand
+	 */
+	options: z.array(z.lazy(() => ApplicationCommandInteractionDataOptionStructure)).optional(),
+	/**
+	 * true if this option is the currently focused option for autocomplete
+	 */
+	focused: z.boolean().optional(),
+});
+
+/**
+ * Resolved Data Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure}
+ */
+export const ResolvedDataStructure = z.object({
+	users: z.record(Snowflake, UserStructure).optional(),
+	members: z.record(Snowflake, GuildMemberStructure.partial()).optional(),
+	roles: z.record(Snowflake, RoleStructure).optional(),
+	channels: z.record(Snowflake, ChannelStructure).optional(),
+	messages: z.record(Snowflake, MessageStructure).optional(),
+	attachments: z.record(Snowflake, AttachmentStructure).optional(),
+});
+
+/**
+ * Resolved Data Structure Infer
+ *
+ * Is used to infer the type of the {@link ResolvedDataStructure} object.
+ */
+export type ResolvedDataStructureInfer = z.infer<typeof ResolvedDataStructure>;
+
+/**
+ * Modal Submit Data Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure}
+ */
+export const ModalSubmitDataStructure = z.object({
+	/**
+	 * The custom_id of the modal
+	 */
+	custom_id: z.string(),
+	/**
+	 * The values submitted by the user
+	 *
+	 * TODO: array of message components
+	 */
+	components: z.array(z.object({})),
+});
+
+/**
+ * Modal Submit Data Structure Infer
+ *
+ * Is used to infer the type of the {@link ModalSubmitDataStructure} object.
+ */
+export type ModalSubmitDataStructureInfer = z.infer<typeof ModalSubmitDataStructure>;
+
+/**
+ * Message Component Data Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-message-component-data-structure}
+ */
+export const MessageComponentDataStructure = z.object({
+	/**
+	 * The custom_id of the component
+	 */
+	custom_id: z.string(),
+	/**
+	 * The type of the component
+	 */
+	component_type: z.number(),
+	/**
+	 * Values the user selected in a select menu component
+	 */
+	values: z.array(SelectOptionStructure).optional(),
+	/**
+	 * Resolved entities from selected options
+	 */
+	resolved: ResolvedDataStructure.optional(),
+});
+
+/**
+ * Message Component Data Structure Infer
+ *
+ * Is used to infer the type of the {@link MessageComponentDataStructure} object.
+ */
+export type MessageComponentDataStructureInfer = z.infer<typeof MessageComponentDataStructure>;
+
+/**
+ * Application Command Data Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-structure}
+ */
+export const ApplicationCommandDataStructure = z.object({
+	/**
+	 * The ID of the invoked command
+	 */
+	id: Snowflake,
+	/**
+	 * The name of the invoked command
+	 */
+	name: z.string(),
+	/**
+	 * The type of the invoked command
+	 */
+	type: InteractionTypeEnum,
+	/**
+	 * Converted users + roles + channels + attachments
+	 */
+	resolved: ResolvedDataStructure.optional(),
+	/**
+	 * The params + values from the user
+	 */
+	options: z.array(ApplicationCommandInteractionDataOptionStructure).optional(),
+	/**
+	 * The ID of the guild the command is registered to
+	 */
+	guild_id: Snowflake.optional(),
+	/**
+	 * The ID of the user or message targeted by a user or message command
+	 */
+	target_id: Snowflake.optional(),
+});
+
+/**
+ * Application Command Data Structure Infer
+ *
+ * Is used to infer the type of the {@link ApplicationCommandDataStructure} object.
+ */
+export type ApplicationCommandDataStructureInfer = z.infer<typeof ApplicationCommandDataStructure>;
+
+/**
+ * Interaction Context Types
+ *
+ * Context in Discord where an interaction can be used, or where it was triggered from. Details about using interaction contexts for application commands is in the commands context documentation.
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types}
+ */
+export enum InteractionContextTypes {
+	/**
+	 * Interaction can be used within servers
+	 */
+	Guild = 0,
+	/**
+	 * Interaction can be used within DMs with the app's bot user
+	 */
+	BotDM = 1,
+	/**
+	 * Interaction can be used within Group DMs and DMs other than the app's bot user
+	 */
+	PrivateChannel = 2,
+}
+
+/**
+ * Interaction Context Types Enum
+ *
+ * Is a zod enum that represents the available {@link InteractionContextTypes}.
+ */
+export const InteractionContextTypesEnum = z.nativeEnum(InteractionContextTypes);
+
+/**
+ * Interaction Structure
+ *
+ * @see {@link https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure}
+ */
+export const InteractionStructure = z.object({
+	/**
+	 * ID of the interaction
+	 */
+	id: Snowflake,
+	/**
+	 * ID of the application this interaction is for
+	 */
+	application_id: Snowflake,
+	/**
+	 * Type of interaction
+	 */
+	type: InteractionTypeEnum,
+	/**
+	 * Interaction data payload
+	 */
+	data: z.union([ApplicationCommandDataStructure, MessageComponentDataStructure, ModalSubmitDataStructure, AutocompleteStructure]).optional(),
+	/**
+	 * Guild that the interaction was sent from
+	 */
+	guild_id: Snowflake.optional(),
+	/**
+	 * Channel that the interaction was sent from
+	 */
+	channel: ChannelStructure.partial().optional(),
+	/**
+	 * Channel that the interaction was sent from
+	 */
+	channel_id: Snowflake.optional(),
+	/**
+	 * Guild member data for the invoking user, including permissions
+	 */
+	member: GuildMemberStructure.optional(),
+	/**
+	 * User object for the invoking user, if invoked in a DM
+	 */
+	user: UserStructure.optional(),
+	/**
+	 * Continuation token for responding to the interaction
+	 */
+	token: z.string(),
+	/**
+	 * Read-only property, always 1
+	 */
+	version: z.number(),
+	/**
+	 * For components, the message they were attached to
+	 */
+	message: MessageStructure.optional(),
+	/**
+	 * Bitwise set of permissions the app has in the source location of the interaction
+	 */
+	app_permissions: z.string().optional(),
+	/**
+	 * Selected language of the invoking user
+	 */
+	locale: LocalesEnum.optional(),
+	/**
+	 * Guild's preferred locale, if invoked in a guild
+	 */
+	guild_locale: LocalesEnum.optional(),
+	/**
+	 * For monetized apps, any entitlements for the invoking user, representing access to premium SKUs
+	 */
+	entitlements: z.array(EntitlementStructure).optional(),
+	/**
+	 * Mapping of installation contexts that the interaction was authorized for to related user or guild IDs. See Authorizing Integration Owners Object for details
+	 */
+	authorizing_integration_owners: z.record(ApplicationIntegrationTypesEnum, z.string()).optional(),
+	/**
+	 * Context where the interaction was triggered from
+	 */
+	context: InteractionContextTypesEnum.optional(),
+});
+
+/**
+ * Interaction Structure Infer
+ *
+ * Is used to infer the type of the {@link InteractionStructure} object.
+ */
+export type InteractionStructureInfer = z.infer<typeof InteractionStructure>;
