@@ -102,4 +102,20 @@ export const ApiVersionsEnum = z.nativeEnum(ApiVersions);
  *
  * @see {@link https://discord.com/developers/docs/reference#api-reference-authorization-types}
  */
-export const AuthorizationTypes = z.enum(["Bearer", "Bot"]);
+export enum AuthorizationTypes {
+	/**
+	 * Bearer Authorization (User)
+	 */
+	Bearer = "Bearer",
+	/**
+	 * Bot Authorization (Bot)
+	 */
+	Bot = "Bot",
+}
+
+/**
+ * Authorization Types Enum
+ *
+ * Is a zod enum that represents the available {@link AuthorizationTypes}.
+ */
+export const AuthorizationTypesEnum = z.nativeEnum(AuthorizationTypes);

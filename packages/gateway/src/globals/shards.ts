@@ -1,4 +1,4 @@
-import type { SnowflakeInfer } from "@aurajs/core/dist/globals/formatters";
+import type { SnowflakeInfer } from "@aurajs/core";
 
 /**
  * Get Shard Id

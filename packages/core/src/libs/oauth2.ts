@@ -11,7 +11,7 @@
  */
 
 import { z } from "zod";
-import { AuthorizationTypes } from "../globals/api";
+import { AuthorizationTypesEnum } from "../globals/api";
 import { Integer, Snowflake } from "../globals/formatters";
 
 /**
@@ -181,7 +181,7 @@ export const OAuth2ScopesEnum = z.nativeEnum(OAuth2Scopes);
  */
 export const AccessTokenResponse = z.object({
 	access_token: z.string(),
-	token_type: AuthorizationTypes,
+	token_type: AuthorizationTypesEnum,
 	expires_in: Integer,
 	refresh_token: z.string(),
 	scope: z.string(),
@@ -203,7 +203,7 @@ export type AccessTokenResponseInfer = z.infer<typeof AccessTokenResponse>;
  */
 export const ClientCredentialsAccessTokenResponse = z.object({
 	access_token: z.string(),
-	token_type: AuthorizationTypes,
+	token_type: AuthorizationTypesEnum,
 	expires_in: Integer,
 	scope: z.string(),
 });

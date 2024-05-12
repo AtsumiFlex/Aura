@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@aurajs/gateway",
+  "name": "aurajs",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -12,15 +12,15 @@
   },
   "dependencies": {
     "@aurajs/core": "workspace:*",
+    "@aurajs/gateway": "workspace:*",
+    "@aurajs/rest": "workspace:*",
     "eventemitter3": "^5.0.1",
     "tslib": "^2.6.2",
-    "ws": "^8.17.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@aurajs/eslint-config": "workspace:*",
     "@aurajs/ts-config": "workspace:*",
-    "@types/ws": "^8.5.10",
     "typescript": "^5.4.5"
   }
 }
