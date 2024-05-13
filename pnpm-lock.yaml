@@ -24,6 +24,37 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
+  apps/aurajs:
+    dependencies:
+      '@aurajs/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@aurajs/gateway':
+        specifier: workspace:*
+        version: link:../../packages/gateway
+      '@aurajs/rest':
+        specifier: workspace:*
+        version: link:../../packages/rest
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@aurajs/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint
+      '@aurajs/ts-config':
+        specifier: workspace:*
+        version: link:../../config/typescript
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+
   apps/test:
     dependencies:
       '@aurajs/core':
@@ -32,6 +63,9 @@ importers:
       '@aurajs/gateway':
         specifier: workspace:*
         version: link:../../packages/gateway
+      aurajs:
+        specifier: workspace:*
+        version: link:../aurajs
       eventemitter3:
         specifier: ^5.0.1
         version: 5.0.1
@@ -77,37 +111,6 @@ importers:
         version: 0.1.62(eslint@8.57.0)(svelte@3.59.2)(typescript@5.4.5)
 
   config/typescript: {}
-
-  packages/aurajs:
-    dependencies:
-      '@aurajs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@aurajs/gateway':
-        specifier: workspace:*
-        version: link:../gateway
-      '@aurajs/rest':
-        specifier: workspace:*
-        version: link:../rest
-      eventemitter3:
-        specifier: ^5.0.1
-        version: 5.0.1
-      tslib:
-        specifier: ^2.6.2
-        version: 2.6.2
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
-    devDependencies:
-      '@aurajs/eslint-config':
-        specifier: workspace:*
-        version: link:../../config/eslint
-      '@aurajs/ts-config':
-        specifier: workspace:*
-        version: link:../../config/typescript
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
 
   packages/core:
     dependencies:
@@ -1894,10 +1897,6 @@ packages:
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
-
-  minimatch@9.0.3:
-    resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
-    engines: {node: '>=16 || 14 >=14.17'}
 
   minimatch@9.0.4:
     resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
@@ -4374,7 +4373,7 @@ snapshots:
     dependencies:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
-      minimatch: 9.0.3
+      minimatch: 9.0.4
       minipass: 7.0.4
       path-scurry: 1.10.1
 
@@ -5063,10 +5062,6 @@ snapshots:
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
-
-  minimatch@9.0.3:
-    dependencies:
-      brace-expansion: 2.0.1
 
   minimatch@9.0.4:
     dependencies:

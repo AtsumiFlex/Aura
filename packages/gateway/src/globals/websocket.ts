@@ -1,18 +1,10 @@
 import { clearInterval, setInterval, setTimeout } from "node:timers";
 import type { IntegerInfer } from "@aurajs/core";
-import { ApiVersions, ApiVersionsEnum, GatewayOpcodes, GatewayOpcodesEnum, Integer } from "@aurajs/core";
+import { ApiVersions, ApiVersionsEnum, GatewayOpcodes } from "@aurajs/core";
 import EventEmitter from "eventemitter3";
 import WebSocket from "ws";
 import { z } from "zod";
-
-export const GatewayPayloadStructure = z.object({
-	d: z.any().nullable(),
-	op: GatewayOpcodesEnum,
-	s: Integer.nullable(),
-	t: z.string().nullable(),
-});
-
-export type GatewayPayloadStructureInfer = z.infer<typeof GatewayPayloadStructure>;
+import type { GatewayPayloadStructureInfer } from "../events/globals";
 
 export const GatewayWebSocketOptions = z.object({
 	compress: z.boolean(),
@@ -77,7 +69,7 @@ export class GatewayWebSocket extends EventEmitter {
 	}
 
 	private _onClose(code: number, reason: string) {
-		console.log(`WebSocket closed: ${code} ${reason} - ${new Date().toISOString()}`);
+		this.emit("close", `WebSocket closed: ${code} ${reason} - ${new Date().toISOString()}`);
 		if (this._heartbeatInterval) {
 			clearInterval(this._heartbeatInterval);
 		}
@@ -102,6 +94,7 @@ export class GatewayWebSocket extends EventEmitter {
 	}
 
 	private _handleMessage(data: GatewayPayloadStructureInfer) {
+		// eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
 		switch (data.op) {
 			case GatewayOpcodes.Hello: {
 				this._heartbeatTimeout = data.d?.heartbeat_interval;

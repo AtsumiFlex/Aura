@@ -6,6 +6,7 @@
     "lint": "eslint . --ext .ts --fix"
   },
   "dependencies": {
+    "aurajs": "workspace:*",
     "@aurajs/core": "workspace:*",
     "@aurajs/gateway": "workspace:*",
     "eventemitter3": "^5.0.1",
