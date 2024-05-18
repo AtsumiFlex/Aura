@@ -1,32 +1,24 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@aurajs/monorepo",
+  "name": "@luna/monorepo",
   "packageManager": "pnpm@9.1.0",
-  "license": "AGPL-3.0-only",
-  "readme": "README.md",
-  "description": "AuraJs: An innovative TypeScript framework for crafting powerful Discord bots. Offers a unique, modular approach to bot development, emphasizing simplicity and extendibility. Start building next-gen bots with Aura.",
   "private": true,
-  "author": {
-    "name": "AtsumiFlex",
-    "url": "https://github.com/AtsumiFlex"
-  },
-  "repository": {
-    "url": "https://github.com/AtsumiFlex/AuraJs.git",
-    "type": "git"
-  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint"
   },
   "devDependencies": {
-    "@aurajs/eslint-config": "workspace:*",
-    "@aurajs/ts-config": "workspace:*",
+    "@luna/eslint-config": "workspace:*",
+    "@luna/ts-config": "workspace:*",
+    "@types/node": "^20.12.12",
     "turbo": "latest",
-    "typedoc": "^0.25.13",
     "typescript": "^5.4.5"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "typedoc": "^0.25.13"
   }
 }

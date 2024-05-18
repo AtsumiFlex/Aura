@@ -1,10 +1,3 @@
-/**
- * Opcodes and Status Codes
- *
- * Opcodes and status codes are used to identify the type of payload and the status of the payload.
- *
- * @see {@link https://discord.com/developers/docs/topics/opcodes-and-status-codes#opcodes-and-status-codes}
- */
 import { z } from "zod";
 
 /**

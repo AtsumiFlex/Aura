@@ -1,22 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@aurajs/rest",
+  "name": "@luna/rest",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "lint": "eslint . --ext .ts --fix"
+    "build": "tsc"
   },
   "dependencies": {
-    "@aurajs/core": "workspace:*",
+    "@luna/core": "workspace:*",
     "eventemitter3": "^5.0.1",
     "tslib": "^2.6.2",
-    "undici": "^6.16.1",
+    "undici": "^6.17.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@aurajs/eslint-config": "workspace:*",
-    "@aurajs/ts-config": "workspace:*",
-    "typescript": "^5.4.5"
+    "@luna/eslint-config": "workspace:*",
+    "@luna/ts-config": "workspace:*"
   }
 }

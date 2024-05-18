@@ -1,57 +1,173 @@
 import { z } from "zod";
 
 /**
- * Locales
- *
- * Locales are used to determine the language of the text in the Discord client.
+ * Enum representing the various locales supported by Discord.
  *
  * @see {@link https://discord.com/developers/docs/reference#locales}
  */
 export enum Locales {
+	/**
+	 * Bulgarian
+	 */
 	bg = "Bulgarian",
+
+	/**
+	 * Czech
+	 */
 	cs = "Czech",
+
+	/**
+	 * Danish
+	 */
 	da = "Danish",
+
+	/**
+	 * German
+	 */
 	de = "German",
+
+	/**
+	 * Greek
+	 */
 	el = "Greek",
-	"en-GB" = "English - UK",
-	"en-US" = "English - US",
-	"es-419" = "Spanish - Latin America",
-	"es-ES" = "Spanish - EU",
+
+	/**
+	 * UK English
+	 */
+	"en-GB" = "UK-English",
+
+	/**
+	 * US English
+	 */
+	"en-US" = "US-English",
+
+	/**
+	 * Latin American Spanish
+	 */
+	"es-419" = "LATAM-Español",
+
+	/**
+	 * Spanish
+	 */
+	"es-ES" = "Spanish",
+
+	/**
+	 * Finnish
+	 */
 	fi = "Finnish",
+
+	/**
+	 * French
+	 */
 	fr = "French",
+
+	/**
+	 * Hindi
+	 */
 	hi = "Hindi",
+
+	/**
+	 * Croatian
+	 */
 	hr = "Croatian",
+
+	/**
+	 * Hungarian
+	 */
 	hu = "Hungarian",
+
+	/**
+	 * Indonesian
+	 */
 	id = "Indonesian",
+
+	/**
+	 * Italian
+	 */
 	it = "Italian",
+
+	/**
+	 * Japanese
+	 */
 	ja = "Japanese",
+
+	/**
+	 * Korean
+	 */
 	ko = "Korean",
+
+	/**
+	 * Lithuanian
+	 */
 	lt = "Lithuanian",
+
+	/**
+	 * Dutch
+	 */
 	nl = "Dutch",
+
+	/**
+	 * Norwegian
+	 */
 	no = "Norwegian",
+
+	/**
+	 * Polish
+	 */
 	pl = "Polish",
-	"pt-BR" = "Portuguese - Brazil",
+
+	/**
+	 * Brazilian Portuguese
+	 */
+	"pt-BR" = "Portuguese",
+
+	/**
+	 * Romanian
+	 */
 	ro = "Romanian",
+
+	/**
+	 * Russian
+	 */
 	ru = "Russian",
+
+	/**
+	 * Swedish
+	 */
 	"sv-SE" = "Swedish",
+
+	/**
+	 * Thai
+	 */
 	th = "Thai",
+
+	/**
+	 * Turkish
+	 */
 	tr = "Turkish",
+
+	/**
+	 * Ukrainian
+	 */
 	uk = "Ukrainian",
+
+	/**
+	 * Vietnamese
+	 */
 	vi = "Vietnamese",
-	"zh-CN" = "Chinese - China",
-	"zh-TW" = "Chinese - Taiwan",
+
+	/**
+	 * Chinese (Simplified)
+	 */
+	"zh-CN" = "Chinese",
+
+	/**
+	 * Chinese (Traditional, Taiwan)
+	 */
+	"zh-TW" = "Chinese-Taiwan",
 }
 
 /**
- * Locales Enum
- *
- * Is a zod enum that represents the available {@link Locales}.
+ * Zod schema for validating the {@link Locales} enum.
  */
 export const LocalesEnum = z.nativeEnum(Locales);
-
-/**
- * Locales Keys
- *
- * The zod keys of the {@link Locales} enum.
- */
-export const LocalesKeys = z.enum(["bg", "cs", "da", "de", "el", "en-GB", "en-US", "es-419", "es-ES", "fi", "fr", "hi", "hr", "hu", "id", "it", "ja", "ko", "lt", "nl", "no", "pl", "pt-BR", "ro", "ru", "sv-SE", "th", "tr", "uk", "vi", "zh-CN", "zh-TW"]);

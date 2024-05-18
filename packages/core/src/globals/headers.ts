@@ -1,125 +1,145 @@
 import { z } from "zod";
+import { Integer } from "./formats";
 
 /**
- * Headers
+ * Schema for validating Discord headers using Zod.
  *
- * Headers are used to send and receive data between the client and server.
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Headers
+ * @see https://discord.com/developers/docs/intro
+ * @example
+ * const headers = {
+ *   Authorization: "Bot YOUR_TOKEN",
+ *   "User-Agent": "DiscordBot (https://yourdomain.com, v1.0)",
+ *   "Content-Type": "application/json",
+ *   "Retry-After": 120,
+ *   "X-Audit-Log-Reason": "Updating user role",
+ *   "X-Signature-Ed25519": 123456789,
+ *   "X-Signature-Timestamp": 1615892877,
+ *   "X-RateLimit-Limit": 100,
+ *   "X-RateLimit-Remaining": 99,
+ *   "X-RateLimit-Reset": 1615892927,
+ *   "X-RateLimit-Reset-After": 60,
+ *   "X-RateLimit-Bucket": "abcd1234",
+ *   "X-RateLimit-Global": "false",
+ *   "X-RateLimit-Scope": "channel"
+ * };
+ * const parsedHeaders = DiscordHeaders.parse(headers);
  */
 export const DiscordHeaders = z.object({
 	/**
-	 * Authorization
+	 * Authorization token for API requests.
 	 *
-	 * The Authorization header is used to authenticate a request with the server, allowing the server to know which user is making the request.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
-	 * @example Authorization: Bot $token
+	 * @example
+	 * "Authorization": "Bot YOUR_TOKEN"
 	 */
-	Authorization: z.string().optional(),
+	Authorization: z.string(),
+
 	/**
-	 * Content-Type
+	 * User agent making the request.
 	 *
-	 * The Content-Type header is used to specify the media type of the resource.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
-	 * @example Content-Type: application/json
+	 * @example
+	 * "User-Agent": "DiscordBot (https://yourdomain.com, v1.0)"
 	 */
-	"Content-Type": z.union([z.literal("application/json"), z.literal("application/ld+json"), z.literal("application/msword"), z.literal("application/pdf"), z.literal("application/sql"), z.literal("application/vnd.api+json"), z.literal("application/vnd.microsoft.portable-executable"), z.literal("application/vnd.ms-excel"), z.literal("application/vnd.ms-powerpoint"), z.literal("application/vnd.oasis.opendocument.text"), z.literal("application/vnd.oasis.opendocument.text"), z.literal("officedocument.presentationml.presentation"), z.literal("application/vnd.openxmlformats-"), z.literal("officedocument.spreadsheetml.sheet"), z.literal("application/vnd.openxmlformats-"), z.literal("officedocument.wordprocessingml.document"), z.literal("application/x-www-form-urlencoded"), z.literal("application/xml"), z.literal("application/zip"), z.literal("application/zstd"), z.literal("audio/mpeg"), z.literal("audio/ogg"), z.literal("image/avif"), z.literal("image/jpeg"), z.literal("image/png"), z.literal("image/svg+xml"), z.literal("image/tiff"), z.literal("model/obj"), z.literal("multipart/form-data"), z.literal("text/plain"), z.literal("text/css"), z.literal("text/csv"), z.literal("text/html"), z.literal("text/javascript"), z.literal("text/xml")]).optional(),
+	"User-Agent": z.string(),
+
 	/**
-	 * User-Agent
+	 * Content type of the request.
 	 *
-	 * The User-Agent header is used to identify the client making the request.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent
-	 * @example User-Agent: DiscordBot ($url, $versionNumber)
+	 * @example
+	 * "Content-Type": "application/json"
 	 */
-	"User-Agent": z.string().optional(),
+	"Content-Type": z.union([z.literal("application/json"), z.literal("application/ld+json"), z.literal("application/msword"), z.literal("application/pdf"), z.literal("application/sql"), z.literal("application/vnd.api+json"), z.literal("application/vnd.microsoft.portable-executable"), z.literal("application/vnd.ms-excel"), z.literal("application/vnd.ms-powerpoint"), z.literal("application/vnd.oasis.opendocument.text"), z.literal("application/vnd.openxmlformats-officedocument.presentationml.presentation"), z.literal("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"), z.literal("application/vnd.openxmlformats-officedocument.wordprocessingml.document"), z.literal("application/x-www-form-urlencoded"), z.literal("application/xml"), z.literal("application/zip"), z.literal("application/zstd"), z.literal("audio/mpeg"), z.literal("audio/ogg"), z.literal("image/avif"), z.literal("image/jpeg"), z.literal("image/png"), z.literal("image/svg+xml"), z.literal("image/tiff"), z.literal("model/obj"), z.literal("multipart/form-data"), z.literal("text/plain"), z.literal("text/css"), z.literal("text/csv"), z.literal("text/html"), z.literal("text/javascript"), z.literal("text/xml")]),
+
 	/**
-	 * X-RateLimit-Limit
+	 * Time to wait before retrying the request after a rate limit is exceeded.
 	 *
-	 * The maximum number of requests that the consumer is permitted to make to the server in a given time period.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Limit
+	 * @example
+	 * "Retry-After": 120
 	 */
-	"X-RateLimit-Limit": z.string().optional(),
+	"Retry-After": Integer,
+
 	/**
-	 * X-RateLimit-Remaining
+	 * Reason included in audit logs.
 	 *
-	 * The number of remaining requests that can be made
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Remaining
+	 * @example
+	 * "X-Audit-Log-Reason": "Updating user role"
 	 */
-	"X-RateLimit-Remaining": z.string().optional(),
+	"X-Audit-Log-Reason": z.string(),
+
 	/**
-	 * X-RateLimit-Reset
+	 * ED25519 signature of the request.
 	 *
-	 * Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Reset
+	 * @example
+	 * "X-Signature-Ed25519": 123456789
+	 * @see {@link https://discord.com/developers/docs/topics/gateway#connecting-to-the-gateway}
 	 */
-	"X-RateLimit-Reset": z.string().optional(),
+	"X-Signature-Ed25519": Integer,
+
 	/**
-	 * X-RateLimit-Reset-After
+	 * Timestamp of the signature.
 	 *
-	 * Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Reset-After
+	 * @example
+	 * "X-Signature-Timestamp": 1615892877
 	 */
-	"X-RateLimit-Reset-After": z.string().optional(),
+	"X-Signature-Timestamp": Integer,
+
 	/**
-	 * X-RateLimit-Bucket
+	 * Rate limit for the requests.
 	 *
-	 * A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path)
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Bucket
+	 * @example
+	 * "X-RateLimit-Limit": 100
 	 */
-	"X-RateLimit-Bucket": z.string().optional(),
+	"X-RateLimit-Limit": Integer,
+
 	/**
-	 * X-RateLimit-Global
+	 * Number of requests remaining before reaching the rate limit.
 	 *
-	 * Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route)
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Global
+	 * @example
+	 * "X-RateLimit-Remaining": 99
 	 */
-	"X-RateLimit-Global": z.string().optional(),
+	"X-RateLimit-Remaining": Integer,
+
 	/**
-	 * X-RateLimit-Scope
+	 * Time when the rate limit will reset.
 	 *
-	 * Returned only on HTTP 429 responses. Value can be user (per bot or user limit), bot (per bot limit), or global (global limit) to help identify the scope of the rate limit.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-RateLimit-Scope
+	 * @example
+	 * "X-RateLimit-Reset": 1615892927
 	 */
-	"X-RateLimit-Scope": z.string().optional(),
+	"X-RateLimit-Reset": Integer,
+
 	/**
-	 * X-Signature-Ed25519
+	 * Duration before the rate limit resets.
 	 *
-	 * The Ed25519 signature of the request body.
-	 *
-	 * @see https://discord.com/developers/docs/interactions/receiving-and-responding#security-and-authorization
+	 * @example
+	 * "X-RateLimit-Reset-After": 60
 	 */
-	"X-Signature-Ed25519": z.string().optional(),
+	"X-RateLimit-Reset-After": Integer,
+
 	/**
-	 * X-Signature-Timestamp
+	 * Rate limit bucket identifier.
 	 *
-	 * The timestamp of the request.
-	 *
-	 * @see https://discord.com/developers/docs/interactions/receiving-and-responding#security-and-authorization
+	 * @example
+	 * "X-RateLimit-Bucket": "abcd1234"
 	 */
-	"X-Signature-Timestamp": z.string().optional(),
+	"X-RateLimit-Bucket": z.string(),
+
 	/**
-	 * X-Audit-Log-Reason
+	 * Indicator of global rate limit.
 	 *
-	 * The reason for the audit log action.
-	 *
-	 * @see https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-audit-log-events
+	 * @example
+	 * "X-RateLimit-Global": "false"
 	 */
-	"X-Audit-Log-Reason": z.string().optional(),
+	"X-RateLimit-Global": z.string(),
+
+	/**
+	 * Scope of the rate limit.
+	 *
+	 * @example
+	 * "X-RateLimit-Scope": "channel"
+	 */
+	"X-RateLimit-Scope": z.string(),
 });
 
 /**
- * Discord Headers Infer
- *
- * Is used to infer the type of the {@link DiscordHeaders} object.
+ * Inferred type from the {@link DiscordHeaders} validation schema.
  */
 export type DiscordHeadersInfer = z.infer<typeof DiscordHeaders>;

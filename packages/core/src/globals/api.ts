@@ -1,121 +1,95 @@
-/**
- * API Reference
- * Discord's API is based around two core layers, a HTTPS/REST API for general operations, and persistent secure WebSocket based connection for sending and subscribing to real-time events. The most common use case of the Discord API will be providing a service, or access to a platform through the OAuth2 API.
- *
- * @see {@link https://discord.com/developers/docs/reference#api-reference}
- */
-
 import { z } from "zod";
 
 /**
- * Base URL
- *
- * The base URL for all API requests is `https://discord.com/api`. All requests should be made with the `https` scheme.
+ * Base URL for the Discord API.
  *
  * @see {@link https://discord.com/developers/docs/reference#api-reference-base-url}
  */
-export const BASE_URL = "https://discord.com/api";
+export const API_BASE_URL = "https://discord.com/api";
 
 /**
- * CDN URL
- *
- * The base URL for all CDN requests is `https://cdn.discordapp.com`. All requests should be made with the `https` scheme.
+ * Base URL for the Discord CDN.
  *
  * @see {@link https://discord.com/developers/docs/reference#image-formatting-image-base-url}
  */
-export const CDN_URL = "https://cdn.discordapp.com";
+export const CDN_BASE_URL = "https://cdn.discordapp.com";
 
 /**
- * Discord Epoch
+ * Discord epoch timestamp used for calculating snowflakes.
  *
- * The Discord epoch is 1420070400000.
- *
- * @see {@link https://discord.com/developers/docs/reference#timestamp}
+ * @example
+ * const snowflake = BigInt(Date.now() - DISCORD_EPOCH) << 22n;
  */
-export const DISCORD_EPOCH = 1_420_070_400_000;
+export const DISCORD_EPOCH = 1_420_070_400_000n;
 
 /**
- * API Versioning
+ * Enum representing the various versions of the Discord API.
  *
- * Discord exposes different versions of our API. You should specify which version to use by including it in the request path like https://discord.com/api/v{version_number}. Omitting the version number from the route will route requests to the current default version (marked below). You can find the change log for the newest API version here.
- *
- * @see {@link https://discord.com/developers/docs/reference#api-versioning | https://discord.com/developers/docs/reference#api-versioning-api-versions}
+ * @see {@link https://discord.com/developers/docs/reference#api-versioning-api-versions}
  */
 export enum ApiVersions {
 	/**
-	 * Available API Versions
+	 * Version 10 of the Discord API.
 	 */
 	V10 = 10,
+
 	/**
-	 * Available API Versions
+	 * Version 9 of the Discord API.
 	 */
 	V9 = 9,
+
 	/**
-	 * Deprecated API Versions
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 8 of the Discord API.
 	 */
 	V8 = 8,
+
 	/**
-	 * Deprecated API Versions
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 7 of the Discord API.
 	 */
 	V7 = 7,
+
 	/**
-	 * Deprecated API Versions & Default API Version
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 6 of the Discord API.
 	 */
 	V6 = 6,
+
 	/**
-	 * Discontinued API Versions
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 5 of the Discord API.
 	 */
 	V5 = 5,
+
 	/**
-	 * Discontinued API Versions
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 4 of the Discord API.
 	 */
 	V4 = 4,
+
 	/**
-	 * Discontinued API Versions
+	 * @deprecated API v8 is deprecated and will be removed on 2022-08-01.
 	 *
-	 * @deprecated
+	 * Version 3 of the Discord API.
 	 */
 	V3 = 3,
 }
 
 /**
- * Api Versions Enum
- *
- * Is a zod enum that represents the available {@link ApiVersions}.
+ * Zod schema for validating the {@link ApiVersions} enum.
  */
 export const ApiVersionsEnum = z.nativeEnum(ApiVersions);
 
 /**
- * Authorization Types
+ * Enum representing the authentication types for the Discord API.
  *
- * The Discord API uses OAuth2 for authentication. OAuth2 is a protocol that lets external apps request authorization to private details in a user's Discord account without getting their password. This is preferred over traditional authentication tokens as OAuth2 tokens can be limited in scope and revoked by the user.
- *
- * @see {@link https://discord.com/developers/docs/reference#api-reference-authorization-types}
+ * @example
+ * const authType = AuthenticationTypes.parse("Bot");
  */
-export enum AuthorizationTypes {
-	/**
-	 * Bearer Authorization (User)
-	 */
-	Bearer = "Bearer",
-	/**
-	 * Bot Authorization (Bot)
-	 */
-	Bot = "Bot",
-}
-
-/**
- * Authorization Types Enum
- *
- * Is a zod enum that represents the available {@link AuthorizationTypes}.
- */
-export const AuthorizationTypesEnum = z.nativeEnum(AuthorizationTypes);
+export const AuthenticationTypes = z.enum(["Bot", "Bearer"]);
