@@ -17,7 +17,7 @@ export type SnowflakeInfer = z.infer<typeof Snowflake>;
  *
  * This schema ensures that the number is an integer, positive, and a safe integer.
  */
-export const Integer = z.number().int().positive().refine((value) => Number.isSafeInteger(value));
+export const Integer = z.number().int().positive();
 
 /**
  * Type representing a valid positive integer.

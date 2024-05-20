@@ -3,6 +3,7 @@
   "name": "@lunajs/ts-config",
   "private": true,
   "files": [
-    "base.json"
+    "base.json",
+    "next.json"
   ]
 }
