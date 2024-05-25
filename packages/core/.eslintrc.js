@@ -1,8 +1,5 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+	ignorePatterns: ["apps/**", "config/**", "packages/**"],
 	extends: ["@lunajs/eslint-config/node.js"],
-	rules: {
-		"line-comment-position": "off",
-		"no-inline-comments": "off",
-	},
 };
